@@ -42,16 +42,12 @@ class AppLocker:
         """Display all locked apps"""
         return self.locked_apps
 
-# Example usage
 if __name__ == "__main__":
     locker = AppLocker()
     
-    # Lock apps
     locker.lock_app("notepad.exe")
     locker.lock_app("calculator.exe")
     
-    # List locked apps
     print("Locked apps:", locker.list_locked_apps())
     
-    # Check if app is locked
     print("Is notepad locked?", locker.is_locked("notepad.exe"))

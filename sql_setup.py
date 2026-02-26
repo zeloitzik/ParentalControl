@@ -21,7 +21,7 @@ class table:
         )
 
         cursor = mydb.cursor()
-        db_name = "trojan_horse_DB"
+        db_name = "parentalControl_DB"
         cursor.execute("SHOW DATABASES LIKE %s", (db_name,))
         result = cursor.fetchone()
         if not result:
@@ -44,7 +44,7 @@ class table:
                         database = db_name
                 )
 
-    def Insert_Client(self,name,key):
+    def Insert_User(self,name,key):
 
         sql = "INSERT INTO symmetric_keys (name, `key`) VALUES(%s, %s)"
         val = (f"{name}", f"{key}")
@@ -68,3 +68,6 @@ class table:
         databases = self.cursor.fetchall()
         self.cursor.execute(f"DROP DATABASE trojan_horse_db")
 
+test_table = table()
+test_table.Insert_User("User1","ADMIN")
+test_table.Print_table()

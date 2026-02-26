@@ -1,0 +1,210 @@
+2026-02-26 08:38:37,327 - SID_tracker - DEBUG - Got SID S-1-5-18 for process with PID 0
+2026-02-26 08:38:37,330 - SID_tracker - DEBUG - Got SID S-1-5-18 for process with PID 4
+2026-02-26 08:38:37,334 - SID_tracker - ERROR - Failed to get SID for process with PID 140
+2026-02-26 08:38:37,341 - SID_tracker - ERROR - Failed to get SID for process with PID 184
+2026-02-26 08:38:37,346 - SID_tracker - ERROR - Failed to get SID for process with PID 756
+2026-02-26 08:38:37,347 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 824
+2026-02-26 08:38:37,353 - SID_tracker - ERROR - Failed to get SID for process with PID 1180
+2026-02-26 08:38:37,359 - SID_tracker - ERROR - Failed to get SID for process with PID 1236
+2026-02-26 08:38:37,365 - SID_tracker - ERROR - Failed to get SID for process with PID 1264
+2026-02-26 08:38:37,371 - SID_tracker - ERROR - Failed to get SID for process with PID 1316
+2026-02-26 08:38:37,377 - SID_tracker - ERROR - Failed to get SID for process with PID 1320
+2026-02-26 08:38:37,383 - SID_tracker - ERROR - Failed to get SID for process with PID 1324
+2026-02-26 08:38:37,389 - SID_tracker - ERROR - Failed to get SID for process with PID 1332
+2026-02-26 08:38:37,395 - SID_tracker - ERROR - Failed to get SID for process with PID 1400
+2026-02-26 08:38:37,400 - SID_tracker - ERROR - Failed to get SID for process with PID 1420
+2026-02-26 08:38:37,407 - SID_tracker - ERROR - Failed to get SID for process with PID 1432
+2026-02-26 08:38:37,414 - SID_tracker - ERROR - Failed to get SID for process with PID 1500
+2026-02-26 08:38:37,415 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 1528
+2026-02-26 08:38:37,416 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 1580
+2026-02-26 08:38:37,416 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 1620
+2026-02-26 08:38:37,422 - SID_tracker - ERROR - Failed to get SID for process with PID 1632
+2026-02-26 08:38:37,429 - SID_tracker - ERROR - Failed to get SID for process with PID 1660
+2026-02-26 08:38:37,432 - SID_tracker - ERROR - Failed to get SID for process with PID 1668
+2026-02-26 08:38:37,443 - SID_tracker - ERROR - Failed to get SID for process with PID 1764
+2026-02-26 08:38:37,446 - SID_tracker - ERROR - Failed to get SID for process with PID 1780
+2026-02-26 08:38:37,446 - SID_tracker - ERROR - Failed to get SID for process with PID 1816
+2026-02-26 08:38:37,462 - SID_tracker - ERROR - Failed to get SID for process with PID 1900
+2026-02-26 08:38:37,462 - SID_tracker - ERROR - Failed to get SID for process with PID 1928
+2026-02-26 08:38:37,478 - SID_tracker - ERROR - Failed to get SID for process with PID 1944
+2026-02-26 08:38:37,478 - SID_tracker - ERROR - Failed to get SID for process with PID 1952
+2026-02-26 08:38:37,478 - SID_tracker - ERROR - Failed to get SID for process with PID 2024
+2026-02-26 08:38:37,495 - SID_tracker - ERROR - Failed to get SID for process with PID 2032
+2026-02-26 08:38:37,495 - SID_tracker - ERROR - Failed to get SID for process with PID 2052
+2026-02-26 08:38:37,509 - SID_tracker - ERROR - Failed to get SID for process with PID 2072
+2026-02-26 08:38:37,510 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 2092
+2026-02-26 08:38:37,518 - SID_tracker - ERROR - Failed to get SID for process with PID 2132
+2026-02-26 08:38:37,527 - SID_tracker - ERROR - Failed to get SID for process with PID 2180
+2026-02-26 08:38:37,530 - SID_tracker - ERROR - Failed to get SID for process with PID 2296
+2026-02-26 08:38:37,530 - SID_tracker - ERROR - Failed to get SID for process with PID 2320
+2026-02-26 08:38:37,545 - SID_tracker - ERROR - Failed to get SID for process with PID 2360
+2026-02-26 08:38:37,545 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 2512
+2026-02-26 08:38:37,548 - SID_tracker - ERROR - Failed to get SID for process with PID 2520
+2026-02-26 08:38:37,559 - SID_tracker - ERROR - Failed to get SID for process with PID 2548
+2026-02-26 08:38:37,559 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 2580
+2026-02-26 08:38:37,563 - SID_tracker - ERROR - Failed to get SID for process with PID 2660
+2026-02-26 08:38:37,563 - SID_tracker - ERROR - Failed to get SID for process with PID 2688
+2026-02-26 08:38:37,563 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 2700
+2026-02-26 08:38:37,580 - SID_tracker - ERROR - Failed to get SID for process with PID 2720
+2026-02-26 08:38:37,580 - SID_tracker - ERROR - Failed to get SID for process with PID 2728
+2026-02-26 08:38:37,580 - SID_tracker - ERROR - Failed to get SID for process with PID 2776
+2026-02-26 08:38:37,597 - SID_tracker - ERROR - Failed to get SID for process with PID 2828
+2026-02-26 08:38:37,597 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 2844
+2026-02-26 08:38:37,597 - SID_tracker - ERROR - Failed to get SID for process with PID 2932
+2026-02-26 08:38:37,615 - SID_tracker - ERROR - Failed to get SID for process with PID 2980
+2026-02-26 08:38:37,615 - SID_tracker - ERROR - Failed to get SID for process with PID 3036
+2026-02-26 08:38:37,628 - SID_tracker - ERROR - Failed to get SID for process with PID 3080
+2026-02-26 08:38:37,634 - SID_tracker - ERROR - Failed to get SID for process with PID 3176
+2026-02-26 08:38:37,634 - SID_tracker - ERROR - Failed to get SID for process with PID 3184
+2026-02-26 08:38:37,649 - SID_tracker - ERROR - Failed to get SID for process with PID 3260
+2026-02-26 08:38:37,649 - SID_tracker - ERROR - Failed to get SID for process with PID 3368
+2026-02-26 08:38:37,662 - SID_tracker - ERROR - Failed to get SID for process with PID 3412
+2026-02-26 08:38:37,662 - SID_tracker - ERROR - Failed to get SID for process with PID 3432
+2026-02-26 08:38:37,662 - SID_tracker - ERROR - Failed to get SID for process with PID 3456
+2026-02-26 08:38:37,683 - SID_tracker - ERROR - Failed to get SID for process with PID 3464
+2026-02-26 08:38:37,684 - SID_tracker - ERROR - Failed to get SID for process with PID 3536
+2026-02-26 08:38:37,699 - SID_tracker - ERROR - Failed to get SID for process with PID 3584
+2026-02-26 08:38:37,701 - SID_tracker - ERROR - Failed to get SID for process with PID 3604
+2026-02-26 08:38:37,714 - SID_tracker - ERROR - Failed to get SID for process with PID 3648
+2026-02-26 08:38:37,714 - SID_tracker - ERROR - Failed to get SID for process with PID 3656
+2026-02-26 08:38:37,714 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 3672
+2026-02-26 08:38:37,714 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 3792
+2026-02-26 08:38:37,729 - SID_tracker - ERROR - Failed to get SID for process with PID 3868
+2026-02-26 08:38:37,730 - SID_tracker - ERROR - Failed to get SID for process with PID 3876
+2026-02-26 08:38:37,730 - SID_tracker - ERROR - Failed to get SID for process with PID 3896
+2026-02-26 08:38:37,730 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 3924
+2026-02-26 08:38:37,746 - SID_tracker - ERROR - Failed to get SID for process with PID 3940
+2026-02-26 08:38:37,746 - SID_tracker - ERROR - Failed to get SID for process with PID 3948
+2026-02-26 08:38:37,761 - SID_tracker - ERROR - Failed to get SID for process with PID 4112
+2026-02-26 08:38:37,763 - SID_tracker - ERROR - Failed to get SID for process with PID 4124
+2026-02-26 08:38:37,763 - SID_tracker - ERROR - Failed to get SID for process with PID 4172
+2026-02-26 08:38:37,779 - SID_tracker - ERROR - Failed to get SID for process with PID 4220
+2026-02-26 08:38:37,780 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 4320
+2026-02-26 08:38:37,781 - SID_tracker - ERROR - Failed to get SID for process with PID 4332
+2026-02-26 08:38:37,781 - SID_tracker - ERROR - Failed to get SID for process with PID 4364
+2026-02-26 08:38:37,793 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 4388
+2026-02-26 08:38:37,797 - SID_tracker - ERROR - Failed to get SID for process with PID 4400
+2026-02-26 08:38:37,797 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 4448
+2026-02-26 08:38:37,797 - SID_tracker - ERROR - Failed to get SID for process with PID 4508
+2026-02-26 08:38:37,797 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 4584
+2026-02-26 08:38:37,810 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 4604
+2026-02-26 08:38:37,811 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 4608
+2026-02-26 08:38:37,811 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 4640
+2026-02-26 08:38:37,812 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 4656
+2026-02-26 08:38:37,812 - SID_tracker - ERROR - Failed to get SID for process with PID 4664
+2026-02-26 08:38:37,812 - SID_tracker - ERROR - Failed to get SID for process with PID 4672
+2026-02-26 08:38:37,830 - SID_tracker - ERROR - Failed to get SID for process with PID 4680
+2026-02-26 08:38:37,830 - SID_tracker - ERROR - Failed to get SID for process with PID 4688
+2026-02-26 08:38:37,845 - SID_tracker - ERROR - Failed to get SID for process with PID 4728
+2026-02-26 08:38:37,845 - SID_tracker - ERROR - Failed to get SID for process with PID 4736
+2026-02-26 08:38:37,845 - SID_tracker - ERROR - Failed to get SID for process with PID 4744
+2026-02-26 08:38:37,862 - SID_tracker - ERROR - Failed to get SID for process with PID 4760
+2026-02-26 08:38:37,862 - SID_tracker - ERROR - Failed to get SID for process with PID 4768
+2026-02-26 08:38:37,876 - SID_tracker - ERROR - Failed to get SID for process with PID 4804
+2026-02-26 08:38:37,879 - SID_tracker - ERROR - Failed to get SID for process with PID 4840
+2026-02-26 08:38:37,879 - SID_tracker - ERROR - Failed to get SID for process with PID 4864
+2026-02-26 08:38:37,895 - SID_tracker - ERROR - Failed to get SID for process with PID 4876
+2026-02-26 08:38:37,899 - SID_tracker - ERROR - Failed to get SID for process with PID 4932
+2026-02-26 08:38:37,899 - SID_tracker - ERROR - Failed to get SID for process with PID 4988
+2026-02-26 08:38:37,914 - SID_tracker - ERROR - Failed to get SID for process with PID 5028
+2026-02-26 08:38:37,929 - SID_tracker - ERROR - Failed to get SID for process with PID 5044
+2026-02-26 08:38:37,935 - SID_tracker - ERROR - Failed to get SID for process with PID 5080
+2026-02-26 08:38:37,935 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 5092
+2026-02-26 08:38:37,945 - SID_tracker - ERROR - Failed to get SID for process with PID 5344
+2026-02-26 08:38:37,946 - SID_tracker - ERROR - Failed to get SID for process with PID 5368
+2026-02-26 08:38:37,946 - SID_tracker - ERROR - Failed to get SID for process with PID 5384
+2026-02-26 08:38:37,962 - SID_tracker - ERROR - Failed to get SID for process with PID 5592
+2026-02-26 08:38:37,962 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 5676
+2026-02-26 08:38:37,962 - SID_tracker - ERROR - Failed to get SID for process with PID 5784
+2026-02-26 08:38:37,962 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 5788
+2026-02-26 08:38:37,962 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 5792
+2026-02-26 08:38:37,962 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 5972
+2026-02-26 08:38:37,979 - SID_tracker - ERROR - Failed to get SID for process with PID 6088
+2026-02-26 08:38:37,980 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 6164
+2026-02-26 08:38:37,980 - SID_tracker - ERROR - Failed to get SID for process with PID 6252
+2026-02-26 08:38:37,981 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 6384
+2026-02-26 08:38:37,981 - SID_tracker - ERROR - Failed to get SID for process with PID 6432
+2026-02-26 08:38:37,981 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 6452
+2026-02-26 08:38:37,981 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 6520
+2026-02-26 08:38:37,981 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 6568
+2026-02-26 08:38:37,995 - SID_tracker - ERROR - Failed to get SID for process with PID 6604
+2026-02-26 08:38:37,995 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 6652
+2026-02-26 08:38:37,995 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 6828
+2026-02-26 08:38:37,995 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 6932
+2026-02-26 08:38:37,995 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7068
+2026-02-26 08:38:37,995 - SID_tracker - ERROR - Failed to get SID for process with PID 7144
+2026-02-26 08:38:38,010 - SID_tracker - ERROR - Failed to get SID for process with PID 7164
+2026-02-26 08:38:38,011 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7176
+2026-02-26 08:38:38,011 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7292
+2026-02-26 08:38:38,012 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7336
+2026-02-26 08:38:38,013 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7368
+2026-02-26 08:38:38,013 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7416
+2026-02-26 08:38:38,014 - SID_tracker - ERROR - Failed to get SID for process with PID 7512
+2026-02-26 08:38:38,014 - SID_tracker - ERROR - Failed to get SID for process with PID 7548
+2026-02-26 08:38:38,014 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7556
+2026-02-26 08:38:38,027 - SID_tracker - ERROR - Failed to get SID for process with PID 7616
+2026-02-26 08:38:38,027 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7688
+2026-02-26 08:38:38,027 - SID_tracker - ERROR - Failed to get SID for process with PID 7708
+2026-02-26 08:38:38,027 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7728
+2026-02-26 08:38:38,027 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7760
+2026-02-26 08:38:38,043 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7876
+2026-02-26 08:38:38,043 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7948
+2026-02-26 08:38:38,043 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 7992
+2026-02-26 08:38:38,047 - SID_tracker - ERROR - Failed to get SID for process with PID 8156
+2026-02-26 08:38:38,047 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 8188
+2026-02-26 08:38:38,047 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 8248
+2026-02-26 08:38:38,047 - SID_tracker - ERROR - Failed to get SID for process with PID 8272
+2026-02-26 08:38:38,061 - SID_tracker - ERROR - Failed to get SID for process with PID 8376
+2026-02-26 08:38:38,061 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 8436
+2026-02-26 08:38:38,061 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 8556
+2026-02-26 08:38:38,061 - SID_tracker - ERROR - Failed to get SID for process with PID 8576
+2026-02-26 08:38:38,061 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 8840
+2026-02-26 08:38:38,061 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 9064
+2026-02-26 08:38:38,061 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 9076
+2026-02-26 08:38:38,079 - SID_tracker - ERROR - Failed to get SID for process with PID 9124
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 9232
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 9348
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 9516
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 9644
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 9804
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 9820
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 9840
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 9856
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 9924
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 10084
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 10264
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 10320
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 10464
+2026-02-26 08:38:38,079 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 10664
+2026-02-26 08:38:38,096 - SID_tracker - ERROR - Failed to get SID for process with PID 10728
+2026-02-26 08:38:38,096 - SID_tracker - ERROR - Failed to get SID for process with PID 11048
+2026-02-26 08:38:38,096 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 11152
+2026-02-26 08:38:38,096 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 11200
+2026-02-26 08:38:38,096 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 11232
+2026-02-26 08:38:38,096 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 11352
+2026-02-26 08:38:38,112 - SID_tracker - ERROR - Failed to get SID for process with PID 11364
+2026-02-26 08:38:38,112 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 11452
+2026-02-26 08:38:38,112 - SID_tracker - ERROR - Failed to get SID for process with PID 11608
+2026-02-26 08:38:38,112 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 11632
+2026-02-26 08:38:38,112 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 11888
+2026-02-26 08:38:38,112 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 11988
+2026-02-26 08:38:38,112 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 12052
+2026-02-26 08:38:38,112 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 12060
+2026-02-26 08:38:38,130 - SID_tracker - ERROR - Failed to get SID for process with PID 12072
+2026-02-26 08:38:38,130 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 12152
+2026-02-26 08:38:38,130 - SID_tracker - ERROR - Failed to get SID for process with PID 12196
+2026-02-26 08:38:38,130 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 12472
+2026-02-26 08:38:38,145 - SID_tracker - ERROR - Failed to get SID for process with PID 12696
+2026-02-26 08:38:38,146 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 12880
+2026-02-26 08:38:38,146 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 12924
+2026-02-26 08:38:38,146 - SID_tracker - ERROR - Failed to get SID for process with PID 12932
+2026-02-26 08:38:38,146 - SID_tracker - ERROR - Failed to get SID for process with PID 13024
+2026-02-26 08:38:38,146 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 13076
+2026-02-26 08:38:38,146 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 13120
+2026-02-26 08:38:38,146 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 13316
+2026-02-26 08:38:38,160 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 13760
+2026-02-26 08:38:38,163 - SID_tracker - ERROR - Failed to get SID for process with PID 13788
+2026-02-26 08:38:38,163 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 13820
+2026-02-26 08:38:38,163 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 14000
+2026-02-26 08:38:38,163 - SID_tracker - ERROR - Failed to get SID for process with PID 14032
+2026-02-26 08:38:38,163 - SID_tracker - DEBUG - Got SID S-1-5-21-1323847849-596449929-2421794689-1001 for process with PID 14288
