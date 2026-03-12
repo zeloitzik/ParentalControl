@@ -1,23 +1,9 @@
-import tkinter as tk
+from sqlalchemy import create_engine
 
-def create_lock_screen():
-    root = tk.Tk()
-    
-    # Make it full screen
-    root.attributes("-fullscreen", True)
-    
-    # Keep it on top of all other windows
-    root.attributes("-topmost", True)
-    
-    # Remove the 'X' and minimize buttons
-    root.overrideredirect(True)
+engine = create_engine(
+    "postgresql://postgres:itzik%402007@localhost:5432/warden_db"
+)
 
-    label = tk.Label(root, text="DEVICE LOCKED BY PARENT", font=("Arial", 30), fg="red")
-    label.pack(expand=True)
-
-    # prevent closing with Alt+F4
-    #root.protocol("WM_DELETE_WINDOW", lambda: None)
-
-    root.mainloop()
-
-create_lock_screen()
+connection = engine.connect()
+print("Connected successfully!")
+connection.close()
