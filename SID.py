@@ -2,10 +2,10 @@
 
 import win32security
 import logging
+from setup_logger import my_logger
 class SID:
     def __init__(self):
-        logging.basicConfig(filename='SID.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-        self.logger = logging.getLogger(__name__)
+        self.logger = my_logger("SID", "sid.log", logging.DEBUG).setup_logger()
         self.sidstr = None
     def GetSID(self):
         desc = win32security.GetFileSecurity(
@@ -18,3 +18,7 @@ class SID:
         self.logger.debug("SID is %s", self.sidstr)
         return self.sidstr
 
+#Test
+if __name__ == "__main__":
+    sid = SID()
+    print(sid.GetSID())

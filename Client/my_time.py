@@ -1,39 +1,74 @@
 import psutil
-from setup_logger import my_logger
-import time
-from datetime import datetime
 import win32security
 import logging
-class TimeTracker:
-    def __init__(self):
-        
-        self.logger_sid = (my_logger("SID_tracker","time_sid.log",logging.DEBUG)).setup_logger()
-        self.logger_process = (my_logger("Process_tracker","time_process.log")).setup_logger()
+from datetime import datetime
+import time
 
-    def get_sid_of_process(self,pid):
+class TimeTracker:
+
+    def __init__(self):
+        self.logger = logging.getLogger("process_tracker")
+        self.active_processes = {}
+
+    def get_sid_of_process(self, pid):
+
         try:
-            process_handle = psutil.Process(pid)
-            username = process_handle.username()
-            sid_obj , domain , type = win32security.LookupAccountName(None, username)
-            self.logger_sid.debug("Got SID %s for process with PID %s", win32security.ConvertSidToStringSid(sid_obj), pid)
+            process = psutil.Process(pid)
+            username = process.username()
+
+            sid_obj, domain, type = win32security.LookupAccountName(None, username)
             return win32security.ConvertSidToStringSid(sid_obj)
-        except:
-            self.logger_sid.error("Failed to get SID for process with PID %s", pid)
+        except Exception:
             return None
-        
-    def track_time(self, target_sid):
-        self.logger_process.info("Starting time tracking for SID %s", target_sid)
-        for proc in psutil.process_iter(['pid', 'name', 'create_time']):
+
+    def scan_processes(self, target_sid):
+
+        current_processes = {}
+        events = []
+        for proc in psutil.process_iter(['pid','name']):
             try:
                 pid = proc.info['pid']
-                sid = self.get_sid_of_process(pid)
-                if sid == target_sid:
-                    start_time = datetime.fromtimestamp(proc.info['create_time'])
-                    elapsed_time = datetime.now() - start_time
-                    self.logger_process.info("Process %s (PID: %s) has been running for %s", proc.info['name'],pid,elapsed_time)
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                continue
-        self.logger_process.info("Finished time tracking for SID %s", target_sid)
+                name = proc.info['name']
 
-time_tracker = TimeTracker()
-print(time_tracker.track_time("S-1-5-21-1323847849-596449929-2421794689-1001"))
+                sid = self.get_sid_of_process(pid)
+                if sid != target_sid:
+                    continue
+                current_processes[pid] = name
+                # NEW PROCESS
+                if pid not in self.active_processes:
+                    events.append({
+                        "event_name": "APP_STARTED",
+                        "app": name,
+                        "pid": pid,
+                        "timestamp": datetime.utcnow().isoformat()
+                    })
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+
+
+        # detect stopped processes
+        for pid in list(self.active_processes):
+
+            if pid not in current_processes:
+                events.append({
+                    "event_name": "APP_STOPPED",
+                    "app": self.active_processes[pid],
+                    "pid": pid,
+                    "timestamp": datetime.utcnow().isoformat()
+                })
+
+
+        self.active_processes = current_processes
+
+        return events
+
+#Test
+if __name__ == "__main__":
+    tracker = TimeTracker()
+    sid = tracker.get_sid_of_process(psutil.Process().pid)
+    print("Current SID:", sid)
+    while True:
+        events = tracker.scan_processes(sid)
+        for event in events:
+            print(event)
+        time.sleep(5)

@@ -11,8 +11,8 @@ class DatabaseManager:
         self.host = "127.0.0.1"
         # self.user = os.environ.get("DB_USER")
         # self.password = os.environ.get("DB_PASSWORD")
-        self.user = "zeloitzik"
-        self.password = "itzik123"
+        self.user = "root"
+        self.password = "Itzik@2007"
         self.db_name = "warden_db"
 
         self._initialize_database()
@@ -176,7 +176,148 @@ class DatabaseManager:
         self.cursor.close()
         self.db.close()
 
+    def clear_table(self, table_name):
 
+        self.cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
+        self.cursor.execute(f"TRUNCATE TABLE {table_name}")
+        self.cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
+
+        self.db.commit()
+    
+    def clear_families(self):
+        self.clear_table("families")
+
+    def clear_users(self):
+        self.clear_table("users")
+
+    def clear_devices(self):
+        self.clear_table("devices")
+
+    def clear_app_rules(self):
+        self.clear_table("app_rules")
+
+    def clear_usage_logs(self):
+        self.clear_table("usage_logs")
+    
+    def clear_all_tables(self):
+
+        self.cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
+
+        tables = [
+            "usage_logs",
+            "app_rules",
+            "devices",
+            "users",
+            "families"
+        ]
+
+        for table in tables:
+            self.cursor.execute(f"TRUNCATE TABLE {table}")
+
+        self.cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
+
+        self.db.commit()
+    
+    def reset_database(self):
+
+        self.cursor.close()
+        self.db.close()
+
+        conn = mysql.connector.connect(
+            host=self.host,
+            user=self.user,
+            password=self.password
+        )
+
+        cursor = conn.cursor()
+
+        cursor.execute(f"DROP DATABASE IF EXISTS {self.db_name}")
+        cursor.execute(f"CREATE DATABASE {self.db_name}")
+
+        cursor.close()
+        conn.close()
+
+        self._connect()
+        self._initialize_tables()
+
+    # Time functions
+    def can_user_run_app(self, sid, app_name):
+
+        sql = "SELECT id FROM users WHERE sid = %s"
+        self.cursor.execute(sql, (sid,))
+        user = self.cursor.fetchone()
+
+        if not user:
+            return True  # no user registered -> allow
+
+        user_id = user[0]
+
+        sql = """
+        SELECT allowed_minutes
+        FROM app_rules
+        WHERE user_id = %s AND app_name = %s
+        """
+
+        self.cursor.execute(sql, (user_id, app_name))
+        rule = self.cursor.fetchone()
+
+        if not rule:
+            return True  # no rule -> allow
+
+        allowed_minutes = rule[0]
+
+        sql = """
+        SELECT IFNULL(SUM(duration),0)
+        FROM usage_logs
+        WHERE user_id = %s
+        AND app_name = %s
+        AND DATE(start_time) = CURDATE()
+        """
+
+        self.cursor.execute(sql, (user_id, app_name))
+        used_minutes = self.cursor.fetchone()[0]
+
+        if used_minutes >= allowed_minutes:
+            return False
+
+        return True
+    def remaining_time(self, sid, app_name):
+
+        sql = "SELECT id FROM users WHERE sid = %s"
+        self.cursor.execute(sql, (sid,))
+        user = self.cursor.fetchone()
+
+        if not user:
+            return None
+
+        user_id = user[0]
+
+        sql = """
+        SELECT allowed_minutes
+        FROM app_rules
+        WHERE user_id = %s AND app_name = %s
+        """
+
+        self.cursor.execute(sql, (user_id, app_name))
+        rule = self.cursor.fetchone()
+
+        if not rule:
+            return None
+
+        allowed_minutes = rule[0]
+
+        sql = """
+        SELECT IFNULL(SUM(duration),0)
+        FROM usage_logs
+        WHERE user_id = %s
+        AND app_name = %s
+        AND DATE(start_time) = CURDATE()
+        """
+
+        self.cursor.execute(sql, (user_id, app_name))
+        used = self.cursor.fetchone()[0]
+
+        return max(allowed_minutes - used, 0)
 # TEST
 
 if __name__ == "__main__":
