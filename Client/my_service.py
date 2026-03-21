@@ -9,6 +9,7 @@ import time
 from SID import SID
 import logging
 import my_time
+
 '''
 Need to gather the SID of all the users, store in a database and distinguish
 between a parent and a child. 
@@ -27,7 +28,7 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
         self.is_running = True
         self.user_SID = SID.GetSID()
         logging.basicConfig(filename='service.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-        self.server_url = "http://localhost:5000/event"
+        self.server_url = "http://localhost:8000/event"
         self.logger = logging.getLogger(__name__)
 
     def SvcStop(self):
@@ -44,8 +45,8 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
                     event["event_name"],
                     {"app": event["app"]}
                 )
-
             time.sleep(5)
+
     def send_event(self, event_name, metadata):
         event = {
             "sid": self.user_SID,

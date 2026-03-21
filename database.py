@@ -20,7 +20,7 @@ class DatabaseManager:
         self._initialize_tables()
 
     # DATABASE INITIALIZATION
-
+    
     def _initialize_database(self):
         conn = mysql.connector.connect(
             host=self.host,
@@ -50,7 +50,8 @@ class DatabaseManager:
         self.cursor = self.db.cursor()
 
     # TABLE CREATION
-
+    def get_cursor(self): 
+        return self.cursor
     def _initialize_tables(self):
 
         # Families table
@@ -162,6 +163,40 @@ class DatabaseManager:
         self.cursor.execute(sql, (user_id, app_name, duration))
         self.db.commit()
 
+    # FUNCTIONS
+    def get_user_id_by_sid(self, sid):
+
+        sql = "SELECT id FROM users WHERE sid = %s"
+        self.cursor.execute(sql, (sid,))
+        result = self.cursor.fetchone()
+
+        return result[0] if result else None
+    def get_start_time_of_active_session(self, user_id, app_name):
+        sql = """
+        SELECT start_time
+        FROM app_sessions
+        WHERE user_id = %s
+        AND app_name = %s
+        AND status = 'RUNNING'
+        """
+
+        self.cursor.execute(sql, (user_id, app_name))
+        result = self.cursor.fetchone()
+
+        return result[0] if result else None
+    def get_active_session_time(self, user_id, app_name):
+        sql = """
+        SELECT IFNULL(TIMESTAMPDIFF(MINUTE, start_time, NOW()),0)
+        FROM app_sessions
+        WHERE user_id = %s
+        AND app_name = %s
+        AND status = 'RUNNING'
+        """
+
+        self.cursor.execute(sql, (user_id, app_name))
+        result = self.cursor.fetchone()
+
+        return result[0] if result else 0
     # DEBUG UTILITIES
 
     def print_table(self, table):

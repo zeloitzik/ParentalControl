@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Warden Dashboard</title>
+</head>
+<body>
+
+<h1>Warden - Parent Dashboard</h1>
+
+<div id="data"></div>
+
+<script>
+
+async function fetchData() {
+
+    const res = await fetch("http://127.0.0.1:8000/parent_dashboard");
+    const data = await res.json();
+
+    let html = "";
+
+    data.forEach(user => {
+
+        html += `<h2>${user.name}</h2>`;
+
+        user.apps.forEach(app => {
+
+            html += `
+            <p>
+            ${app.app} : ${app.used} / ${app.allowed} minutes
+            </p>
+            `;
+        });
+
+    });
+
+    document.getElementById("data").innerHTML = html;
+}
+
+// refresh every 3 seconds
+setInterval(fetchData, 3000);
+
+fetchData();
+
+</script>
+
+</body>
+</html>
