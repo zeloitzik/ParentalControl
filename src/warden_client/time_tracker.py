@@ -1,5 +1,6 @@
 import psutil
 import win32security
+import win32con
 import logging
 from datetime import datetime
 import time
@@ -11,14 +12,39 @@ class TimeTracker:
         self.active_processes = {}
 
     def get_sid_of_process(self, pid):
-
         try:
+            # First, check if process exists
+            if not psutil.pid_exists(pid):
+                return None
+                
             process = psutil.Process(pid)
-            username = process.username()
+            # Try to get SID from process token (more reliable than username lookup)
+            import win32process
+            import win32api
+            import win32security
+            import pywintypes
 
-            sid_obj, domain, type = win32security.LookupAccountName(None, username)
-            return win32security.ConvertSidToStringSid(sid_obj)
-        except Exception:
+            try:
+                # Open process token
+                hProcess = win32api.OpenProcess(win32con.PROCESS_QUERY_INFORMATION, False, pid)
+                hToken = win32security.OpenProcessToken(hProcess, win32con.TOKEN_QUERY)
+                # Get SID
+                user_sid, _ = win32security.GetTokenInformation(hToken, win32security.TokenUser)
+                win32api.CloseHandle(hToken)
+                win32api.CloseHandle(hProcess)
+                return win32security.ConvertSidToStringSid(user_sid)
+            except Exception:
+                # Fallback to username lookup if token access fails
+                username = process.username()
+                if not username:
+                    return None
+                # Split domain\user if present
+                if '\\' in username:
+                    username = username.split('\\')[-1]
+                sid_obj, _, _ = win32security.LookupAccountName(None, username)
+                return win32security.ConvertSidToStringSid(sid_obj)
+        except Exception as exc:
+            self.logger.debug("Failed to resolve SID for pid=%s: %s", pid, exc)
             return None
 
     def scan_processes(self, target_sid):

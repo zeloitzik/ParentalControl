@@ -47,7 +47,7 @@ class DatabaseManager:
             database=self.db_name
         )
 
-        self.cursor = self.db.cursor()
+        self.cursor = self.db.cursor(buffered=True)
 
     # TABLE CREATION
     def get_cursor(self): 
@@ -97,6 +97,19 @@ class DatabaseManager:
         )
         """)
 
+        self.cursor.execute("""
+        CREATE TABLE IF NOT EXISTS app_sessions (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
+            app_name VARCHAR(255) NOT NULL,
+            start_time TIMESTAMP NOT NULL,
+            end_time TIMESTAMP NULL,
+            status ENUM('RUNNING','CLOSED') NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES users(id),
+            INDEX idx_user_app_status (user_id, app_name, status)
+        )
+        """)
+
         # Usage logs table
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS usage_logs (
@@ -116,22 +129,28 @@ class DatabaseManager:
     def add_family(self, parent_email):
 
         sql = "INSERT INTO families (parent_email) VALUES (%s)"
-        self.cursor.execute(sql, (parent_email,))
-        self.db.commit()
-
-        return self.cursor.lastrowid
+        try:
+            self.cursor.execute(sql, (parent_email,))
+            self.db.commit()
+            return self.cursor.lastrowid
+        except mysql.connector.Error as err:
+            self.db.rollback()
+            raise err
 
     def add_user(self, family_id, sid, name, user_type):
-
+        if not all([family_id, sid, name, user_type]):
+            raise ValueError("All user fields are required")
         sql = """
         INSERT INTO users (family_id, sid, name, type)
         VALUES (%s, %s, %s, %s)
         """
-
-        self.cursor.execute(sql, (family_id, sid, name, user_type))
-        self.db.commit()
-
-        return self.cursor.lastrowid
+        try:
+            self.cursor.execute(sql, (family_id, sid, name, user_type))
+            self.db.commit()
+            return self.cursor.lastrowid
+        except mysql.connector.Error as err:
+            self.db.rollback()
+            raise err
 
     def add_device(self, family_id, device_name):
 
@@ -139,9 +158,12 @@ class DatabaseManager:
         INSERT INTO devices (family_id, device_name)
         VALUES (%s, %s)
         """
-
-        self.cursor.execute(sql, (family_id, device_name))
-        self.db.commit()
+        try:
+            self.cursor.execute(sql, (family_id, device_name))
+            self.db.commit()
+        except mysql.connector.Error as err:
+            self.db.rollback()
+            raise err
 
     def add_app_rule(self, user_id, app_name, allowed_minutes):
 
@@ -149,9 +171,12 @@ class DatabaseManager:
         INSERT INTO app_rules (user_id, app_name, allowed_minutes)
         VALUES (%s, %s, %s)
         """
-
-        self.cursor.execute(sql, (user_id, app_name, allowed_minutes))
-        self.db.commit()
+        try:
+            self.cursor.execute(sql, (user_id, app_name, allowed_minutes))
+            self.db.commit()
+        except mysql.connector.Error as err:
+            self.db.rollback()
+            raise err
 
     def log_usage(self, user_id, app_name, duration):
 
@@ -159,9 +184,42 @@ class DatabaseManager:
         INSERT INTO usage_logs (user_id, app_name, start_time, duration)
         VALUES (%s, %s, NOW(), %s)
         """
+        try:
+            self.cursor.execute(sql, (user_id, app_name, duration))
+            self.db.commit()
+        except mysql.connector.Error as err:
+            self.db.rollback()
+            raise err
 
-        self.cursor.execute(sql, (user_id, app_name, duration))
-        self.db.commit()
+    def start_app_session(self, user_id, app_name, start_time):
+        sql = """
+        INSERT INTO app_sessions (user_id, app_name, start_time, status)
+        VALUES (%s, %s, %s, 'RUNNING')
+        """
+        try:
+            self.cursor.execute(sql, (user_id, app_name, start_time))
+            self.db.commit()
+        except mysql.connector.Error as err:
+            self.db.rollback()
+            raise err
+
+    def get_running_session(self, user_id, app_name):
+        sql = """
+        SELECT id, start_time FROM app_sessions 
+        WHERE user_id = %s AND app_name = %s AND status = 'RUNNING'
+        LIMIT 1
+        """
+        self.cursor.execute(sql, (user_id, app_name))
+        result = self.cursor.fetchone()
+        if result:
+            return {"id": result[0], "start_time": result[1]}
+        return None
+
+    def get_app_rule(self, user_id, app_name):
+        sql = "SELECT allowed_minutes FROM app_rules WHERE user_id = %s AND app_name = %s"
+        self.cursor.execute(sql, (user_id, app_name))
+        result = self.cursor.fetchone()
+        return {"allowed_minutes": result[0]} if result else None
 
     # FUNCTIONS
     def get_user_id_by_sid(self, sid):
@@ -353,6 +411,18 @@ class DatabaseManager:
         used = self.cursor.fetchone()[0]
 
         return max(allowed_minutes - used, 0)
+    
+    
+    def get_used_time_today(self, user_id, app_name):
+        sql = """
+        SELECT IFNULL(SUM(duration), 0)
+        FROM usage_logs
+        WHERE user_id = %s
+          AND app_name = %s
+          AND DATE(start_time) = CURDATE()
+        """
+        self.cursor.execute(sql, (user_id, app_name))
+        return self.cursor.fetchone()[0]
 # TEST
 
 if __name__ == "__main__":

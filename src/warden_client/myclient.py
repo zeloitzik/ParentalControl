@@ -1,5 +1,5 @@
 from socket import *
-from my_service import MyParentalControlService
+from service import MyParentalControlService
 class my_client:
     def __init__(self, ip, port):
         self.soc = socket()
