@@ -298,6 +298,7 @@ class DatabaseManager:
 
         tables = [
             "usage_logs",
+            "app_sessions",
             "app_rules",
             "devices",
             "users",

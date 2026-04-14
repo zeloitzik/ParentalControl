@@ -4,6 +4,7 @@ import win32con
 import logging
 from datetime import datetime
 import time
+from datetime import timezone
 
 class TimeTracker:
 
@@ -66,7 +67,7 @@ class TimeTracker:
                         "event_name": "APP_STARTED",
                         "app": name,
                         "pid": pid,
-                        "timestamp": datetime.utcnow().isoformat()
+                        "timestamp": datetime.now(timezone.utc).isoformat()
                     })
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 continue
@@ -80,7 +81,7 @@ class TimeTracker:
                     "event_name": "APP_STOPPED",
                     "app": self.active_processes[pid],
                     "pid": pid,
-                    "timestamp": datetime.utcnow().isoformat()
+                    "timestamp": datetime.now(timezone.utc).isoformat()
                 })
 
 

@@ -23,10 +23,22 @@ def seed_test_data():
 
     print(f"Current User SID: {user_sid}")
     
-    # 1. Clear existing data for a fresh start (optional, but good for testing)
-    # db.clear_all_tables()
+    # 1. Clear existing data for a fresh start
+    print("Resetting database...")
+    db.clear_all_tables()
     
-    # 2. Add family
+    # 2. Clear local locked apps list
+    print("Resetting local locked apps...")
+    try:
+        app_data_dir = Path(os.getenv('APPDATA')) / "Warden"
+        locked_apps_file = app_data_dir / "locked_apps.json"
+        if locked_apps_file.exists():
+            os.remove(locked_apps_file)
+            print(f"Removed {locked_apps_file}")
+    except Exception as e:
+        print(f"Warning: Could not clear local locked apps: {e}")
+    
+    # 3. Add family
     try:
         db.cursor.execute("INSERT IGNORE INTO families (parent_email) VALUES (%s)", ("test_parent@example.com",))
         db.cursor.execute("SELECT id FROM families WHERE parent_email=%s", ("test_parent@example.com",))
@@ -40,7 +52,7 @@ def seed_test_data():
         
         # 4. Add app rule for testing (e.g., 1 minute for notepad.exe or calculator.exe)
         # Or better yet, a rule that is already expired for immediate testing
-        test_app = "zen.exe"
+        test_app = "notepad.exe"
         db.cursor.execute("INSERT INTO app_rules (user_id, app_name, allowed_minutes) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE allowed_minutes=%s", 
                           (user_id, test_app, 1, 1))
         

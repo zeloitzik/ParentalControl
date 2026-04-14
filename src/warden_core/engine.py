@@ -12,7 +12,8 @@ class ServerEngine:
         event_name = event["event_name"]
         sid = event["sid"]
         metadata = event["metadata"]
-        timestamp = datetime.fromisoformat(event["timestamp"]).astimezone(timezone.utc)
+        timestamp_utc = datetime.fromisoformat(event["timestamp"])
+        timestamp = timestamp_utc.astimezone().replace(tzinfo=None)
 
         if event_name == "APP_STARTED":
             self.handle_app_start(sid, metadata["app"], timestamp)

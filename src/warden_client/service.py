@@ -50,7 +50,7 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
         self.sid_helper = SID()
         self.user_SID = self.sid_helper.GetSID()
         logging.basicConfig(filename='service.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-        self.server_url = "http://localhost:8000"
+        self.server_url = "http://127.0.0.1:8000"
         self.logger = logging.getLogger(__name__)
         self.app_locker = AppLocker()
         self.lock_screen_active = False
@@ -83,23 +83,35 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
                         pid = event["pid"]
                         
                         # Check local registry first
+                        blocked_locally = False
                         if self.app_locker.is_locked(app_name):
                             self.logger.info("Blocking app from local registry: %s", app_name)
                             self.kill_process(pid)
-                            continue
+                            blocked_locally = True
 
                         # Check with server
-                        allowed = self.check_with_server(app_name)
-                        if not allowed:
-                            self.logger.info("Blocking app by server policy: %s", app_name)
-                            self.app_locker.lock_app(app_name) # Add to local registry
-                            self.kill_process(pid)
+                        allowed = True
+                        if not blocked_locally:
+                            allowed = self.check_with_server(app_name)
+                            if not allowed:
+                                self.logger.info("Blocking app by server policy: %s", app_name)
+                                self.app_locker.lock_app(app_name) # Add to local registry
+                                self.kill_process(pid)
+
+                        # Always send START event to server so it's recorded in app_sessions
+                        self.send_event(
+                            "APP_STARTED",
+                            {"app": app_name, "pid": pid}
+                        )
+
+                        if blocked_locally or not allowed:
                             continue
 
-                    self.send_event(
-                        event["event_name"],
-                        {"app": event["app"], "pid": event["pid"]}
-                    )
+                    else:
+                        self.send_event(
+                            event["event_name"],
+                            {"app": event["app"], "pid": event["pid"]}
+                        )
             except Exception as e:
                 self.logger.error("Error in service loop: %s", e)
             
@@ -209,7 +221,7 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
             "sid": self.user_SID,
             "event_name": event_name,
             "metadata": metadata,
-            "timestamp": datetime.datetime.utcnow().isoformat()
+            "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()
         }
 
         try:
@@ -251,7 +263,7 @@ if __name__ == '__main__':
                 self.is_running = True
                 self.sid_helper = sid_helper.SID()
                 self.user_SID = self.sid_helper.GetSID()
-                self.server_url = "http://localhost:8000"
+                self.server_url = "http://127.0.0.1:8000"
                 self.logger = logging.getLogger(__name__)
                 self.app_locker = AppLocker()
                 self.lock_screen_active = False
