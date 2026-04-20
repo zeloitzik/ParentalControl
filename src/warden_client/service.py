@@ -13,7 +13,6 @@ import datetime
 import win32serviceutil
 import win32service
 import win32event
-import requests
 import time
 import logging
 import subprocess
@@ -50,7 +49,7 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
         self.sid_helper = SID()
         self.user_SID = self.sid_helper.GetSID()
         logging.basicConfig(filename='service.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-        self.server_url = "http://127.0.0.1:8000"
+        self.net_client = WardenNetClient(host="127.0.0.1", port=8000)
         self.logger = logging.getLogger(__name__)
         self.app_locker = AppLocker()
         self.lock_screen_active = False
@@ -165,11 +164,8 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
 
     def check_with_server(self, app_name):
         try:
-            url = f"{self.server_url}/check_app"
             payload = {"sid": self.user_SID, "app": app_name}
-            response = requests.post(url, json=payload, timeout=2)
-            response.raise_for_status()
-            data = response.json()
+            data = self.net_client.send_command("check_app", payload)
             
             # Pass usage data to UI if available
             used_minutes = data.get("used_minutes", 0)
@@ -225,9 +221,7 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
         }
 
         try:
-            url = f"{self.server_url}/event"
-            response = requests.post(url, json=event, timeout=2)
-            response.raise_for_status()
+            self.net_client.send_command("event", event)
         except Exception as e:
             self.logger.error("Server unavailable for event %s: %s", event_name, e)
             self.apply_local_fallback_policy(event)
@@ -258,12 +252,13 @@ if __name__ == '__main__':
                 import warden_core.sid_helper as sid_helper
                 import warden_client.time_tracker as time_tracker
                 from warden_client.lock_manager.lock_app import AppLocker
+                from warden_client.net_client import WardenNetClient
                 
                 self.hWaitStop = None
                 self.is_running = True
                 self.sid_helper = sid_helper.SID()
                 self.user_SID = self.sid_helper.GetSID()
-                self.server_url = "http://127.0.0.1:8000"
+                self.net_client = WardenNetClient(host="127.0.0.1", port=8000)
                 self.logger = logging.getLogger(__name__)
                 self.app_locker = AppLocker()
                 self.lock_screen_active = False

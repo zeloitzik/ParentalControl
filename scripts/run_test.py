@@ -89,12 +89,19 @@ class TestWardenIntegration:
                 continue
 
     def test_server_heartbeat(self):
-        """Verify the server is reachable and responding."""
+        """Verify the raw socket server and AES encryption heartbeat."""
+        if str(SRC_PATH) not in sys.path:
+            sys.path.append(str(SRC_PATH))
+            
         try:
-            response = requests.get("http://localhost:8000/parent_dashboard", timeout=5)
-            assert response.status_code == 200, "FAILED: Server dashboard unreachable"
-        except requests.exceptions.RequestException as e:
-            pytest.fail(f"FAILED: Connection to server failed: {e}")
+            from warden_client.net_client import WardenNetClient
+            client = WardenNetClient(host="127.0.0.1", port=8000)
+            assert client.connect(), "FAILED: Raw socket handshake completely failed"
+            
+            response = client.send_command("dashboard", {})
+            assert "status" in response and response["status"] == "success", "FAILED: Dashboart via socket encryption failed"
+        except Exception as e:
+            pytest.fail(f"FAILED: Connection to socket server failed: {e}")
 
     def test_threshold_and_lock_trigger(self):
         """
@@ -132,7 +139,7 @@ class TestWardenIntegration:
             
             # Set allowed minutes to 0 for notepad.exe and DEVICE_TOTAL
             db.cursor.execute(
-                "UPDATE app_rules SET allowed_minutes=0 WHERE user_id=%s AND app_name IN ('Notepad.exe', 'notepad.exe', 'DEVICE_TOTAL')",
+                "UPDATE app_rules SET allowed_minutes=1 WHERE user_id=%s AND app_name IN ('Notepad.exe', 'notepad.exe', 'DEVICE_TOTAL')",
                 (user_id,)
             )
             db.db.commit()
