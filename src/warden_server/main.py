@@ -144,6 +144,37 @@ class WardenServer:
                     result.append(user_data)
                 return {"status": "success", "data": result}
                 
+            elif cmd == "update_rule":
+                user_id = data["user_id"]
+                app_name = data["app"]
+                allowed = data["allowed"]
+                if allowed == 0:
+                    self.db.delete_app_rule(user_id, app_name)
+                else:
+                    self.db.update_app_rule(user_id, app_name, allowed)
+                return {"status": "success"}
+                
+            elif cmd == "add_time":
+                user_id = data["user_id"]
+                app_name = data["app"]
+                added_minutes = data["minutes"]
+                
+                rule = self.db.get_app_rule(user_id, app_name)
+                if rule:
+                    new_limit = rule["allowed_minutes"] + added_minutes
+                    self.db.update_app_rule(user_id, app_name, new_limit)
+                else:
+                    # if no rule existed, giving time means giving an explicit allowance
+                    self.db.update_app_rule(user_id, app_name, 120 + added_minutes) 
+                return {"status": "success"}
+                
+            elif cmd == "unlock_app":
+                user_id = data["user_id"]
+                app_name = data["app"]
+                # 1440 mins = 24 hours (forces unlock)
+                self.db.update_app_rule(user_id, app_name, 1440)
+                return {"status": "success"}
+                
             else:
                 return {"error": "Unknown command"}
         except Exception as e:

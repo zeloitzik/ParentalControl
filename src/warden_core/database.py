@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import mysql.connector
 import os
+import bcrypt
 
 load_dotenv()
 
@@ -59,9 +60,14 @@ class DatabaseManager:
         CREATE TABLE IF NOT EXISTS families (
             id INT AUTO_INCREMENT PRIMARY KEY,
             parent_email VARCHAR(255) UNIQUE,
+            password_hash VARCHAR(255),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
         """)
+        try:
+            self.cursor.execute("ALTER TABLE families ADD COLUMN password_hash VARCHAR(255)")
+        except mysql.connector.Error:
+            pass
 
         # Users table
         self.cursor.execute("""
@@ -96,6 +102,10 @@ class DatabaseManager:
             FOREIGN KEY (user_id) REFERENCES users(id)
         )
         """)
+        try:
+            self.cursor.execute("ALTER TABLE app_rules ADD UNIQUE INDEX uidx_user_app (user_id, app_name)")
+        except mysql.connector.Error:
+            pass
 
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS app_sessions (
@@ -220,6 +230,62 @@ class DatabaseManager:
         self.cursor.execute(sql, (user_id, app_name))
         result = self.cursor.fetchone()
         return {"allowed_minutes": result[0]} if result else None
+
+    # AUTHENTICATION
+    def set_admin_password(self, email, password):
+        hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        sql = "UPDATE families SET password_hash = %s WHERE parent_email = %s"
+        self.cursor.execute(sql, (hashed.decode('utf-8'), email))
+        self.db.commit()
+
+    def verify_admin(self, email, password):
+        sql = "SELECT password_hash FROM families WHERE parent_email = %s"
+        self.cursor.execute(sql, (email,))
+        result = self.cursor.fetchone()
+        
+        # Auto-setup for empty password cases (initial login)
+        if result and not result[0]:
+            self.set_admin_password(email, password)
+            return True
+            
+        if result and result[0]:
+            stored_hash = result[0].encode('utf-8') if isinstance(result[0], str) else result[0]
+            return bcrypt.checkpw(password.encode('utf-8'), stored_hash)
+        return False
+
+    # ADMIN API METHODS
+    def get_users_by_type(self, user_type):
+        sql = "SELECT id, name, sid, family_id FROM users WHERE type = %s"
+        self.cursor.execute(sql, (user_type,))
+        return [{"id": row[0], "name": row[1], "sid": row[2], "family_id": row[3]} for row in self.cursor.fetchall()]
+
+    def update_app_rule(self, user_id, app_name, allowed_minutes):
+        sql = """
+        INSERT INTO app_rules (user_id, app_name, allowed_minutes)
+        VALUES (%s, %s, %s)
+        ON DUPLICATE KEY UPDATE allowed_minutes = VALUES(allowed_minutes)
+        """
+        try:
+            self.cursor.execute(sql, (user_id, app_name, allowed_minutes))
+            self.db.commit()
+        except mysql.connector.Error as err:
+            self.db.rollback()
+            raise err
+
+    def delete_app_rule(self, user_id, app_name):
+        sql = "DELETE FROM app_rules WHERE user_id = %s AND app_name = %s"
+        try:
+            self.cursor.execute(sql, (user_id, app_name))
+            self.db.commit()
+        except mysql.connector.Error as err:
+            self.db.rollback()
+            raise err
+            
+    def get_dataframe_data(self, query, params=None):
+        import pandas as pd
+        if not params:
+            return pd.read_sql(query, self.db)
+        return pd.read_sql(query, self.db, params=params)
 
     # FUNCTIONS
     def get_user_id_by_sid(self, sid):
