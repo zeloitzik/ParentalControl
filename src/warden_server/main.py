@@ -7,7 +7,7 @@ from pathlib import Path
 # Add src to sys.path if running as script to allow absolute imports
 current_dir = Path(__file__).resolve().parent
 if (current_dir.parent / "warden_core").exists():
-    sys.path.append(str(current_dir.parent.parent))
+    sys.path.append(str(current_dir.parent))
 
 from warden_core.database import DatabaseManager
 from warden_core.engine import ServerEngine
