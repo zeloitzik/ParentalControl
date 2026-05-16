@@ -1,82 +1,503 @@
-2026-05-16 21:04:57,769 - server - INFO - Warden Server listening on 0.0.0.0:8000 (Raw Sockets)
-2026-05-16 21:05:12,390 - server - INFO - Accepted connection from ('192.168.1.248', 53801)
-2026-05-16 21:05:12,407 - server - INFO - Secure AES session established with ('192.168.1.248', 53801)
-2026-05-16 21:05:12,988 - server - INFO - Client authentication: SID=S-1-5-21-1782710462-1921316265-2944239350-1001, purpose=registration
-2026-05-16 21:05:12,988 - server - INFO - Registered client for SID S-1-5-21-1782710462-1921316265-2944239350-1001
-2026-05-16 21:05:13,647 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'powershell.exe', 'pid': 248}, 'timestamp': '2026-05-16T18:05:12.915076+00:00'}
-2026-05-16 21:05:13,650 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'pet.exe', 'pid': 876}, 'timestamp': '2026-05-16T18:05:12.984131+00:00'}
-2026-05-16 21:05:13,650 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 916}, 'timestamp': '2026-05-16T18:05:12.994978+00:00'}
-2026-05-16 21:05:13,651 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'py.exe', 'pid': 1808}, 'timestamp': '2026-05-16T18:05:13.110270+00:00'}
-2026-05-16 21:05:13,653 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 1832}, 'timestamp': '2026-05-16T18:05:13.110404+00:00'}
-2026-05-16 21:05:13,653 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 2220}, 'timestamp': '2026-05-16T18:05:13.132683+00:00'}
-2026-05-16 21:05:13,654 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 2416}, 'timestamp': '2026-05-16T18:05:13.169921+00:00'}
-2026-05-16 21:05:13,654 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'pet.exe', 'pid': 2432}, 'timestamp': '2026-05-16T18:05:13.170051+00:00'}
-2026-05-16 21:05:13,660 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'LockApp.exe', 'pid': 3864}, 'timestamp': '2026-05-16T18:05:13.297972+00:00'}
-2026-05-16 21:05:13,660 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 4148}, 'timestamp': '2026-05-16T18:05:13.345912+00:00'}
-2026-05-16 21:05:13,663 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'WindowsPackageManagerServer.exe', 'pid': 4412}, 'timestamp': '2026-05-16T18:05:13.346049+00:00'}
-2026-05-16 21:05:13,665 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 4764}, 'timestamp': '2026-05-16T18:05:13.362249+00:00'}
-2026-05-16 21:05:13,667 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'cmd.exe', 'pid': 5056}, 'timestamp': '2026-05-16T18:05:13.362428+00:00'}
-2026-05-16 21:05:13,667 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 6416}, 'timestamp': '2026-05-16T18:05:13.421972+00:00'}
-2026-05-16 21:05:13,667 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'StartMenuExperienceHost.exe', 'pid': 6724}, 'timestamp': '2026-05-16T18:05:13.432855+00:00'}
-2026-05-16 21:05:13,670 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'TextInputHost.exe', 'pid': 6884}, 'timestamp': '2026-05-16T18:05:13.433061+00:00'}
-2026-05-16 21:05:13,671 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 6952}, 'timestamp': '2026-05-16T18:05:13.433223+00:00'}
-2026-05-16 21:05:13,671 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 7624}, 'timestamp': '2026-05-16T18:05:13.444290+00:00'}
-2026-05-16 21:05:13,673 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 8040}, 'timestamp': '2026-05-16T18:05:13.444435+00:00'}
-2026-05-16 21:05:13,674 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'taskhostw.exe', 'pid': 8428}, 'timestamp': '2026-05-16T18:05:13.444548+00:00'}
-2026-05-16 21:05:13,674 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 8528}, 'timestamp': '2026-05-16T18:05:13.444654+00:00'}
-2026-05-16 21:05:13,676 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'python.exe', 'pid': 8596}, 'timestamp': '2026-05-16T18:05:13.444755+00:00'}
-2026-05-16 21:05:13,676 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 8948}, 'timestamp': '2026-05-16T18:05:13.444860+00:00'}
-2026-05-16 21:05:13,676 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'explorer.exe', 'pid': 9304}, 'timestamp': '2026-05-16T18:05:13.444982+00:00'}
-2026-05-16 21:05:13,681 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9352}, 'timestamp': '2026-05-16T18:05:13.445281+00:00'}
-2026-05-16 21:05:13,683 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9636}, 'timestamp': '2026-05-16T18:05:13.445453+00:00'}
-2026-05-16 21:05:13,685 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9868}, 'timestamp': '2026-05-16T18:05:13.456505+00:00'}
-2026-05-16 21:05:13,685 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9908}, 'timestamp': '2026-05-16T18:05:13.456899+00:00'}
-2026-05-16 21:05:13,685 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9984}, 'timestamp': '2026-05-16T18:05:13.457070+00:00'}
-2026-05-16 21:05:13,685 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'WinStore.App.exe', 'pid': 10044}, 'timestamp': '2026-05-16T18:05:13.457343+00:00'}
-2026-05-16 21:05:13,688 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 10072}, 'timestamp': '2026-05-16T18:05:13.457515+00:00'}
-2026-05-16 21:05:13,690 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 10364}, 'timestamp': '2026-05-16T18:05:13.457675+00:00'}
-2026-05-16 21:05:13,690 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'sihost.exe', 'pid': 10456}, 'timestamp': '2026-05-16T18:05:13.457901+00:00'}
-2026-05-16 21:05:13,690 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OpenConsole.exe', 'pid': 10512}, 'timestamp': '2026-05-16T18:05:13.458138+00:00'}
-2026-05-16 21:05:13,693 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 10544}, 'timestamp': '2026-05-16T18:05:13.458303+00:00'}
-2026-05-16 21:05:13,693 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OpenConsole.exe', 'pid': 10648}, 'timestamp': '2026-05-16T18:05:13.458464+00:00'}
-2026-05-16 21:05:13,693 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SystemSettings.exe', 'pid': 10892}, 'timestamp': '2026-05-16T18:05:13.458691+00:00'}
-2026-05-16 21:05:13,693 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 10988}, 'timestamp': '2026-05-16T18:05:13.469989+00:00'}
-2026-05-16 21:05:13,697 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 11216}, 'timestamp': '2026-05-16T18:05:13.470174+00:00'}
-2026-05-16 21:05:13,698 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'cmd.exe', 'pid': 11296}, 'timestamp': '2026-05-16T18:05:13.470333+00:00'}
-2026-05-16 21:05:13,699 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ShellExperienceHost.exe', 'pid': 11416}, 'timestamp': '2026-05-16T18:05:13.470603+00:00'}
-2026-05-16 21:05:13,700 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 11420}, 'timestamp': '2026-05-16T18:05:13.470772+00:00'}
-2026-05-16 21:05:13,702 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SearchApp.exe', 'pid': 11508}, 'timestamp': '2026-05-16T18:05:13.471019+00:00'}
-2026-05-16 21:05:13,704 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 11580}, 'timestamp': '2026-05-16T18:05:13.471186+00:00'}
-2026-05-16 21:05:13,704 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 11636}, 'timestamp': '2026-05-16T18:05:13.471347+00:00'}
-2026-05-16 21:05:13,704 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'MusNotifyIcon.exe', 'pid': 11764}, 'timestamp': '2026-05-16T18:05:13.482805+00:00'}
-2026-05-16 21:05:13,708 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 11892}, 'timestamp': '2026-05-16T18:05:13.483104+00:00'}
-2026-05-16 21:05:13,708 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 11900}, 'timestamp': '2026-05-16T18:05:13.483375+00:00'}
-2026-05-16 21:05:13,708 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ApplicationFrameHost.exe', 'pid': 11932}, 'timestamp': '2026-05-16T18:05:13.483719+00:00'}
-2026-05-16 21:05:13,708 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 11944}, 'timestamp': '2026-05-16T18:05:13.483974+00:00'}
-2026-05-16 21:05:13,713 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'powershell.exe', 'pid': 12112}, 'timestamp': '2026-05-16T18:05:13.495564+00:00'}
-2026-05-16 21:05:13,713 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 12224}, 'timestamp': '2026-05-16T18:05:13.495750+00:00'}
-2026-05-16 21:05:13,716 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 12636}, 'timestamp': '2026-05-16T18:05:13.495919+00:00'}
-2026-05-16 21:05:13,717 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Taskmgr.exe', 'pid': 12684}, 'timestamp': '2026-05-16T18:05:13.497424+00:00'}
-2026-05-16 21:05:13,717 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'UserOOBEBroker.exe', 'pid': 12988}, 'timestamp': '2026-05-16T18:05:13.508626+00:00'}
-2026-05-16 21:05:13,719 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ctfmon.exe', 'pid': 13008}, 'timestamp': '2026-05-16T18:05:13.510064+00:00'}
-2026-05-16 21:05:13,721 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13436}, 'timestamp': '2026-05-16T18:05:13.510424+00:00'}
-2026-05-16 21:05:13,721 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13476}, 'timestamp': '2026-05-16T18:05:13.510592+00:00'}
-2026-05-16 21:05:13,723 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 13644}, 'timestamp': '2026-05-16T18:05:13.521926+00:00'}
-2026-05-16 21:05:13,724 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'StoreDesktopExtension.exe', 'pid': 13696}, 'timestamp': '2026-05-16T18:05:13.522203+00:00'}
-2026-05-16 21:05:13,726 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13748}, 'timestamp': '2026-05-16T18:05:13.522370+00:00'}
-2026-05-16 21:05:13,726 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'taskhostw.exe', 'pid': 13836}, 'timestamp': '2026-05-16T18:05:13.523853+00:00'}
-2026-05-16 21:05:13,726 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13908}, 'timestamp': '2026-05-16T18:05:13.524294+00:00'}
-2026-05-16 21:05:13,726 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13924}, 'timestamp': '2026-05-16T18:05:13.524464+00:00'}
-2026-05-16 21:05:13,726 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 14040}, 'timestamp': '2026-05-16T18:05:13.535382+00:00'}
-2026-05-16 21:05:13,731 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 14128}, 'timestamp': '2026-05-16T18:05:13.535564+00:00'}
-2026-05-16 21:05:13,732 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 14224}, 'timestamp': '2026-05-16T18:05:13.535721+00:00'}
-2026-05-16 21:05:13,733 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'StoreDesktopExtension.exe', 'pid': 14260}, 'timestamp': '2026-05-16T18:05:13.535879+00:00'}
-2026-05-16 21:05:13,733 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 14320}, 'timestamp': '2026-05-16T18:05:13.536036+00:00'}
-2026-05-16 21:05:41,704 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'msedge.exe', 'pid': 12636}, 'timestamp': '2026-05-16T18:05:41.589247+00:00'}
-2026-05-16 21:05:53,026 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'notepad.exe', 'pid': 9200}, 'timestamp': '2026-05-16T18:05:52.864502+00:00'}
-2026-05-16 21:05:53,031 - server - INFO - Sent lock command to S-1-5-21-1782710462-1921316265-2944239350-1001 for app notepad.exe
-2026-05-16 21:05:53,035 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'smartscreen.exe', 'pid': 13776}, 'timestamp': '2026-05-16T18:05:52.908366+00:00'}
-2026-05-16 21:05:58,645 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'python.exe', 'pid': 3004}, 'timestamp': '2026-05-16T18:05:58.238275+00:00'}
-2026-05-16 21:06:09,859 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 7576}, 'timestamp': '2026-05-16T18:06:09.701014+00:00'}
-2026-05-16 21:06:10,376 - server - INFO - Unregistered client for SID S-1-5-21-1782710462-1921316265-2944239350-1001
-2026-05-16 21:06:10,376 - server - INFO - Connection closed for ('192.168.1.248', 53801)
+2026-05-16 21:29:52,007 - server - INFO - Warden Server listening on 0.0.0.0:8000 (Raw Sockets)
+2026-05-16 21:29:52,007 - server - INFO - Lock monitor loop entering periodic scan mode.
+2026-05-16 21:29:52,009 - server - INFO - Lock monitor thread started.
+2026-05-16 21:29:52,010 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:30:02,012 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:30:12,013 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:30:14,335 - server - INFO - Accepted connection from ('192.168.1.248', 54169)
+2026-05-16 21:30:14,357 - server - INFO - Secure AES session established with ('192.168.1.248', 54169)
+2026-05-16 21:30:14,916 - server - INFO - Client authentication: SID=S-1-5-21-1782710462-1921316265-2944239350-1001, purpose=registration
+2026-05-16 21:30:14,916 - server - INFO - Registered client for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 21:30:15,523 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'powershell.exe', 'pid': 248}, 'timestamp': '2026-05-16T18:30:14.855620+00:00'}
+2026-05-16 21:30:15,524 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'pet.exe', 'pid': 876}, 'timestamp': '2026-05-16T18:30:14.921520+00:00'}
+2026-05-16 21:30:15,525 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 916}, 'timestamp': '2026-05-16T18:30:14.931846+00:00'}
+2026-05-16 21:30:15,527 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 1832}, 'timestamp': '2026-05-16T18:30:15.037636+00:00'}
+2026-05-16 21:30:15,528 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 2220}, 'timestamp': '2026-05-16T18:30:15.057503+00:00'}
+2026-05-16 21:30:15,529 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 2416}, 'timestamp': '2026-05-16T18:30:15.092618+00:00'}
+2026-05-16 21:30:15,529 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'pet.exe', 'pid': 2432}, 'timestamp': '2026-05-16T18:30:15.092753+00:00'}
+2026-05-16 21:30:15,531 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'python.exe', 'pid': 2516}, 'timestamp': '2026-05-16T18:30:15.097942+00:00'}
+2026-05-16 21:30:15,531 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'cmd.exe', 'pid': 3696}, 'timestamp': '2026-05-16T18:30:15.198783+00:00'}
+2026-05-16 21:30:15,533 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'LockApp.exe', 'pid': 3864}, 'timestamp': '2026-05-16T18:30:15.214323+00:00'}
+2026-05-16 21:30:15,533 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 4148}, 'timestamp': '2026-05-16T18:30:15.259906+00:00'}
+2026-05-16 21:30:15,534 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OpenConsole.exe', 'pid': 4244}, 'timestamp': '2026-05-16T18:30:15.260040+00:00'}
+2026-05-16 21:30:15,535 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 4764}, 'timestamp': '2026-05-16T18:30:15.270317+00:00'}
+2026-05-16 21:30:15,536 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'py.exe', 'pid': 5184}, 'timestamp': '2026-05-16T18:30:15.275499+00:00'}
+2026-05-16 21:30:15,537 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'StartMenuExperienceHost.exe', 'pid': 6724}, 'timestamp': '2026-05-16T18:30:15.336069+00:00'}
+2026-05-16 21:30:15,537 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'TextInputHost.exe', 'pid': 6884}, 'timestamp': '2026-05-16T18:30:15.336200+00:00'}
+2026-05-16 21:30:15,539 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 6952}, 'timestamp': '2026-05-16T18:30:15.336308+00:00'}
+2026-05-16 21:30:15,540 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 7624}, 'timestamp': '2026-05-16T18:30:15.346648+00:00'}
+2026-05-16 21:30:15,541 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 8040}, 'timestamp': '2026-05-16T18:30:15.346839+00:00'}
+2026-05-16 21:30:15,541 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'taskhostw.exe', 'pid': 8428}, 'timestamp': '2026-05-16T18:30:15.352023+00:00'}
+2026-05-16 21:30:15,543 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 8948}, 'timestamp': '2026-05-16T18:30:15.352174+00:00'}
+2026-05-16 21:30:15,544 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'notepad.exe', 'pid': 9200}, 'timestamp': '2026-05-16T18:30:15.357461+00:00'}
+2026-05-16 21:30:15,544 - server - INFO - Pushing time_up lock command to SID S-1-5-21-1782710462-1921316265-2944239350-1001 for app notepad.exe
+2026-05-16 21:30:15,544 - server - INFO - Sent lock command to S-1-5-21-1782710462-1921316265-2944239350-1001 for app notepad.exe
+2026-05-16 21:30:15,544 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'explorer.exe', 'pid': 9304}, 'timestamp': '2026-05-16T18:30:15.362746+00:00'}
+2026-05-16 21:30:15,546 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9352}, 'timestamp': '2026-05-16T18:30:15.363107+00:00'}
+2026-05-16 21:30:15,547 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9636}, 'timestamp': '2026-05-16T18:30:15.363319+00:00'}
+2026-05-16 21:30:15,548 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9868}, 'timestamp': '2026-05-16T18:30:15.373731+00:00'}
+2026-05-16 21:30:15,550 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9908}, 'timestamp': '2026-05-16T18:30:15.374122+00:00'}
+2026-05-16 21:30:15,550 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9984}, 'timestamp': '2026-05-16T18:30:15.374290+00:00'}
+2026-05-16 21:30:15,551 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 10072}, 'timestamp': '2026-05-16T18:30:15.374456+00:00'}
+2026-05-16 21:30:15,553 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 10364}, 'timestamp': '2026-05-16T18:30:15.374616+00:00'}
+2026-05-16 21:30:15,554 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'sihost.exe', 'pid': 10456}, 'timestamp': '2026-05-16T18:30:15.374876+00:00'}
+2026-05-16 21:30:15,555 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OpenConsole.exe', 'pid': 10512}, 'timestamp': '2026-05-16T18:30:15.375041+00:00'}
+2026-05-16 21:30:15,556 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 10544}, 'timestamp': '2026-05-16T18:30:15.375203+00:00'}
+2026-05-16 21:30:15,558 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OpenConsole.exe', 'pid': 10648}, 'timestamp': '2026-05-16T18:30:15.375364+00:00'}
+2026-05-16 21:30:15,558 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SystemSettings.exe', 'pid': 10892}, 'timestamp': '2026-05-16T18:30:15.375595+00:00'}
+2026-05-16 21:30:15,559 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 10988}, 'timestamp': '2026-05-16T18:30:15.385916+00:00'}
+2026-05-16 21:30:15,560 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 11216}, 'timestamp': '2026-05-16T18:30:15.386105+00:00'}
+2026-05-16 21:30:15,562 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ShellExperienceHost.exe', 'pid': 11416}, 'timestamp': '2026-05-16T18:30:15.386375+00:00'}
+2026-05-16 21:30:15,563 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 11420}, 'timestamp': '2026-05-16T18:30:15.386548+00:00'}
+2026-05-16 21:30:15,564 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SearchApp.exe', 'pid': 11508}, 'timestamp': '2026-05-16T18:30:15.386789+00:00'}
+2026-05-16 21:30:15,566 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 11580}, 'timestamp': '2026-05-16T18:30:15.386960+00:00'}
+2026-05-16 21:30:15,567 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 11636}, 'timestamp': '2026-05-16T18:30:15.387128+00:00'}
+2026-05-16 21:30:15,569 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'MusNotifyIcon.exe', 'pid': 11764}, 'timestamp': '2026-05-16T18:30:15.387364+00:00'}
+2026-05-16 21:30:15,570 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 11892}, 'timestamp': '2026-05-16T18:30:15.387529+00:00'}
+2026-05-16 21:30:15,573 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 11900}, 'timestamp': '2026-05-16T18:30:15.387695+00:00'}
+2026-05-16 21:30:15,575 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'powershell.exe', 'pid': 11908}, 'timestamp': '2026-05-16T18:30:15.387861+00:00'}
+2026-05-16 21:30:15,576 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ApplicationFrameHost.exe', 'pid': 11932}, 'timestamp': '2026-05-16T18:30:15.388086+00:00'}
+2026-05-16 21:30:15,577 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 11944}, 'timestamp': '2026-05-16T18:30:15.388261+00:00'}
+2026-05-16 21:30:15,579 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'powershell.exe', 'pid': 12112}, 'timestamp': '2026-05-16T18:30:15.398266+00:00'}
+2026-05-16 21:30:15,580 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 12224}, 'timestamp': '2026-05-16T18:30:15.398450+00:00'}
+2026-05-16 21:30:15,582 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 12596}, 'timestamp': '2026-05-16T18:30:15.398614+00:00'}
+2026-05-16 21:30:15,584 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Taskmgr.exe', 'pid': 12684}, 'timestamp': '2026-05-16T18:30:15.400163+00:00'}
+2026-05-16 21:30:15,586 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'UserOOBEBroker.exe', 'pid': 12988}, 'timestamp': '2026-05-16T18:30:15.400612+00:00'}
+2026-05-16 21:30:15,588 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ctfmon.exe', 'pid': 13008}, 'timestamp': '2026-05-16T18:30:15.402043+00:00'}
+2026-05-16 21:30:15,590 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13436}, 'timestamp': '2026-05-16T18:30:15.402407+00:00'}
+2026-05-16 21:30:15,591 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13476}, 'timestamp': '2026-05-16T18:30:15.402580+00:00'}
+2026-05-16 21:30:15,593 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'smartscreen.exe', 'pid': 13512}, 'timestamp': '2026-05-16T18:30:15.402843+00:00'}
+2026-05-16 21:30:15,595 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 13644}, 'timestamp': '2026-05-16T18:30:15.413046+00:00'}
+2026-05-16 21:30:15,596 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'StoreDesktopExtension.exe', 'pid': 13696}, 'timestamp': '2026-05-16T18:30:15.413329+00:00'}
+2026-05-16 21:30:15,597 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13748}, 'timestamp': '2026-05-16T18:30:15.413494+00:00'}
+2026-05-16 21:30:15,600 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'taskhostw.exe', 'pid': 13836}, 'timestamp': '2026-05-16T18:30:15.414981+00:00'}
+2026-05-16 21:30:15,601 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13908}, 'timestamp': '2026-05-16T18:30:15.415346+00:00'}
+2026-05-16 21:30:15,603 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13924}, 'timestamp': '2026-05-16T18:30:15.415516+00:00'}
+2026-05-16 21:30:15,604 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 14040}, 'timestamp': '2026-05-16T18:30:15.425751+00:00'}
+2026-05-16 21:30:15,606 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 14224}, 'timestamp': '2026-05-16T18:30:15.425929+00:00'}
+2026-05-16 21:30:15,607 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 14320}, 'timestamp': '2026-05-16T18:30:15.426091+00:00'}
+2026-05-16 21:30:21,144 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'python.exe', 'pid': 3516}, 'timestamp': '2026-05-16T18:30:20.818298+00:00'}
+2026-05-16 21:30:22,014 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:30:32,017 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:30:42,018 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:30:52,020 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:31:02,023 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:31:12,027 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:31:22,029 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:31:22,502 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 8984}, 'timestamp': '2026-05-16T18:31:22.356837+00:00'}
+2026-05-16 21:31:24,512 - server - WARNING - Connection reset by ('192.168.1.248', 54169)
+2026-05-16 21:31:24,512 - server - INFO - Unregistered client for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 21:31:24,512 - server - INFO - Connection closed for ('192.168.1.248', 54169)
+2026-05-16 21:31:32,030 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:31:42,032 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:31:52,034 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:32:02,036 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:32:12,037 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:32:18,952 - server - INFO - Accepted connection from ('192.168.1.248', 54196)
+2026-05-16 21:32:18,972 - server - INFO - Secure AES session established with ('192.168.1.248', 54196)
+2026-05-16 21:32:19,504 - server - INFO - Client authentication: SID=S-1-5-21-1782710462-1921316265-2944239350-1001, purpose=registration
+2026-05-16 21:32:19,504 - server - INFO - Registered client for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 21:32:20,094 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'powershell.exe', 'pid': 248}, 'timestamp': '2026-05-16T18:32:19.440908+00:00'}
+2026-05-16 21:32:20,099 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'pet.exe', 'pid': 876}, 'timestamp': '2026-05-16T18:32:19.506217+00:00'}
+2026-05-16 21:32:20,102 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 916}, 'timestamp': '2026-05-16T18:32:19.516385+00:00'}
+2026-05-16 21:32:20,104 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 1832}, 'timestamp': '2026-05-16T18:32:19.622897+00:00'}
+2026-05-16 21:32:20,104 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 2220}, 'timestamp': '2026-05-16T18:32:19.643281+00:00'}
+2026-05-16 21:32:20,104 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 2416}, 'timestamp': '2026-05-16T18:32:19.678537+00:00'}
+2026-05-16 21:32:20,104 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'pet.exe', 'pid': 2432}, 'timestamp': '2026-05-16T18:32:19.678667+00:00'}
+2026-05-16 21:32:20,104 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'LockApp.exe', 'pid': 3864}, 'timestamp': '2026-05-16T18:32:19.799097+00:00'}
+2026-05-16 21:32:20,108 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 4148}, 'timestamp': '2026-05-16T18:32:19.844452+00:00'}
+2026-05-16 21:32:20,109 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OpenConsole.exe', 'pid': 4244}, 'timestamp': '2026-05-16T18:32:19.844581+00:00'}
+2026-05-16 21:32:20,109 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'python.exe', 'pid': 4252}, 'timestamp': '2026-05-16T18:32:19.844687+00:00'}
+2026-05-16 21:32:20,109 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 4764}, 'timestamp': '2026-05-16T18:32:19.854870+00:00'}
+2026-05-16 21:32:20,112 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'StartMenuExperienceHost.exe', 'pid': 6724}, 'timestamp': '2026-05-16T18:32:19.919403+00:00'}
+2026-05-16 21:32:20,112 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'TextInputHost.exe', 'pid': 6884}, 'timestamp': '2026-05-16T18:32:19.919546+00:00'}
+2026-05-16 21:32:20,112 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 6952}, 'timestamp': '2026-05-16T18:32:19.919717+00:00'}
+2026-05-16 21:32:20,112 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'cmd.exe', 'pid': 7432}, 'timestamp': '2026-05-16T18:32:19.929784+00:00'}
+2026-05-16 21:32:20,117 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 7624}, 'timestamp': '2026-05-16T18:32:19.929926+00:00'}
+2026-05-16 21:32:20,118 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 8040}, 'timestamp': '2026-05-16T18:32:19.930059+00:00'}
+2026-05-16 21:32:20,118 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'taskhostw.exe', 'pid': 8428}, 'timestamp': '2026-05-16T18:32:19.930175+00:00'}
+2026-05-16 21:32:20,120 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 8948}, 'timestamp': '2026-05-16T18:32:19.930401+00:00'}
+2026-05-16 21:32:20,120 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'explorer.exe', 'pid': 9304}, 'timestamp': '2026-05-16T18:32:19.935581+00:00'}
+2026-05-16 21:32:20,122 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9352}, 'timestamp': '2026-05-16T18:32:19.935902+00:00'}
+2026-05-16 21:32:20,122 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9636}, 'timestamp': '2026-05-16T18:32:19.936073+00:00'}
+2026-05-16 21:32:20,122 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9868}, 'timestamp': '2026-05-16T18:32:19.946927+00:00'}
+2026-05-16 21:32:20,122 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9908}, 'timestamp': '2026-05-16T18:32:19.947121+00:00'}
+2026-05-16 21:32:20,122 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9984}, 'timestamp': '2026-05-16T18:32:19.947292+00:00'}
+2026-05-16 21:32:20,127 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 10072}, 'timestamp': '2026-05-16T18:32:19.947467+00:00'}
+2026-05-16 21:32:20,128 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 10364}, 'timestamp': '2026-05-16T18:32:19.947635+00:00'}
+2026-05-16 21:32:20,128 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'sihost.exe', 'pid': 10456}, 'timestamp': '2026-05-16T18:32:19.947987+00:00'}
+2026-05-16 21:32:20,129 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OpenConsole.exe', 'pid': 10512}, 'timestamp': '2026-05-16T18:32:19.948211+00:00'}
+2026-05-16 21:32:20,129 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 10544}, 'timestamp': '2026-05-16T18:32:19.948378+00:00'}
+2026-05-16 21:32:20,129 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OpenConsole.exe', 'pid': 10648}, 'timestamp': '2026-05-16T18:32:19.948585+00:00'}
+2026-05-16 21:32:20,132 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SystemSettings.exe', 'pid': 10892}, 'timestamp': '2026-05-16T18:32:19.948825+00:00'}
+2026-05-16 21:32:20,132 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 10988}, 'timestamp': '2026-05-16T18:32:19.959035+00:00'}
+2026-05-16 21:32:20,135 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 11216}, 'timestamp': '2026-05-16T18:32:19.959220+00:00'}
+2026-05-16 21:32:20,136 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ShellExperienceHost.exe', 'pid': 11416}, 'timestamp': '2026-05-16T18:32:19.959500+00:00'}
+2026-05-16 21:32:20,138 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 11420}, 'timestamp': '2026-05-16T18:32:19.959818+00:00'}
+2026-05-16 21:32:20,138 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SearchApp.exe', 'pid': 11508}, 'timestamp': '2026-05-16T18:32:19.960100+00:00'}
+2026-05-16 21:32:20,140 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 11580}, 'timestamp': '2026-05-16T18:32:19.960268+00:00'}
+2026-05-16 21:32:20,141 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 11636}, 'timestamp': '2026-05-16T18:32:19.960434+00:00'}
+2026-05-16 21:32:20,142 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'py.exe', 'pid': 11756}, 'timestamp': '2026-05-16T18:32:19.960743+00:00'}
+2026-05-16 21:32:20,142 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'MusNotifyIcon.exe', 'pid': 11764}, 'timestamp': '2026-05-16T18:32:19.961117+00:00'}
+2026-05-16 21:32:20,142 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 11892}, 'timestamp': '2026-05-16T18:32:19.961294+00:00'}
+2026-05-16 21:32:20,144 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 11900}, 'timestamp': '2026-05-16T18:32:19.961463+00:00'}
+2026-05-16 21:32:20,144 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'powershell.exe', 'pid': 11908}, 'timestamp': '2026-05-16T18:32:19.961632+00:00'}
+2026-05-16 21:32:20,146 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ApplicationFrameHost.exe', 'pid': 11932}, 'timestamp': '2026-05-16T18:32:19.961862+00:00'}
+2026-05-16 21:32:20,146 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 11944}, 'timestamp': '2026-05-16T18:32:19.962090+00:00'}
+2026-05-16 21:32:20,146 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'powershell.exe', 'pid': 12112}, 'timestamp': '2026-05-16T18:32:19.972336+00:00'}
+2026-05-16 21:32:20,149 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 12224}, 'timestamp': '2026-05-16T18:32:19.972942+00:00'}
+2026-05-16 21:32:20,149 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Taskmgr.exe', 'pid': 12684}, 'timestamp': '2026-05-16T18:32:19.976004+00:00'}
+2026-05-16 21:32:20,149 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'UserOOBEBroker.exe', 'pid': 12988}, 'timestamp': '2026-05-16T18:32:19.976615+00:00'}
+2026-05-16 21:32:20,149 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ctfmon.exe', 'pid': 13008}, 'timestamp': '2026-05-16T18:32:19.978180+00:00'}
+2026-05-16 21:32:20,153 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13436}, 'timestamp': '2026-05-16T18:32:19.978548+00:00'}
+2026-05-16 21:32:20,154 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13476}, 'timestamp': '2026-05-16T18:32:19.978717+00:00'}
+2026-05-16 21:32:20,154 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'smartscreen.exe', 'pid': 13512}, 'timestamp': '2026-05-16T18:32:19.978973+00:00'}
+2026-05-16 21:32:20,154 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 13644}, 'timestamp': '2026-05-16T18:32:19.989192+00:00'}
+2026-05-16 21:32:20,154 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'StoreDesktopExtension.exe', 'pid': 13696}, 'timestamp': '2026-05-16T18:32:19.989475+00:00'}
+2026-05-16 21:32:20,154 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 13716}, 'timestamp': '2026-05-16T18:32:19.989644+00:00'}
+2026-05-16 21:32:20,154 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13748}, 'timestamp': '2026-05-16T18:32:19.989808+00:00'}
+2026-05-16 21:32:20,154 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'taskhostw.exe', 'pid': 13836}, 'timestamp': '2026-05-16T18:32:19.991212+00:00'}
+2026-05-16 21:32:20,154 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13908}, 'timestamp': '2026-05-16T18:32:19.991568+00:00'}
+2026-05-16 21:32:20,162 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13924}, 'timestamp': '2026-05-16T18:32:19.991740+00:00'}
+2026-05-16 21:32:20,162 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 14040}, 'timestamp': '2026-05-16T18:32:20.001854+00:00'}
+2026-05-16 21:32:20,163 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 14224}, 'timestamp': '2026-05-16T18:32:20.002049+00:00'}
+2026-05-16 21:32:20,164 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 14320}, 'timestamp': '2026-05-16T18:32:20.002237+00:00'}
+2026-05-16 21:32:22,038 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:32:32,040 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:32:42,042 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:32:42,454 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'notepad.exe', 'pid': 6384}, 'timestamp': '2026-05-16T18:32:42.298291+00:00'}
+2026-05-16 21:32:42,454 - server - INFO - Pushing time_up lock command to SID S-1-5-21-1782710462-1921316265-2944239350-1001 for app notepad.exe
+2026-05-16 21:32:42,454 - server - INFO - Sent lock command to S-1-5-21-1782710462-1921316265-2944239350-1001 for app notepad.exe
+2026-05-16 21:32:48,044 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'python.exe', 'pid': 14136}, 'timestamp': '2026-05-16T18:32:47.953012+00:00'}
+2026-05-16 21:32:52,044 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:32:53,742 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 8900}, 'timestamp': '2026-05-16T18:32:53.589464+00:00'}
+2026-05-16 21:32:59,978 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 5736}, 'timestamp': '2026-05-16T18:32:59.671132+00:00'}
+2026-05-16 21:32:59,987 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Microsoft.Photos.exe', 'pid': 7096}, 'timestamp': '2026-05-16T18:32:59.779422+00:00'}
+2026-05-16 21:32:59,987 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 10300}, 'timestamp': '2026-05-16T18:32:59.814400+00:00'}
+2026-05-16 21:33:02,045 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:33:05,603 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'FileCoAuth.exe', 'pid': 8896}, 'timestamp': '2026-05-16T18:33:05.461472+00:00'}
+2026-05-16 21:33:05,611 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'Microsoft.Photos.exe', 'pid': 7096}, 'timestamp': '2026-05-16T18:33:05.508795+00:00'}
+2026-05-16 21:33:05,615 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'dllhost.exe', 'pid': 8900}, 'timestamp': '2026-05-16T18:33:05.508834+00:00'}
+2026-05-16 21:33:11,227 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'FileCoAuth.exe', 'pid': 8896}, 'timestamp': '2026-05-16T18:33:11.125162+00:00'}
+2026-05-16 21:33:12,046 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:33:22,047 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:33:32,049 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:33:33,709 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'msedge.exe', 'pid': 10300}, 'timestamp': '2026-05-16T18:33:33.608406+00:00'}
+2026-05-16 21:33:42,051 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:33:44,913 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 5736}, 'timestamp': '2026-05-16T18:33:44.819537+00:00'}
+2026-05-16 21:33:52,054 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:34:02,055 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:34:12,058 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:34:22,059 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:34:32,060 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:34:42,062 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:34:52,064 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:35:02,067 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:35:12,067 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:35:22,069 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:35:32,070 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:35:42,072 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:35:52,073 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:35:58,980 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 13596}, 'timestamp': '2026-05-16T18:35:58.883308+00:00'}
+2026-05-16 21:35:58,986 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 14012}, 'timestamp': '2026-05-16T18:35:58.890694+00:00'}
+2026-05-16 21:36:02,075 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:36:04,580 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 5832}, 'timestamp': '2026-05-16T18:36:04.389349+00:00'}
+2026-05-16 21:36:10,179 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'StoreDesktopExtension.exe', 'pid': 13696}, 'timestamp': '2026-05-16T18:36:10.087883+00:00'}
+2026-05-16 21:36:12,076 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:36:22,077 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:36:32,079 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:36:42,080 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 86, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 176, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
