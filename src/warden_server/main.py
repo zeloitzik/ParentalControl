@@ -172,8 +172,14 @@ class WardenServer:
             if allowed_minutes is None:
                 continue
 
+            # DB may return Decimal for SUM(duration) — normalize to float
+            try:
+                used_minutes = float(used_minutes) if used_minutes is not None else 0.0
+            except Exception:
+                used_minutes = 0.0
+
             elapsed_minutes = max((now - start_time).total_seconds() / 60.0, 0.0)
-            total_minutes = used_minutes + elapsed_minutes
+            total_minutes = used_minutes + float(elapsed_minutes)
 
             if total_minutes >= allowed_minutes:
                 with self.locked_sessions_lock:
