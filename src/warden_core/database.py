@@ -50,6 +50,9 @@ class DatabaseManager:
 
         self.cursor = self.db.cursor(buffered=True)
 
+    def _new_cursor(self):
+        return self.db.cursor(buffered=True)
+
     # TABLE CREATION
     def get_cursor(self): 
         return self.cursor
@@ -219,17 +222,25 @@ class DatabaseManager:
         WHERE user_id = %s AND app_name = %s AND status = 'RUNNING'
         LIMIT 1
         """
-        self.cursor.execute(sql, (user_id, app_name))
-        result = self.cursor.fetchone()
-        if result:
-            return {"id": result[0], "start_time": result[1]}
-        return None
+        cursor = self._new_cursor()
+        try:
+            cursor.execute(sql, (user_id, app_name))
+            result = cursor.fetchone()
+            if result:
+                return {"id": result[0], "start_time": result[1]}
+            return None
+        finally:
+            cursor.close()
 
     def get_app_rule(self, user_id, app_name):
         sql = "SELECT allowed_minutes FROM app_rules WHERE user_id = %s AND app_name = %s"
-        self.cursor.execute(sql, (user_id, app_name))
-        result = self.cursor.fetchone()
-        return {"allowed_minutes": result[0]} if result else None
+        cursor = self._new_cursor()
+        try:
+            cursor.execute(sql, (user_id, app_name))
+            result = cursor.fetchone()
+            return {"allowed_minutes": result[0]} if result else None
+        finally:
+            cursor.close()
 
     # AUTHENTICATION
     def set_admin_password(self, email, password):
@@ -256,8 +267,12 @@ class DatabaseManager:
     # ADMIN API METHODS
     def get_users_by_type(self, user_type):
         sql = "SELECT id, name, sid, family_id FROM users WHERE type = %s"
-        self.cursor.execute(sql, (user_type,))
-        return [{"id": row[0], "name": row[1], "sid": row[2], "family_id": row[3]} for row in self.cursor.fetchall()]
+        cursor = self._new_cursor()
+        try:
+            cursor.execute(sql, (user_type,))
+            return [{"id": row[0], "name": row[1], "sid": row[2], "family_id": row[3]} for row in cursor.fetchall()]
+        finally:
+            cursor.close()
 
     def update_app_rule(self, user_id, app_name, allowed_minutes):
         sql = """
@@ -289,12 +304,15 @@ class DatabaseManager:
 
     # FUNCTIONS
     def get_user_id_by_sid(self, sid):
-
         sql = "SELECT id FROM users WHERE sid = %s"
-        self.cursor.execute(sql, (sid,))
-        result = self.cursor.fetchone()
+        cursor = self._new_cursor()
+        try:
+            cursor.execute(sql, (sid,))
+            result = cursor.fetchone()
+            return result[0] if result else None
+        finally:
+            cursor.close()
 
-        return result[0] if result else None
     def get_start_time_of_active_session(self, user_id, app_name):
         sql = """
         SELECT start_time
@@ -303,11 +321,14 @@ class DatabaseManager:
         AND app_name = %s
         AND status = 'RUNNING'
         """
+        cursor = self._new_cursor()
+        try:
+            cursor.execute(sql, (user_id, app_name))
+            result = cursor.fetchone()
+            return result[0] if result else None
+        finally:
+            cursor.close()
 
-        self.cursor.execute(sql, (user_id, app_name))
-        result = self.cursor.fetchone()
-
-        return result[0] if result else None
     def get_active_session_time(self, user_id, app_name):
         sql = """
         SELECT IFNULL(TIMESTAMPDIFF(MINUTE, start_time, NOW()),0)
@@ -316,11 +337,13 @@ class DatabaseManager:
         AND app_name = %s
         AND status = 'RUNNING'
         """
-
-        self.cursor.execute(sql, (user_id, app_name))
-        result = self.cursor.fetchone()
-
-        return result[0] if result else 0
+        cursor = self._new_cursor()
+        try:
+            cursor.execute(sql, (user_id, app_name))
+            result = cursor.fetchone()
+            return result[0] if result else 0
+        finally:
+            cursor.close()
     # DEBUG UTILITIES
 
     def print_table(self, table):
@@ -402,82 +425,85 @@ class DatabaseManager:
 
     # Time functions
     def can_user_run_app(self, sid, app_name):
+        cursor = self._new_cursor()
+        try:
+            sql = "SELECT id FROM users WHERE sid = %s"
+            cursor.execute(sql, (sid,))
+            user = cursor.fetchone()
 
-        sql = "SELECT id FROM users WHERE sid = %s"
-        self.cursor.execute(sql, (sid,))
-        user = self.cursor.fetchone()
+            if not user:
+                return True  # no user registered -> allow
 
-        if not user:
-            return True  # no user registered -> allow
+            user_id = user[0]
 
-        user_id = user[0]
+            sql = """
+            SELECT allowed_minutes
+            FROM app_rules
+            WHERE user_id = %s AND app_name = %s
+            """
+            cursor.execute(sql, (user_id, app_name))
+            rule = cursor.fetchone()
 
-        sql = """
-        SELECT allowed_minutes
-        FROM app_rules
-        WHERE user_id = %s AND app_name = %s
-        """
+            if not rule:
+                return True  # no rule -> allow
 
-        self.cursor.execute(sql, (user_id, app_name))
-        rule = self.cursor.fetchone()
+            allowed_minutes = rule[0]
 
-        if not rule:
-            return True  # no rule -> allow
+            sql = """
+            SELECT IFNULL(SUM(duration),0)
+            FROM usage_logs
+            WHERE user_id = %s
+            AND app_name = %s
+            AND DATE(start_time) = CURDATE()
+            """
+            cursor.execute(sql, (user_id, app_name))
+            used_minutes = cursor.fetchone()[0]
 
-        allowed_minutes = rule[0]
+            if used_minutes >= allowed_minutes:
+                return False
 
-        sql = """
-        SELECT IFNULL(SUM(duration),0)
-        FROM usage_logs
-        WHERE user_id = %s
-        AND app_name = %s
-        AND DATE(start_time) = CURDATE()
-        """
+            return True
+        finally:
+            cursor.close()
 
-        self.cursor.execute(sql, (user_id, app_name))
-        used_minutes = self.cursor.fetchone()[0]
-
-        if used_minutes >= allowed_minutes:
-            return False
-
-        return True
     def remaining_time(self, sid, app_name):
+        cursor = self._new_cursor()
+        try:
+            sql = "SELECT id FROM users WHERE sid = %s"
+            cursor.execute(sql, (sid,))
+            user = cursor.fetchone()
 
-        sql = "SELECT id FROM users WHERE sid = %s"
-        self.cursor.execute(sql, (sid,))
-        user = self.cursor.fetchone()
+            if not user:
+                return None
 
-        if not user:
-            return None
+            user_id = user[0]
 
-        user_id = user[0]
+            sql = """
+            SELECT allowed_minutes
+            FROM app_rules
+            WHERE user_id = %s AND app_name = %s
+            """
+            cursor.execute(sql, (user_id, app_name))
+            rule = cursor.fetchone()
 
-        sql = """
-        SELECT allowed_minutes
-        FROM app_rules
-        WHERE user_id = %s AND app_name = %s
-        """
+            if not rule:
+                return None
 
-        self.cursor.execute(sql, (user_id, app_name))
-        rule = self.cursor.fetchone()
+            allowed_minutes = rule[0]
 
-        if not rule:
-            return None
+            sql = """
+            SELECT IFNULL(SUM(duration),0)
+            FROM usage_logs
+            WHERE user_id = %s
+            AND app_name = %s
+            AND DATE(start_time) = CURDATE()
+            """
+            cursor.execute(sql, (user_id, app_name))
+            used = cursor.fetchone()[0]
 
-        allowed_minutes = rule[0]
-
-        sql = """
-        SELECT IFNULL(SUM(duration),0)
-        FROM usage_logs
-        WHERE user_id = %s
-        AND app_name = %s
-        AND DATE(start_time) = CURDATE()
-        """
-
-        self.cursor.execute(sql, (user_id, app_name))
-        used = self.cursor.fetchone()[0]
-
-        return max(allowed_minutes - used, 0)
+            return max(allowed_minutes - used, 0)
+        finally:
+            cursor.close()
     
     
     def get_used_time_today(self, user_id, app_name):
@@ -488,8 +514,12 @@ class DatabaseManager:
           AND app_name = %s
           AND DATE(start_time) = CURDATE()
         """
-        self.cursor.execute(sql, (user_id, app_name))
-        return self.cursor.fetchone()[0]
+        cursor = self._new_cursor()
+        try:
+            cursor.execute(sql, (user_id, app_name))
+            return cursor.fetchone()[0]
+        finally:
+            cursor.close()
 # TEST
 
 if __name__ == "__main__":
