@@ -49,7 +49,7 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
         self.sid_helper = SID()
         self.user_SID = self.sid_helper.GetSID()
         logging.basicConfig(filename='service.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-        self.net_client = WardenNetClient(host="127.0.0.1", port=8000)
+        self.net_client = WardenNetClient(host="192.168.1.213", port=8000)
         self.logger = logging.getLogger(__name__)
         self.app_locker = AppLocker()
         self.lock_screen_active = False
@@ -143,20 +143,27 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
         Needs to run in the user session context if possible. 
         Note: Python services run as SYSTEM, so launching UI requires care.
         """
-        if self.lock_screen_active:
+        if self.lock_screen_active: 
             return
 
         try:
-            # We launch the lock_screen script. 
-            # In a real service, we'd use CreateProcessAsUser to target the active session.
-            # Here we assume a simple subprocess might reach the desktop if permissions allow or for demo purposes.
-            script_path = os.path.join(os.path.dirname(__file__), "lock_manager", "lock_screen.py")
-            # Set PYTHONPATH so lock_screen can find warden_core if needed
-            new_env = os.environ.copy()
-            src_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            new_env["PYTHONPATH"] = src_path
-            
-            subprocess.Popen([sys.executable, script_path], env=new_env)
+            # Check if running as a PyInstaller compiled executable
+            if getattr(sys, 'frozen', False):
+                # The lock_screen.exe should be in the same directory as the service executable
+                base_dir = os.path.dirname(sys.executable)
+                exe_path = os.path.join(base_dir, "lock_screen.exe")
+                subprocess.Popen([exe_path])
+            else:
+                # We launch the lock_screen script. 
+                # In a real service, we'd use CreateProcessAsUser to target the active session.
+                # Here we assume a simple subprocess might reach the desktop if permissions allow or for demo purposes.
+                script_path = os.path.join(os.path.dirname(__file__), "lock_manager", "lock_screen.py")
+                # Set PYTHONPATH so lock_screen can find warden_core if needed
+                new_env = os.environ.copy()
+                src_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                new_env["PYTHONPATH"] = src_path
+                
+                subprocess.Popen([sys.executable, script_path], env=new_env)
             self.lock_screen_active = True
             self.logger.info("Lock screen triggered.")
         except Exception as e:
@@ -258,7 +265,7 @@ if __name__ == '__main__':
                 self.is_running = True
                 self.sid_helper = sid_helper.SID()
                 self.user_SID = self.sid_helper.GetSID()
-                self.net_client = WardenNetClient(host="127.0.0.1", port=8000)
+                self.net_client = WardenNetClient(host="192.168.1.213", port=8000)
                 self.logger = logging.getLogger(__name__)
                 self.app_locker = AppLocker()
                 self.lock_screen_active = False

@@ -5,7 +5,7 @@ from warden_core.crypto import CryptoManager
 from warden_core.protocol import Protocol
 
 class WardenNetClient:
-    def __init__(self, host="127.0.0.1", port=8000):
+    def __init__(self, host="192.168.1.213", port=8000):
         self.host = host
         self.port = port
         self.sock = None
