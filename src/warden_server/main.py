@@ -128,12 +128,16 @@ class WardenServer:
             if not user_id:
                 return None
 
-            self.db.cursor.execute("SELECT name FROM users WHERE id=%s", (user_id,))
-            row = self.db.cursor.fetchone()
-            name = row[0] if row else None
+            cursor = self.db.db.cursor(buffered=True)
+            try:
+                cursor.execute("SELECT name FROM users WHERE id=%s", (user_id,))
+                row = cursor.fetchone()
+                name = row[0] if row else None
 
-            self.db.cursor.execute("SELECT app_name FROM app_rules WHERE user_id=%s", (user_id,))
-            rules = self.db.cursor.fetchall()
+                cursor.execute("SELECT app_name FROM app_rules WHERE user_id=%s", (user_id,))
+                rules = cursor.fetchall()
+            finally:
+                cursor.close()
 
             apps = []
             for app_name, in rules:
@@ -203,8 +207,12 @@ class WardenServer:
             GROUP BY s.id, u.sid, s.app_name, s.start_time, r.allowed_minutes
         """
         with self.db_lock:
-            self.db.cursor.execute(sql)
-            rows = self.db.cursor.fetchall()
+            cursor = self.db.db.cursor(buffered=True)
+            try:
+                cursor.execute(sql)
+                rows = cursor.fetchall()
+            finally:
+                cursor.close()
         now = datetime.now()
 
         for session_id, sid, app_name, start_time, allowed_minutes, used_minutes in rows:
@@ -358,29 +366,33 @@ class WardenServer:
             elif cmd == "dashboard":
                 result = []
                 with self.db_lock:
-                    self.db.cursor.execute("SELECT id, name FROM users WHERE type='child'")
-                    users = self.db.cursor.fetchall()
+                    cursor = self.db.db.cursor(buffered=True)
+                    try:
+                        cursor.execute("SELECT id, name FROM users WHERE type='child'")
+                        users = cursor.fetchall()
 
-                    for user_id, name in users:
-                        user_data = {
-                            "name": name,
-                            "apps": []
-                        }
+                        for user_id, name in users:
+                            user_data = {
+                                "name": name,
+                                "apps": []
+                            }
 
-                        self.db.cursor.execute("SELECT app_name, allowed_minutes FROM app_rules WHERE user_id=%s", (user_id,))
-                        rules = self.db.cursor.fetchall()
+                            cursor.execute("SELECT app_name, allowed_minutes FROM app_rules WHERE user_id=%s", (user_id,))
+                            rules = cursor.fetchall()
 
-                        for app_name, allowed in rules:
-                            used = float(self.db.get_used_time_today(user_id, app_name))
-                            active = float(self.db.get_active_session_time(user_id, app_name))
-                            total = used + active
+                            for app_name, allowed in rules:
+                                used = float(self.db.get_used_time_today(user_id, app_name))
+                                active = float(self.db.get_active_session_time(user_id, app_name))
+                                total = used + active
 
-                            user_data["apps"].append({
-                                "app": app_name,
-                                "used": round(total, 2),
-                                "allowed": float(allowed) if allowed is not None else 0.0
-                            })
-                        result.append(user_data)
+                                user_data["apps"].append({
+                                    "app": app_name,
+                                    "used": round(total, 2),
+                                    "allowed": float(allowed) if allowed is not None else 0.0
+                                })
+                            result.append(user_data)
+                    finally:
+                        cursor.close()
                 return {"status": "success", "data": result}
                 
             elif cmd == "update_rule":
