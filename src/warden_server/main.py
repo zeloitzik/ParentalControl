@@ -2,6 +2,8 @@ import sys
 import os
 import socket
 import threading
+import time
+from datetime import datetime
 from pathlib import Path
 
 # Add src to sys.path if running as script to allow absolute imports
@@ -26,6 +28,8 @@ class WardenServer:
         # Map of authenticated clients by SID -> {sock, aes_key}
         self.clients_by_sid = {}
         self.clients_lock = threading.Lock()
+        self.locked_sessions = set()
+        self.locked_sessions_lock = threading.Lock()
 
         self.private_key = CryptoManager.generate_rsa_keypair()
         self.public_key_bytes = CryptoManager.get_public_key_bytes(self.private_key)
@@ -37,6 +41,9 @@ class WardenServer:
         self.server_socket.bind((self.host, self.port))
         self.server_socket.listen(5)
         self.logger.info(f"Warden Server listening on {self.host}:{self.port} (Raw Sockets)")
+
+        self.lock_monitor_thread = threading.Thread(target=self._lock_monitor_loop, daemon=True)
+        self.lock_monitor_thread.start()
 
         try:
             while self.is_running:
@@ -60,6 +67,71 @@ class WardenServer:
         if hasattr(self, 'server_socket'):
             self.server_socket.close()
         self.logger.info("Server stopped.")
+
+    def _lock_monitor_loop(self):
+        while self.is_running:
+            try:
+                self._check_active_sessions_for_time_expired()
+            except Exception as e:
+                self.logger.exception(f"Lock monitor error: {e}")
+            time.sleep(10)
+
+    def _check_active_sessions_for_time_expired(self):
+        sql = """
+            SELECT s.id, u.sid, s.app_name, s.start_time, r.allowed_minutes,
+                   IFNULL(SUM(ul.duration), 0) AS used_minutes
+            FROM app_sessions s
+            JOIN users u ON u.id = s.user_id
+            JOIN app_rules r ON r.user_id = s.user_id AND r.app_name = s.app_name
+            LEFT JOIN usage_logs ul ON ul.user_id = s.user_id
+              AND ul.app_name = s.app_name
+              AND DATE(ul.start_time)=CURDATE()
+            WHERE s.status = 'RUNNING'
+            GROUP BY s.id, u.sid, s.app_name, s.start_time, r.allowed_minutes
+        """
+        self.db.cursor.execute(sql)
+        rows = self.db.cursor.fetchall()
+        now = datetime.now()
+
+        for session_id, sid, app_name, start_time, allowed_minutes, used_minutes in rows:
+            if allowed_minutes is None:
+                continue
+
+            elapsed_minutes = max((now - start_time).total_seconds() / 60.0, 0.0)
+            total_minutes = used_minutes + elapsed_minutes
+
+            if total_minutes >= allowed_minutes:
+                with self.locked_sessions_lock:
+                    if session_id in self.locked_sessions:
+                        continue
+
+                self.logger.info(
+                    f"Session overdue for SID {sid}, app {app_name}: "
+                    f"used={used_minutes:.2f}, active={elapsed_minutes:.2f}, allowed={allowed_minutes}"
+                )
+                if self._push_lock_command(sid, app_name):
+                    with self.locked_sessions_lock:
+                        self.locked_sessions.add(session_id)
+
+    def _push_lock_command(self, sid, app):
+        client_info = None
+        with self.clients_lock:
+            client_info = self.clients_by_sid.get(sid)
+
+        if not client_info:
+            self.logger.warning(f"No connected client found for SID {sid} to send lock command")
+            return False
+
+        try:
+            lock_payload = {"action": "time_up", "app": app}
+            lock_msg = Protocol.serialize_message("time_up", lock_payload)
+            encrypted = CryptoManager.encrypt_aes(client_info["aes_key"], lock_msg)
+            Protocol.send_packet(client_info["sock"], encrypted)
+            self.logger.info(f"Sent lock command to {sid} for app {app}")
+            return True
+        except Exception as e:
+            self.logger.exception(f"Failed to send lock command to {sid}: {e}")
+            return False
 
     def handle_client(self, client_sock, addr):
         try:
@@ -144,22 +216,7 @@ class WardenServer:
                     if sid and app:
                         allowed = self.engine.can_user_run_app(sid, app)
                         if not allowed:
-                            # If we have an authenticated client for this SID, push a lock/time_up command
-                            client_info = None
-                            with self.clients_lock:
-                                client_info = self.clients_by_sid.get(sid)
-
-                            if client_info:
-                                try:
-                                    lock_payload = {"action": "time_up", "app": app}
-                                    lock_msg = Protocol.serialize_message("time_up", lock_payload)
-                                    encrypted = CryptoManager.encrypt_aes(client_info["aes_key"], lock_msg)
-                                    Protocol.send_packet(client_info["sock"], encrypted)
-                                    self.logger.info(f"Sent lock command to {sid} for app {app}")
-                                except Exception as e:
-                                    self.logger.exception(f"Failed to send lock command to {sid}: {e}")
-                            else:
-                                self.logger.warning(f"No connected client found for SID {sid} to send lock command")
+                            self._push_lock_command(sid, app)
                 except Exception:
                     self.logger.exception("Error while evaluating lock condition for event")
 
