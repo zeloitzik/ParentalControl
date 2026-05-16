@@ -1,0 +1,9 @@
+bcrypt
+cryptography
+mysql-connector-python
+psutil
+python-dotenv
+pywin32
+pytest
+sqlalchemy
+pyinstaller
