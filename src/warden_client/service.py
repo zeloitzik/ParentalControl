@@ -81,6 +81,10 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
                         app_name = event["app"]
                         pid = event["pid"]
                         
+                        # Prevent client from tracking or killing itself
+                        if pid == os.getpid() or app_name.lower() in ['py.exe', 'python.exe', 'pythonw.exe', 'lock_screen.exe']:
+                            continue
+                        
                         # Check local registry first
                         blocked_locally = False
                         if self.app_locker.is_locked(app_name):
@@ -134,6 +138,10 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
 
         # 2. Check each active process
         for pid, app_name in list(tracker.active_processes.items()):
+            # Prevent client from tracking or killing itself
+            if pid == os.getpid() or app_name.lower() in ['py.exe', 'python.exe', 'pythonw.exe', 'lock_screen.exe']:
+                continue
+                
             allowed = self.check_with_server(app_name)
             if allowed is False:
                 self.logger.info("Time limit reached for %s (PID %s). Killing.", app_name, pid)

@@ -10,3 +10,9 @@
 2026-05-16 14:01:09,297 - server - INFO - Secure AES session established with ('192.168.1.248', 58092)
 2026-05-16 14:01:09,882 - server - WARNING - Connection reset by ('192.168.1.248', 58092)
 2026-05-16 14:01:09,882 - server - INFO - Connection closed for ('192.168.1.248', 58092)
+2026-05-16 14:10:09,843 - server - INFO - Accepted connection from ('192.168.1.248', 58519)
+2026-05-16 14:10:09,942 - server - INFO - Secure AES session established with ('192.168.1.248', 58519)
+2026-05-16 14:10:10,632 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'pet.exe', 'pid': 780}, 'timestamp': '2026-05-16T11:10:12.425544+00:00'}
+2026-05-16 14:10:10,637 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'py.exe', 'pid': 1500}, 'timestamp': '2026-05-16T11:10:12.442076+00:00'}
+2026-05-16 14:10:10,643 - server - WARNING - Connection reset by ('192.168.1.248', 58519)
+2026-05-16 14:10:10,643 - server - INFO - Connection closed for ('192.168.1.248', 58519)
