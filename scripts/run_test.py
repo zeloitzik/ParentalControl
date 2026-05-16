@@ -137,9 +137,9 @@ class TestWardenIntegration:
             db.cursor.execute("SELECT id FROM users WHERE sid=%s", (user_sid,))
             user_id = db.cursor.fetchone()[0]
             
-            # Set allowed minutes to 0 for notepad.exe and DEVICE_TOTAL
+            # Set allowed minutes to 1 for notepad.exe
             db.cursor.execute(
-                "UPDATE app_rules SET allowed_minutes=1 WHERE user_id=%s AND app_name IN ('Notepad.exe', 'notepad.exe', 'DEVICE_TOTAL')",
+                "UPDATE app_rules SET allowed_minutes=1 WHERE user_id=%s AND app_name IN ('Notepad.exe', 'notepad.exe')",
                 (user_id,)
             )
             db.db.commit()

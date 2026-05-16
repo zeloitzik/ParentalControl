@@ -86,6 +86,7 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
                         if self.app_locker.is_locked(app_name):
                             self.logger.info("Blocking app from local registry: %s", app_name)
                             self.kill_process(pid)
+                            self.trigger_lock_screen()
                             blocked_locally = True
 
                         # Check with server
@@ -96,6 +97,7 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
                                 self.logger.info("Blocking app by server policy: %s", app_name)
                                 self.app_locker.lock_app(app_name) # Add to local registry
                                 self.kill_process(pid)
+                                self.trigger_lock_screen()
 
                         # Always send START event to server so it's recorded in app_sessions
                         self.send_event(
@@ -122,12 +124,7 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
         If so, triggers the lock screen or kills the violating process.
         """
         self.logger.info("Enforcing policies. Active apps: %s", list(tracker.active_processes.values()))
-        # 1. Check if device-wide lock is needed (e.g. total time exceeded)
-        # For simplicity, we assume an 'all_apps' or 'device' rule exists on server
-        if not self.check_with_server("DEVICE_TOTAL"):
-            self.trigger_lock_screen()
-            # If device is locked, we might want to kill all current processes or just let them stay but obscured
-            return
+
 
         # 2. Check each active process
         for pid, app_name in list(tracker.active_processes.items()):
@@ -135,6 +132,7 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
                 self.logger.info("Time limit reached for %s (PID %s). Killing.", app_name, pid)
                 self.app_locker.lock_app(app_name)
                 self.kill_process(pid)
+                self.trigger_lock_screen()
 
     def trigger_lock_screen(self):
         """
