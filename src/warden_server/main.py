@@ -23,6 +23,10 @@ class WardenServer:
         self.engine = ServerEngine(self.db)
         self.logger = my_logger("server", "server.log").setup_logger()
         
+        # Map of authenticated clients by SID -> {sock, aes_key}
+        self.clients_by_sid = {}
+        self.clients_lock = threading.Lock()
+
         self.private_key = CryptoManager.generate_rsa_keypair()
         self.public_key_bytes = CryptoManager.get_public_key_bytes(self.private_key)
         self.is_running = True
@@ -72,6 +76,9 @@ class WardenServer:
             aes_key = CryptoManager.decrypt_rsa(self.private_key, encrypted_aes_key)
             self.logger.info(f"Secure AES session established with {addr}")
 
+            # Track whether this socket has completed auth and which SID it belongs to
+            client_sid = None
+
             # --- Communication Loop ---
             while True:
                 encrypted_payload = Protocol.recv_packet(client_sock)
@@ -80,9 +87,19 @@ class WardenServer:
                     
                 decrypted_bytes = CryptoManager.decrypt_aes(aes_key, encrypted_payload)
                 cmd, data = Protocol.deserialize_message(decrypted_bytes)
-                
+
                 response_data = self.process_command(cmd, data)
-                
+
+                # If this was authentication and succeeded, register the client by SID
+                if cmd == "auth" and isinstance(response_data, dict) and response_data.get("status") == "authenticated":
+                    client_sid = None
+                    if isinstance(data, dict):
+                        client_sid = data.get("sid")
+                    if client_sid:
+                        with self.clients_lock:
+                            self.clients_by_sid[client_sid] = {"sock": client_sock, "aes_key": aes_key}
+                        self.logger.info(f"Registered client for SID {client_sid}")
+
                 response_bytes = Protocol.serialize_message("response", response_data)
                 encrypted_response = CryptoManager.encrypt_aes(aes_key, response_bytes)
                 Protocol.send_packet(client_sock, encrypted_response)
@@ -93,6 +110,15 @@ class WardenServer:
             self.logger.exception(f"Error handling client {addr}: {e}")
         finally:
             client_sock.close()
+            # Unregister any SID that used this socket
+            try:
+                with self.clients_lock:
+                    to_remove = [s for s,info in self.clients_by_sid.items() if info.get("sock") == client_sock]
+                    for s in to_remove:
+                        del self.clients_by_sid[s]
+                        self.logger.info(f"Unregistered client for SID {s}")
+            except Exception:
+                pass
             self.logger.info(f"Connection closed for {addr}")
 
     def process_command(self, cmd, data):
@@ -107,6 +133,36 @@ class WardenServer:
             elif cmd == "event":
                 self.engine.process_event(data)
                 self.logger.info("Event processed: %s", data)
+
+                # After processing the event, check whether the app is allowed
+                try:
+                    sid = data.get("sid") if isinstance(data, dict) else None
+                    app = None
+                    if isinstance(data, dict):
+                        app = data.get("metadata", {}).get("app")
+
+                    if sid and app:
+                        allowed = self.engine.can_user_run_app(sid, app)
+                        if not allowed:
+                            # If we have an authenticated client for this SID, push a lock/time_up command
+                            client_info = None
+                            with self.clients_lock:
+                                client_info = self.clients_by_sid.get(sid)
+
+                            if client_info:
+                                try:
+                                    lock_payload = {"action": "time_up", "app": app}
+                                    lock_msg = Protocol.serialize_message("time_up", lock_payload)
+                                    encrypted = CryptoManager.encrypt_aes(client_info["aes_key"], lock_msg)
+                                    Protocol.send_packet(client_info["sock"], encrypted)
+                                    self.logger.info(f"Sent lock command to {sid} for app {app}")
+                                except Exception as e:
+                                    self.logger.exception(f"Failed to send lock command to {sid}: {e}")
+                            else:
+                                self.logger.warning(f"No connected client found for SID {sid} to send lock command")
+                except Exception:
+                    self.logger.exception("Error while evaluating lock condition for event")
+
                 return {"status": "ok"}
                 
             elif cmd == "check_app":

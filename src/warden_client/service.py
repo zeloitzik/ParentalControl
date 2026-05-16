@@ -15,6 +15,7 @@ from warden_core.protocol import Protocol
 from warden_core.sid_helper import SID
 from warden_core.setup_logger import my_logger
 from warden_core.crypto import CryptoManager
+from warden_client.time_tracker import TimeTracker
 
 DEFAULT_SERVER_HOST = "192.168.1.213"
 DEFAULT_SERVER_PORT = 8000
@@ -37,10 +38,13 @@ class WardenControlClient:
         self.port = port
         self.sock = None
         self.listener_thread = None
+        self.event_thread = None
         self.stop_event = threading.Event()
         self.sid_helper = SID()
         self.lock_screen_process = None
         self.aes_key = None
+        self.sid = None
+        self.tracker = TimeTracker()
         self.max_retries = 5
         self.retry_count = 0
         logger_instance = my_logger(self.__class__.__name__, "service.log")
@@ -89,15 +93,16 @@ class WardenControlClient:
             self.logger.info("Sent encrypted AES key to server")
             
             # Step 4: Send auth message with SID
-            sid = self.get_sid()
-            auth_payload = {"sid": sid, "purpose": "registration"}
+            self.sid = self.get_sid()
+            auth_payload = {"sid": self.sid, "purpose": "registration"}
             auth_message = Protocol.serialize_message("auth", auth_payload)
             encrypted_auth = CryptoManager.encrypt_aes(self.aes_key, auth_message)
             Protocol.send_packet(self.sock, encrypted_auth)
-            self.logger.info("Sent authenticated registration message for SID %s", sid)
+            self.logger.info("Sent authenticated registration message for SID %s", self.sid)
         except Exception as exc:
             self.logger.error("Authentication handshake failed: %s", exc)
             self.aes_key = None
+            self.sid = None
             raise
 
     def start(self):
@@ -149,12 +154,45 @@ class WardenControlClient:
         self.logger.info("Received termination signal: %s", signum)
         self.stop_event.set()
 
+    def _start_event_scanner(self):
+        if self.event_thread and self.event_thread.is_alive():
+            return
+        self.event_thread = threading.Thread(target=self._event_loop, daemon=True)
+        self.event_thread.start()
+        self.logger.info("Event scanner thread started.")
+
+    def _event_loop(self):
+        self.logger.info("Starting process event monitor.")
+        while not self.stop_event.is_set() and self.sock and self.aes_key and self.sid:
+            try:
+                events = self.tracker.scan_processes(self.sid)
+                for event in events:
+                    payload = {
+                        "sid": self.sid,
+                        "event_name": event["event_name"],
+                        "metadata": {
+                            "app": event["app"],
+                            "pid": event["pid"]
+                        },
+                        "timestamp": event["timestamp"]
+                    }
+                    self.send_message("event", payload)
+                    self.logger.info("Sent event to server: %s", payload)
+            except Exception as exc:
+                if self.stop_event.is_set():
+                    break
+                self.logger.error("Event scanner error: %s", exc)
+                self.close_socket()
+                break
+            time.sleep(5)
+
     def _start_listener(self):
         if self.listener_thread and self.listener_thread.is_alive():
             return
         self.listener_thread = threading.Thread(target=self._listen_loop, daemon=True)
         self.listener_thread.start()
         self.logger.info("Listener thread started.")
+        self._start_event_scanner()
 
     def _listen_loop(self):
         self.logger.info("Entering receive loop.")
@@ -238,6 +276,8 @@ class WardenControlClient:
             except Exception:
                 pass
             self.sock = None
+        self.aes_key = None
+        self.sid = None
 
     def shutdown(self):
         self.logger.info("Shutting down WardenControlClient.")
@@ -245,6 +285,8 @@ class WardenControlClient:
         self.close_socket()
         if self.listener_thread and self.listener_thread.is_alive():
             self.listener_thread.join(timeout=5)
+        if self.event_thread and self.event_thread.is_alive():
+            self.event_thread.join(timeout=5)
         self.logger.info("Shutdown complete.")
 
 
