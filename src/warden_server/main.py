@@ -28,6 +28,7 @@ class WardenServer:
         # Map of authenticated clients by SID -> {sock, aes_key}
         self.clients_by_sid = {}
         self.clients_lock = threading.Lock()
+        self.db_lock = threading.Lock()
         self.locked_sessions = set()
         self.locked_sessions_lock = threading.Lock()
 
@@ -41,14 +42,23 @@ class WardenServer:
         self.server_socket.bind((self.host, self.port))
         self.server_socket.listen(5)
         self.logger.info(f"Warden Server listening on {self.host}:{self.port} (Raw Sockets)")
+        print(f"[SERVER] Starting Warden Server on {self.host}:{self.port}")
+        print("[SERVER] Waiting for client connections...")
 
         self.lock_monitor_thread = threading.Thread(target=self._lock_monitor_loop, daemon=True)
         self.lock_monitor_thread.start()
+        self.logger.info("Lock monitor thread started.")
+        print("[SERVER] Lock monitor thread started.")
+
+        self.status_printer_thread = threading.Thread(target=self._status_printer_loop, daemon=True)
+        self.status_printer_thread.start()
+        print("[SERVER] Client status display thread started.")
 
         try:
             while self.is_running:
                 client_sock, addr = self.server_socket.accept()
                 self.logger.info(f"Accepted connection from {addr}")
+                print(f"[SERVER] Accepted connection from {addr}")
                 client_thread = threading.Thread(
                     target=self.handle_client, 
                     args=(client_sock, addr),
@@ -67,14 +77,78 @@ class WardenServer:
         if hasattr(self, 'server_socket'):
             self.server_socket.close()
         self.logger.info("Server stopped.")
+        print("[SERVER] Server stopped.")
 
     def _lock_monitor_loop(self):
+        self.logger.info("Lock monitor loop entering periodic scan mode.")
         while self.is_running:
             try:
                 self._check_active_sessions_for_time_expired()
             except Exception as e:
                 self.logger.exception(f"Lock monitor error: {e}")
             time.sleep(10)
+
+    def _status_printer_loop(self):
+        while self.is_running:
+            self._display_connected_client_limits()
+            time.sleep(10)
+
+    def _display_connected_client_limits(self):
+        with self.clients_lock:
+            active_sids = list(self.clients_by_sid.keys())
+
+        print("\n[SERVER STATUS] Connected clients and current time limits:")
+        if not active_sids:
+            print("[SERVER STATUS] No clients currently connected.")
+            return
+
+        for sid in active_sids:
+            user_info = self._get_client_session_status(sid)
+            if not user_info:
+                print(f"[SERVER STATUS] SID {sid} connected, no user record found.")
+                continue
+
+            name = user_info.get("name", "Unknown")
+            print(f"[SERVER STATUS] SID {sid} | User: {name}")
+            apps = user_info.get("apps", [])
+            if not apps:
+                print("  [SERVER STATUS] No configured rules or active app sessions.")
+                continue
+
+            for app_info in apps:
+                print(
+                    f"  - App: {app_info['app']} | Allowed: {app_info['allowed']} min | "
+                    f"Used: {app_info['used']} min | Active: {app_info['active']} min | "
+                    f"Remaining: {app_info['remaining']} min"
+                )
+
+    def _get_client_session_status(self, sid):
+        with self.db_lock:
+            user_id = self.db.get_user_id_by_sid(sid)
+            if not user_id:
+                return None
+
+            self.db.cursor.execute("SELECT name FROM users WHERE id=%s", (user_id,))
+            row = self.db.cursor.fetchone()
+            name = row[0] if row else None
+
+            self.db.cursor.execute("SELECT app_name, allowed_minutes FROM app_rules WHERE user_id=%s", (user_id,))
+            rules = self.db.cursor.fetchall()
+
+            apps = []
+            for app_name, allowed_minutes in rules:
+                used = float(self.db.get_used_time_today(user_id, app_name))
+                active = float(self.db.get_active_session_time(user_id, app_name))
+                remaining = max(float(allowed_minutes) - (used + active), 0.0) if allowed_minutes is not None else 0.0
+                apps.append({
+                    "app": app_name,
+                    "allowed": float(allowed_minutes) if allowed_minutes is not None else 0.0,
+                    "used": round(used, 2),
+                    "active": round(active, 2),
+                    "remaining": round(remaining, 2)
+                })
+
+            return {"name": name, "apps": apps}
 
     def _check_active_sessions_for_time_expired(self):
         sql = """
@@ -89,8 +163,9 @@ class WardenServer:
             WHERE s.status = 'RUNNING'
             GROUP BY s.id, u.sid, s.app_name, s.start_time, r.allowed_minutes
         """
-        self.db.cursor.execute(sql)
-        rows = self.db.cursor.fetchall()
+        with self.db_lock:
+            self.db.cursor.execute(sql)
+            rows = self.db.cursor.fetchall()
         now = datetime.now()
 
         for session_id, sid, app_name, start_time, allowed_minutes, used_minutes in rows:
@@ -121,6 +196,8 @@ class WardenServer:
         if not client_info:
             self.logger.warning(f"No connected client found for SID {sid} to send lock command")
             return False
+
+        self.logger.info(f"Pushing time_up lock command to SID {sid} for app {app}")
 
         try:
             lock_payload = {"action": "time_up", "app": app}
@@ -171,6 +248,7 @@ class WardenServer:
                         with self.clients_lock:
                             self.clients_by_sid[client_sid] = {"sock": client_sock, "aes_key": aes_key}
                         self.logger.info(f"Registered client for SID {client_sid}")
+                        print(f"[SERVER] Registered client SID {client_sid} from {addr}")
 
                 response_bytes = Protocol.serialize_message("response", response_data)
                 encrypted_response = CryptoManager.encrypt_aes(aes_key, response_bytes)
@@ -189,9 +267,11 @@ class WardenServer:
                     for s in to_remove:
                         del self.clients_by_sid[s]
                         self.logger.info(f"Unregistered client for SID {s}")
+                        print(f"[SERVER] Unregistered client SID {s} from {addr}")
             except Exception:
                 pass
             self.logger.info(f"Connection closed for {addr}")
+            print(f"[SERVER] Connection closed for {addr}")
 
     def process_command(self, cmd, data):
         try:
@@ -225,12 +305,13 @@ class WardenServer:
             elif cmd == "check_app":
                 allowed = self.engine.can_user_run_app(data["sid"], data["app"])
                 
-                user_id = self.db.get_user_id_by_sid(data["sid"])
-                used_minutes = 0.0
-                if user_id:
-                    used_today = float(self.db.get_used_time_today(user_id, data["app"]))
-                    active_time = float(self.db.get_active_session_time(user_id, data["app"]))
-                    used_minutes = used_today + active_time
+                with self.db_lock:
+                    user_id = self.db.get_user_id_by_sid(data["sid"])
+                    used_minutes = 0.0
+                    if user_id:
+                        used_today = float(self.db.get_used_time_today(user_id, data["app"]))
+                        active_time = float(self.db.get_active_session_time(user_id, data["app"]))
+                        used_minutes = used_today + active_time
                     
                 return {
                     "allowed": allowed,
@@ -239,29 +320,30 @@ class WardenServer:
                 
             elif cmd == "dashboard":
                 result = []
-                self.db.cursor.execute("SELECT id, name FROM users WHERE type='child'")
-                users = self.db.cursor.fetchall()
+                with self.db_lock:
+                    self.db.cursor.execute("SELECT id, name FROM users WHERE type='child'")
+                    users = self.db.cursor.fetchall()
 
-                for user_id, name in users:
-                    user_data = {
-                        "name": name,
-                        "apps": []
-                    }
+                    for user_id, name in users:
+                        user_data = {
+                            "name": name,
+                            "apps": []
+                        }
 
-                    self.db.cursor.execute("SELECT app_name, allowed_minutes FROM app_rules WHERE user_id=%s", (user_id,))
-                    rules = self.db.cursor.fetchall()
+                        self.db.cursor.execute("SELECT app_name, allowed_minutes FROM app_rules WHERE user_id=%s", (user_id,))
+                        rules = self.db.cursor.fetchall()
 
-                    for app_name, allowed in rules:
-                        used = float(self.db.get_used_time_today(user_id, app_name))
-                        active = float(self.db.get_active_session_time(user_id, app_name))
-                        total = used + active
+                        for app_name, allowed in rules:
+                            used = float(self.db.get_used_time_today(user_id, app_name))
+                            active = float(self.db.get_active_session_time(user_id, app_name))
+                            total = used + active
 
-                        user_data["apps"].append({
-                            "app": app_name,
-                            "used": round(total, 2),
-                            "allowed": float(allowed) if allowed is not None else 0.0
-                        })
-                    result.append(user_data)
+                            user_data["apps"].append({
+                                "app": app_name,
+                                "used": round(total, 2),
+                                "allowed": float(allowed) if allowed is not None else 0.0
+                            })
+                        result.append(user_data)
                 return {"status": "success", "data": result}
                 
             elif cmd == "update_rule":
