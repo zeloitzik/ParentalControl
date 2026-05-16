@@ -1,10 +1,12 @@
 from datetime import datetime, timezone
 from warden_core.database import DatabaseManager
+from warden_core.setup_logger import my_logger
 
 class ServerEngine:
 
     def __init__(self, db):
         self.db = db
+        self.logger = my_logger(self.__class__.__name__, "engine.log").setup_logger()
 
 
     def process_event(self, event):
@@ -47,19 +49,34 @@ class ServerEngine:
         if not rule:
             return True
 
+        allowed_minutes = rule.get("allowed_minutes")
+        if allowed_minutes is None:
+            self.logger.warning(
+                "Missing allowed_minutes for user_id=%s app=%s; defaulting to allow",
+                user_id,
+                app,
+            )
+            return True
+
         try:
-            allowed_minutes = float(rule["allowed_minutes"]) if rule["allowed_minutes"] is not None else 0.0
-        except Exception:
-            allowed_minutes = 0.0
+            allowed_minutes = float(allowed_minutes)
+        except (TypeError, ValueError):
+            self.logger.warning(
+                "Malformed allowed_minutes for user_id=%s app=%s: %r; defaulting to allow",
+                user_id,
+                app,
+                rule.get("allowed_minutes"),
+            )
+            return True
 
         try:
             used_today = float(self.db.get_used_time_today(user_id, app) or 0.0)
-        except Exception:
+        except (TypeError, ValueError):
             used_today = 0.0
 
         try:
             active_time = float(self.db.get_active_session_time(user_id, app) or 0.0)
-        except Exception:
+        except (TypeError, ValueError):
             active_time = 0.0
 
         total_used = used_today + active_time
