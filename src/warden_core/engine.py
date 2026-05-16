@@ -41,7 +41,7 @@ class ServerEngine:
     def can_user_run_app(self, sid, app):
         user_id = self.db.get_user_id_by_sid(sid)
         if not user_id:
-            return False
+            return True
 
         rule = self.db.get_app_rule(user_id, app)
         if not rule:

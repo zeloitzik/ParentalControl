@@ -1,18 +1,1 @@
-2026-05-16 13:13:30,652 - server - INFO - Warden Server listening on 0.0.0.0:8000 (Raw Sockets)
-2026-05-16 13:14:19,162 - server - INFO - Accepted connection from ('192.168.1.248', 57030)
-2026-05-16 13:14:19,191 - server - INFO - Secure AES session established with ('192.168.1.248', 57030)
-2026-05-16 13:14:20,712 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 128}, 'timestamp': '2026-05-16T10:14:22.549251+00:00'}
-2026-05-16 13:14:20,729 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 1068}, 'timestamp': '2026-05-16T10:14:22.567019+00:00'}
-2026-05-16 13:14:20,734 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 1668}, 'timestamp': '2026-05-16T10:14:22.573794+00:00'}
-2026-05-16 13:14:20,761 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 1816}, 'timestamp': '2026-05-16T10:14:22.596534+00:00'}
-2026-05-16 13:14:20,770 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OpenConsole.exe', 'pid': 1960}, 'timestamp': '2026-05-16T10:14:22.605848+00:00'}
-2026-05-16 13:14:20,793 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'powershell.exe', 'pid': 2480}, 'timestamp': '2026-05-16T10:14:22.632877+00:00'}
-2026-05-16 13:14:20,802 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 2504}, 'timestamp': '2026-05-16T10:14:22.640066+00:00'}
-2026-05-16 13:14:20,811 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'cmd.exe', 'pid': 2576}, 'timestamp': '2026-05-16T10:14:22.648861+00:00'}
-2026-05-16 13:14:20,819 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'StartMenuExperienceHost.exe', 'pid': 2732}, 'timestamp': '2026-05-16T10:14:22.656204+00:00'}
-2026-05-16 13:14:20,837 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 3280}, 'timestamp': '2026-05-16T10:14:22.674034+00:00'}
-2026-05-16 13:14:20,884 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'explorer.exe', 'pid': 4360}, 'timestamp': '2026-05-16T10:14:22.720974+00:00'}
-2026-05-16 13:14:20,946 - server - WARNING - Connection reset by ('192.168.1.248', 57030)
-2026-05-16 13:14:20,946 - server - INFO - Connection closed for ('192.168.1.248', 57030)
-2026-05-16 13:15:31,687 - server - INFO - Accepted connection from ('127.0.0.1', 51521)
-2026-05-16 13:15:31,693 - server - INFO - Secure AES session established with ('127.0.0.1', 51521)
+2026-05-16 13:56:43,712 - server - INFO - Warden Server listening on 0.0.0.0:8000 (Raw Sockets)

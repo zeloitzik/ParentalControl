@@ -84,20 +84,26 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
                         # Check local registry first
                         blocked_locally = False
                         if self.app_locker.is_locked(app_name):
-                            self.logger.info("Blocking app from local registry: %s", app_name)
-                            self.kill_process(pid)
-                            self.trigger_lock_screen()
+                            self.logger.info("App is locked locally: %s", app_name)
                             blocked_locally = True
 
-                        # Check with server
-                        allowed = True
-                        if not blocked_locally:
-                            allowed = self.check_with_server(app_name)
-                            if not allowed:
-                                self.logger.info("Blocking app by server policy: %s", app_name)
-                                self.app_locker.lock_app(app_name) # Add to local registry
-                                self.kill_process(pid)
-                                self.trigger_lock_screen()
+                        allowed = self.check_with_server(app_name)
+                        
+                        if allowed is True:
+                            # Server says allowed, so unblock
+                            blocked_locally = False
+                        elif allowed is None and blocked_locally:
+                            # Server unreachable, rely on local cache
+                            pass
+                        elif allowed is False:
+                            # Server says blocked
+                            blocked_locally = True
+                            self.app_locker.lock_app(app_name)
+                            
+                        if blocked_locally:
+                            self.logger.info("Blocking app: %s", app_name)
+                            self.kill_process(pid)
+                            self.trigger_lock_screen()
 
                         # Always send START event to server so it's recorded in app_sessions
                         self.send_event(
@@ -128,7 +134,8 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
 
         # 2. Check each active process
         for pid, app_name in list(tracker.active_processes.items()):
-            if not self.check_with_server(app_name):
+            allowed = self.check_with_server(app_name)
+            if allowed is False:
                 self.logger.info("Time limit reached for %s (PID %s). Killing.", app_name, pid)
                 self.app_locker.lock_app(app_name)
                 self.kill_process(pid)
@@ -178,10 +185,14 @@ class MyParentalControlService(win32serviceutil.ServiceFramework):
             
             allowed = data.get("allowed", True)
             self.logger.info("Check app %s: allowed=%s, used=%s", app_name, allowed, used_minutes)
+            
+            if allowed:
+                self.app_locker.unlock_app(app_name)
+                
             return allowed
         except Exception as e:
             self.logger.error("Failed to check with server for %s: %s", app_name, e)
-            return True # Fail-open by default
+            return None # Fail-safe, rely on local registry
 
     def update_ui_logs(self, app_name, used_minutes):
         """Helper to send usage data to the lock screen or log it."""
