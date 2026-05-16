@@ -481,3 +481,67 @@ Traceback (most recent call last):
     total_minutes = used_minutes + elapsed_minutes
                     ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
 TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:24:54,607 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 74, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 101, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:25:04,609 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 74, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 101, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:25:14,612 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 74, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 101, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:25:24,613 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 74, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 101, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:25:34,615 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 74, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 101, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:25:44,616 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 74, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 101, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:25:54,618 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 74, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 101, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+2026-05-16 21:26:04,619 - server - ERROR - Lock monitor error: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
+Traceback (most recent call last):
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 74, in _lock_monitor_loop
+    self._check_active_sessions_for_time_expired()
+  File "C:\Users\porat\Downloads\כיתה יב\פרויקט סייבר\ParentalControl\src\warden_server\main.py", line 101, in _check_active_sessions_for_time_expired
+    total_minutes = used_minutes + elapsed_minutes
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'decimal.Decimal' and 'float'
