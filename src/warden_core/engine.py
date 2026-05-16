@@ -47,9 +47,20 @@ class ServerEngine:
         if not rule:
             return True
 
-        allowed_minutes = rule["allowed_minutes"]
-        used_today = self.db.get_used_time_today(user_id, app)
-        active_time = self.db.get_active_session_time(user_id, app)
+        try:
+            allowed_minutes = float(rule["allowed_minutes"]) if rule["allowed_minutes"] is not None else 0.0
+        except Exception:
+            allowed_minutes = 0.0
+
+        try:
+            used_today = float(self.db.get_used_time_today(user_id, app) or 0.0)
+        except Exception:
+            used_today = 0.0
+
+        try:
+            active_time = float(self.db.get_active_session_time(user_id, app) or 0.0)
+        except Exception:
+            active_time = 0.0
 
         total_used = used_today + active_time
         return total_used < allowed_minutes
