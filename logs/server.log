@@ -1,1 +1,12 @@
 2026-05-16 13:56:43,712 - server - INFO - Warden Server listening on 0.0.0.0:8000 (Raw Sockets)
+2026-05-16 13:57:27,143 - server - INFO - Accepted connection from ('127.0.0.1', 53803)
+2026-05-16 13:57:27,149 - server - INFO - Secure AES session established with ('127.0.0.1', 53803)
+2026-05-16 14:00:50,287 - server - INFO - Accepted connection from ('192.168.1.248', 58091)
+2026-05-16 14:00:50,362 - server - INFO - Secure AES session established with ('192.168.1.248', 58091)
+2026-05-16 14:00:50,948 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'py.exe', 'pid': 4904}, 'timestamp': '2026-05-16T11:00:52.751005+00:00'}
+2026-05-16 14:00:50,948 - server - WARNING - Connection reset by ('192.168.1.248', 58091)
+2026-05-16 14:00:50,948 - server - INFO - Connection closed for ('192.168.1.248', 58091)
+2026-05-16 14:01:09,262 - server - INFO - Accepted connection from ('192.168.1.248', 58092)
+2026-05-16 14:01:09,297 - server - INFO - Secure AES session established with ('192.168.1.248', 58092)
+2026-05-16 14:01:09,882 - server - WARNING - Connection reset by ('192.168.1.248', 58092)
+2026-05-16 14:01:09,882 - server - INFO - Connection closed for ('192.168.1.248', 58092)
