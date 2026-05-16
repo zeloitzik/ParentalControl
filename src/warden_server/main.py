@@ -132,23 +132,62 @@ class WardenServer:
             row = self.db.cursor.fetchone()
             name = row[0] if row else None
 
-            self.db.cursor.execute("SELECT app_name, allowed_minutes FROM app_rules WHERE user_id=%s", (user_id,))
+            self.db.cursor.execute("SELECT app_name FROM app_rules WHERE user_id=%s", (user_id,))
             rules = self.db.cursor.fetchall()
 
             apps = []
-            for app_name, allowed_minutes in rules:
-                used = float(self.db.get_used_time_today(user_id, app_name))
-                active = float(self.db.get_active_session_time(user_id, app_name))
-                remaining = max(float(allowed_minutes) - (used + active), 0.0) if allowed_minutes is not None else 0.0
+            for app_name, in rules:
+                status = self._get_app_time_status(sid, app_name)
+                if not status:
+                    continue
                 apps.append({
                     "app": app_name,
-                    "allowed": float(allowed_minutes) if allowed_minutes is not None else 0.0,
-                    "used": round(used, 2),
-                    "active": round(active, 2),
-                    "remaining": round(remaining, 2)
+                    "allowed": status["allowed"],
+                    "used": status["used"],
+                    "active": status["active"],
+                    "remaining": status["remaining"]
                 })
 
             return {"name": name, "apps": apps}
+
+    def _get_app_time_status(self, sid, app_name):
+        with self.db_lock:
+            user_id = self.db.get_user_id_by_sid(sid)
+            if not user_id:
+                return None
+
+            rule = self.db.get_app_rule(user_id, app_name)
+            if not rule or rule.get("allowed_minutes") is None:
+                return None
+
+            try:
+                allowed = float(rule["allowed_minutes"])
+            except (TypeError, ValueError):
+                self.logger.warning(
+                    "Malformed allowed_minutes for user_id=%s app=%s: %r; defaulting to allow",
+                    user_id,
+                    app_name,
+                    rule.get("allowed_minutes"),
+                )
+                return None
+
+            try:
+                used = float(self.db.get_used_time_today(user_id, app_name) or 0.0)
+            except (TypeError, ValueError):
+                used = 0.0
+
+            try:
+                active = float(self.db.get_active_session_time(user_id, app_name) or 0.0)
+            except (TypeError, ValueError):
+                active = 0.0
+
+            remaining = max(allowed - (used + active), 0.0)
+            return {
+                "allowed": round(allowed, 2),
+                "used": round(used, 2),
+                "active": round(active, 2),
+                "remaining": round(remaining, 2),
+            }
 
     def _check_active_sessions_for_time_expired(self):
         sql = """
@@ -169,26 +208,18 @@ class WardenServer:
         now = datetime.now()
 
         for session_id, sid, app_name, start_time, allowed_minutes, used_minutes in rows:
-            if allowed_minutes is None:
+            status = self._get_app_time_status(sid, app_name)
+            if not status:
                 continue
 
-            # DB may return Decimal for SUM(duration) — normalize to float
-            try:
-                used_minutes = float(used_minutes) if used_minutes is not None else 0.0
-            except Exception:
-                used_minutes = 0.0
-
-            elapsed_minutes = max((now - start_time).total_seconds() / 60.0, 0.0)
-            total_minutes = used_minutes + float(elapsed_minutes)
-
-            if total_minutes >= allowed_minutes:
+            if status["remaining"] <= 0.0:
                 with self.locked_sessions_lock:
                     if session_id in self.locked_sessions:
                         continue
 
                 self.logger.info(
                     f"Session overdue for SID {sid}, app {app_name}: "
-                    f"used={used_minutes:.2f}, active={elapsed_minutes:.2f}, allowed={allowed_minutes}"
+                    f"used={status['used']:.2f}, active={status['active']:.2f}, allowed={status['allowed']}"
                 )
                 if self._push_lock_command(sid, app_name):
                     with self.locked_sessions_lock:
@@ -300,8 +331,8 @@ class WardenServer:
                         app = data.get("metadata", {}).get("app")
 
                     if sid and app:
-                        allowed = self.engine.can_user_run_app(sid, app)
-                        if not allowed:
+                        status = self._get_app_time_status(sid, app)
+                        if status and status["remaining"] <= 0.0:
                             self._push_lock_command(sid, app)
                 except Exception:
                     self.logger.exception("Error while evaluating lock condition for event")
