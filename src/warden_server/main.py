@@ -97,7 +97,14 @@ class WardenServer:
 
     def process_command(self, cmd, data):
         try:
-            if cmd == "event":
+            if cmd == "auth":
+                # Handle client authentication/registration
+                sid = data.get("sid")
+                purpose = data.get("purpose", "registration")
+                self.logger.info(f"Client authentication: SID={sid}, purpose={purpose}")
+                return {"status": "authenticated", "message": "Client registered successfully"}
+                
+            elif cmd == "event":
                 self.engine.process_event(data)
                 self.logger.info("Event processed: %s", data)
                 return {"status": "ok"}

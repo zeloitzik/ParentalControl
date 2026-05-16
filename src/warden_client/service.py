@@ -1,300 +1,286 @@
-import sys
 import os
-from pathlib import Path
-
-# Add src to sys.path if running as script to allow absolute imports
-current_dir = Path(__file__).resolve().parent
-if (current_dir.parent / "warden_core").exists():
-    sys.path.append(str(current_dir.parent.parent))
-
-#Windows sercive template
-#Maybe switch to c++ 
-import datetime
-import win32serviceutil
-import win32service
-import win32event
+import sys
+import socket
+import threading
 import time
 import logging
 import subprocess
+import signal
+from pathlib import Path
 
-# Standard imports assuming sys.path is correct
+# Add src directory to path so warden_core modules can be imported
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from warden_core.protocol import Protocol
+from warden_core.sid_helper import SID
+from warden_core.setup_logger import my_logger
+from warden_core.crypto import CryptoManager
+
+DEFAULT_SERVER_HOST = "192.168.1.213"
+DEFAULT_SERVER_PORT = 8000
+RECONNECT_BASE_DELAY = 1.0
+RECONNECT_MAX_DELAY = 30.0
+LOCK_COMMANDS = {"lock", "lock_screen", "times_up", "timeout", "time_up", "lockout"}
+
 try:
-    import warden_core.sid_helper as sid_helper
-    import warden_client.time_tracker as time_tracker
-    import warden_client.lock_manager.lock_app as lock_app
-    SID = sid_helper.SID
-    TimeTracker = time_tracker.TimeTracker
-    AppLocker = lock_app.AppLocker
+    import win32serviceutil
+    import win32service
+    import win32event
+    HAS_WIN32 = True
 except ImportError:
-    # Use absolute paths as last resort
-    import sys
-    from pathlib import Path
-    sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
-    import warden_core.sid_helper as sid_helper
-    import warden_client.time_tracker as time_tracker
-    import warden_client.lock_manager.lock_app as lock_app
-    SID = sid_helper.SID
-    TimeTracker = time_tracker.TimeTracker
-    AppLocker = lock_app.AppLocker
+    HAS_WIN32 = False
 
-class MyParentalControlService(win32serviceutil.ServiceFramework):
-    _svc_name_ = "WardenService"
-    _svc_display_name_ = "Warden's Parental Control Service"
-    _svc_description_ = "Monitors user SIDs and enforces lockouts."
 
-    def __init__(self, args):
-        win32serviceutil.ServiceFramework.__init__(self, args)
-        self.hWaitStop = win32event.CreateEvent(None, 0, 0, None)
-        self.is_running = True
+class WardenControlClient:
+    def __init__(self, host=DEFAULT_SERVER_HOST, port=DEFAULT_SERVER_PORT):
+        self.host = host
+        self.port = port
+        self.sock = None
+        self.listener_thread = None
+        self.stop_event = threading.Event()
         self.sid_helper = SID()
-        self.user_SID = self.sid_helper.GetSID()
-        logging.basicConfig(filename='service.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-        self.net_client = WardenNetClient(host="192.168.1.213", port=8000)
-        self.logger = logging.getLogger(__name__)
-        self.app_locker = AppLocker()
-        self.lock_screen_active = False
+        self.lock_screen_process = None
+        self.aes_key = None
+        self.max_retries = 5
+        self.retry_count = 0
+        logger_instance = my_logger(self.__class__.__name__, "service.log")
+        self.logger = logger_instance.setup_logger()
 
-    def SvcStop(self):
-        self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
-        win32event.SetEvent(self.hWaitStop)
-        self.is_running = False
+    def get_sid(self):
+        sid = self.sid_helper.GetSID()
+        if not sid:
+            raise RuntimeError("Unable to retrieve current user SID.")
+        return sid
 
-    def SvcDoRun(self):
-        tracker = TimeTracker()
-        while self.is_running:
-            try:
-                # Re-check SID in case of user switch (if service survives logout)
-                self.user_SID = self.sid_helper.GetSID()
-                if not self.user_SID:
-                    time.sleep(5)
+    def connect(self):
+        self.close_socket()
+        try:
+            self.logger.info("Connecting to server %s:%s", self.host, self.port)
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(10.0)
+            sock.connect((self.host, self.port))
+            self.sock = sock
+            self.logger.info("Connection established.")
+            return True
+        except Exception as exc:
+            self.logger.error("Socket connect failed: %s", exc)
+            self.close_socket()
+            return False
+
+    def authenticate(self):
+        """Perform RSA/AES handshake with the server."""
+        try:
+            # Step 1: Receive server's RSA public key
+            self.logger.info("Waiting to receive server public key...")
+            pub_key_bytes = Protocol.recv_packet(self.sock)
+            if not pub_key_bytes:
+                raise ConnectionError("Failed to receive public key from server.")
+            
+            server_pub_key = CryptoManager.load_public_key(pub_key_bytes)
+            self.logger.info("Received server RSA public key")
+            
+            # Step 2: Generate and encrypt AES key
+            self.aes_key = CryptoManager.generate_aes_key()
+            encrypted_aes = CryptoManager.encrypt_rsa(server_pub_key, self.aes_key)
+            self.logger.info("Generated and encrypted AES session key")
+            
+            # Step 3: Send encrypted AES key to server
+            Protocol.send_packet(self.sock, encrypted_aes)
+            self.logger.info("Sent encrypted AES key to server")
+            
+            # Step 4: Send auth message with SID
+            sid = self.get_sid()
+            auth_payload = {"sid": sid, "purpose": "registration"}
+            auth_message = Protocol.serialize_message("auth", auth_payload)
+            encrypted_auth = CryptoManager.encrypt_aes(self.aes_key, auth_message)
+            Protocol.send_packet(self.sock, encrypted_auth)
+            self.logger.info("Sent authenticated registration message for SID %s", sid)
+        except Exception as exc:
+            self.logger.error("Authentication handshake failed: %s", exc)
+            self.aes_key = None
+            raise
+
+    def start(self):
+        self.stop_event.clear()
+        self._install_signal_handlers()
+        backoff = RECONNECT_BASE_DELAY
+        self.retry_count = 0
+
+        while not self.stop_event.is_set():
+            if not self.sock:
+                if self.connect():
+                    try:
+                        self.authenticate()
+                        self._start_listener()
+                        backoff = RECONNECT_BASE_DELAY
+                        self.retry_count = 0
+                    except Exception as exc:
+                        self.logger.error("Authentication/listener startup failed: %s", exc)
+                        self.retry_count += 1
+                        self.close_socket()
+                        
+                        # Stop retrying after max attempts
+                        if self.retry_count >= self.max_retries:
+                            self.logger.error("Max authentication retries (%d) reached. Shutting down.", self.max_retries)
+                            self.stop_event.set()
+                            break
+                else:
+                    self.logger.info("Reconnect attempt in %.1f seconds", backoff)
+                    time.sleep(backoff)
+                    backoff = min(backoff * 2, RECONNECT_MAX_DELAY)
                     continue
 
-                self.logger.info("Service loop start for SID: %s", self.user_SID)
-                
-                # 1. Periodic check for overall device time and running apps
-                self.enforce_policies(tracker)
-
-                # 2. Scan for process changes (starts/stops)
-                events = tracker.scan_processes(self.user_SID)
-                for event in events:
-                    if event["event_name"] == "APP_STARTED":
-                        app_name = event["app"]
-                        pid = event["pid"]
-                        
-                        # Prevent client from tracking or killing itself
-                        if pid == os.getpid() or app_name.lower() in ['py.exe', 'python.exe', 'pythonw.exe', 'lock_screen.exe']:
-                            continue
-                        
-                        # Check local registry first
-                        blocked_locally = False
-                        if self.app_locker.is_locked(app_name):
-                            self.logger.info("App is locked locally: %s", app_name)
-                            blocked_locally = True
-
-                        allowed = self.check_with_server(app_name)
-                        
-                        if allowed is True:
-                            # Server says allowed, so unblock
-                            blocked_locally = False
-                        elif allowed is None and blocked_locally:
-                            # Server unreachable, rely on local cache
-                            pass
-                        elif allowed is False:
-                            # Server says blocked
-                            blocked_locally = True
-                            self.app_locker.lock_app(app_name)
-                            
-                        if blocked_locally:
-                            self.logger.info("Blocking app: %s", app_name)
-                            self.kill_process(pid)
-                            self.trigger_lock_screen()
-
-                        # Always send START event to server so it's recorded in app_sessions
-                        self.send_event(
-                            "APP_STARTED",
-                            {"app": app_name, "pid": pid}
-                        )
-
-                        if blocked_locally or not allowed:
-                            continue
-
-                    else:
-                        self.send_event(
-                            event["event_name"],
-                            {"app": event["app"], "pid": event["pid"]}
-                        )
-            except Exception as e:
-                self.logger.error("Error in service loop: %s", e)
-            
-            time.sleep(5)
-
-    def enforce_policies(self, tracker):
-        """
-        Periodically checks if the user has exceeded their time limits.
-        If so, triggers the lock screen or kills the violating process.
-        """
-        self.logger.info("Enforcing policies. Active apps: %s", list(tracker.active_processes.values()))
-
-
-        # 2. Check each active process
-        for pid, app_name in list(tracker.active_processes.items()):
-            # Prevent client from tracking or killing itself
-            if pid == os.getpid() or app_name.lower() in ['py.exe', 'python.exe', 'pythonw.exe', 'lock_screen.exe']:
+            if self.listener_thread and not self.listener_thread.is_alive():
+                self.logger.warning("Listener thread stopped. Reconnecting.")
+                self.close_socket()
                 continue
-                
-            allowed = self.check_with_server(app_name)
-            if allowed is False:
-                self.logger.info("Time limit reached for %s (PID %s). Killing.", app_name, pid)
-                self.app_locker.lock_app(app_name)
-                self.kill_process(pid)
-                self.trigger_lock_screen()
 
-    def trigger_lock_screen(self):
-        """
-        Launches the lock_screen UI. 
-        Using subprocess to run it as a separate process to avoid blocking the service.
-        Needs to run in the user session context if possible. 
-        Note: Python services run as SYSTEM, so launching UI requires care.
-        """
-        if self.lock_screen_active: 
+            time.sleep(0.5)
+
+        self.shutdown()
+
+    def _install_signal_handlers(self):
+        if hasattr(signal, "SIGINT"):
+            signal.signal(signal.SIGINT, self._signal_handler)
+        if hasattr(signal, "SIGTERM"):
+            signal.signal(signal.SIGTERM, self._signal_handler)
+
+    def _signal_handler(self, signum, frame):
+        self.logger.info("Received termination signal: %s", signum)
+        self.stop_event.set()
+
+    def _start_listener(self):
+        if self.listener_thread and self.listener_thread.is_alive():
+            return
+        self.listener_thread = threading.Thread(target=self._listen_loop, daemon=True)
+        self.listener_thread.start()
+        self.logger.info("Listener thread started.")
+
+    def _listen_loop(self):
+        self.logger.info("Entering receive loop.")
+        while not self.stop_event.is_set() and self.sock and self.aes_key:
+            try:
+                encrypted_payload = Protocol.recv_packet(self.sock)
+                if encrypted_payload is None:
+                    raise ConnectionError("Server closed the connection.")
+
+                decrypted_bytes = CryptoManager.decrypt_aes(self.aes_key, encrypted_payload)
+                cmd, data = Protocol.deserialize_message(decrypted_bytes)
+                self.logger.info("Received server command: %s data=%s", cmd, data)
+                self._handle_command(cmd, data)
+            except socket.timeout:
+                continue
+            except Exception as exc:
+                if self.stop_event.is_set():
+                    break
+                self.logger.error("Receive loop error: %s", exc)
+                self.close_socket()
+                break
+
+        self.logger.info("Receive loop exiting.")
+
+    def _handle_command(self, cmd, data):
+        normalized_cmd = str(cmd).strip().lower() if cmd else ""
+        normalized_action = ""
+        normalized_command = ""
+        if isinstance(data, dict):
+            normalized_action = str(data.get("action", "")).strip().lower()
+            normalized_command = str(data.get("command", "")).strip().lower()
+
+        if (normalized_cmd in LOCK_COMMANDS
+                or normalized_action in LOCK_COMMANDS
+                or normalized_command in LOCK_COMMANDS):
+            self.logger.info("Lock command detected from server: %s", cmd)
+            self.launch_lock_screen()
+        else:
+            self.logger.debug("Unhandled command received: %s", cmd)
+
+    def launch_lock_screen(self):
+        if self.lock_screen_process and self.lock_screen_process.poll() is None:
+            self.logger.info("Lock screen already running.")
             return
 
         try:
-            # Check if running as a PyInstaller compiled executable
-            if getattr(sys, 'frozen', False):
-                # The lock_screen.exe should be in the same directory as the service executable
-                base_dir = os.path.dirname(sys.executable)
-                exe_path = os.path.join(base_dir, "lock_screen.exe")
-                subprocess.Popen([exe_path])
+            script_path = Path(__file__).resolve().parent / "lock_manager" / "lock_screen.py"
+            if getattr(sys, "frozen", False):
+                exe_path = Path(sys.executable).with_name("lock_screen.exe")
+                if exe_path.exists():
+                    self.lock_screen_process = subprocess.Popen(
+                        [str(exe_path)],
+                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+                    )
+                else:
+                    raise FileNotFoundError("lock_screen.exe not found next to service executable.")
             else:
-                # We launch the lock_screen script. 
-                # In a real service, we'd use CreateProcessAsUser to target the active session.
-                # Here we assume a simple subprocess might reach the desktop if permissions allow or for demo purposes.
-                script_path = os.path.join(os.path.dirname(__file__), "lock_manager", "lock_screen.py")
-                # Set PYTHONPATH so lock_screen can find warden_core if needed
-                new_env = os.environ.copy()
-                src_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-                new_env["PYTHONPATH"] = src_path
-                
-                subprocess.Popen([sys.executable, script_path], env=new_env)
-            self.lock_screen_active = True
-            self.logger.info("Lock screen triggered.")
-        except Exception as e:
-            self.logger.error("Failed to trigger lock screen: %s", e)
+                env = os.environ.copy()
+                env["PYTHONPATH"] = str(Path(__file__).resolve().parent.parent)
+                self.lock_screen_process = subprocess.Popen(
+                    [sys.executable, str(script_path)],
+                    env=env,
+                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+                )
 
-    def check_with_server(self, app_name):
-        try:
-            payload = {"sid": self.user_SID, "app": app_name}
-            data = self.net_client.send_command("check_app", payload)
-            
-            # Pass usage data to UI if available
-            used_minutes = data.get("used_minutes", 0)
-            self.update_ui_logs(app_name, used_minutes)
-            
-            allowed = data.get("allowed", True)
-            self.logger.info("Check app %s: allowed=%s, used=%s", app_name, allowed, used_minutes)
-            
-            if allowed:
-                self.app_locker.unlock_app(app_name)
-                
-            return allowed
-        except Exception as e:
-            self.logger.error("Failed to check with server for %s: %s", app_name, e)
-            return None # Fail-safe, rely on local registry
+            self.logger.info("Lock screen launched successfully.")
+        except Exception as exc:
+            self.logger.error("Failed to launch lock screen: %s", exc)
 
-    def update_ui_logs(self, app_name, used_minutes):
-        """Helper to send usage data to the lock screen or log it."""
-        try:
-            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            # Convert minutes to HH:MM:SS
-            total_seconds = int(used_minutes * 60)
-            hours, remainder = divmod(total_seconds, 3600)
-            minutes, seconds = divmod(remainder, 60)
-            duration_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
-            
-            log_entry = f"[{timestamp}] [{app_name}] - Duration: [{duration_str}]"
-            self.logger.info("UI_LOG: %s", log_entry)
-            
-            # In a real app, we might send this via a queue or socket to the UI process.
-            # For now, we'll write it to a shared file that the UI can read.
-            log_path = Path(os.getenv('APPDATA')) / "Warden" / "usage_display.log"
-            with open(log_path, "a") as f:
-                f.write(log_entry + "\n")
-        except Exception as e:
-            self.logger.error("Failed to update UI logs: %s", e)
+    def send_message(self, cmd, data):
+        if not self.sock or not self.aes_key:
+            raise ConnectionError("Not connected or not authenticated.")
+        payload = Protocol.serialize_message(cmd, data)
+        encrypted_payload = CryptoManager.encrypt_aes(self.aes_key, payload)
+        Protocol.send_packet(self.sock, encrypted_payload)
 
-    def kill_process(self, pid):
-        try:
-            import psutil
-            p = psutil.Process(pid)
-            p.terminate()
-            self.logger.info("Killed blocked process: PID %s", pid)
-        except Exception as e:
-            self.logger.error("Failed to kill process %s: %s", pid, e)
-
-    def apply_local_fallback_policy(self, event):
-        # Placeholder for local cache logic
-        pass
-
-    def send_event(self, event_name, metadata):
-        event = {
-            "sid": self.user_SID,
-            "event_name": event_name,
-            "metadata": metadata,
-            "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()
-        }
-
-        try:
-            self.net_client.send_command("event", event)
-        except Exception as e:
-            self.logger.error("Server unavailable for event %s: %s", event_name, e)
-            self.apply_local_fallback_policy(event)
-    def Install(self):
-        win32serviceutil.InstallService(
-            MyParentalControlService._svc_name_,
-            MyParentalControlService._svc_display_name_,
-            MyParentalControlService._svc_description_
-        )
-        self.logger.info("Service installed successfully.")
-    def Start(self):
-        win32serviceutil.StartService(MyParentalControlService._svc_name_)
-        self.logger.info("Service started successfully.")
-    def Stop(self):
-        win32serviceutil.StopService(MyParentalControlService._svc_name_)
-        self.logger.info("Service stopped successfully.")
-    def Uninstall(self):
-        win32serviceutil.RemoveService(MyParentalControlService._svc_name_)
-        self.logger.info("Service uninstalled successfully.")
-if __name__ == '__main__':
-    if len(sys.argv) > 1 and sys.argv[1] == 'run':
-        # Simple test runner
-        logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-        
-        class MockService(MyParentalControlService):
-            def __init__(self, args):
-                # Absolute imports using PYTHONPATH
-                import warden_core.sid_helper as sid_helper
-                import warden_client.time_tracker as time_tracker
-                from warden_client.lock_manager.lock_app import AppLocker
-                from warden_client.net_client import WardenNetClient
-                
-                self.hWaitStop = None
-                self.is_running = True
-                self.sid_helper = sid_helper.SID()
-                self.user_SID = self.sid_helper.GetSID()
-                self.net_client = WardenNetClient(host="192.168.1.213", port=8000)
-                self.logger = logging.getLogger(__name__)
-                self.app_locker = AppLocker()
-                self.lock_screen_active = False
-            
-            def ReportServiceStatus(self, *args):
+    def close_socket(self):
+        if self.sock:
+            try:
+                self.sock.close()
+            except Exception:
                 pass
-                
-        service = MockService(None)
-        print("Starting Service in test mode (script). Press Ctrl+C to stop.")
+            self.sock = None
+
+    def shutdown(self):
+        self.logger.info("Shutting down WardenControlClient.")
+        self.stop_event.set()
+        self.close_socket()
+        if self.listener_thread and self.listener_thread.is_alive():
+            self.listener_thread.join(timeout=5)
+        self.logger.info("Shutdown complete.")
+
+
+if HAS_WIN32:
+    class MyParentalControlService(win32serviceutil.ServiceFramework):
+        _svc_name_ = "WardenService"
+        _svc_display_name_ = "Warden's Parental Control Service"
+        _svc_description_ = "Monitors user SIDs and enforces lockouts."
+
+        def __init__(self, args):
+            super().__init__(args)
+            self.hWaitStop = win32event.CreateEvent(None, 0, 0, None)
+            self.client = WardenControlClient()
+
+        def SvcStop(self):
+            self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
+            win32event.SetEvent(self.hWaitStop)
+            self.client.stop_event.set()
+
+        def SvcDoRun(self):
+            self.client.start()
+
+
+def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "run":
+        client = WardenControlClient()
         try:
-            service.SvcDoRun()
+            client.start()
         except KeyboardInterrupt:
-            print("Stopping...")
-    else:
+            client.logger.info("KeyboardInterrupt received, terminating client.")
+            client.shutdown()
+    elif HAS_WIN32:
         win32serviceutil.HandleCommandLine(MyParentalControlService)
+    else:
+        print("Win32 service support is unavailable. Use 'python service.py run' to execute in console.")
+
+
+if __name__ == "__main__":
+    main()

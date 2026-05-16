@@ -1,0 +1,959 @@
+2026-05-16 14:32:19,971 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:19,993 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:20,572 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:20,575 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:20,575 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:20,576 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:20,577 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:21,076 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:21,092 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:21,118 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:21,120 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:21,121 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:21,121 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:21,122 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:21,621 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:21,637 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:21,664 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:21,665 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:21,665 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:21,666 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:21,666 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:22,166 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:22,182 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:22,219 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:22,221 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:22,221 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:22,222 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:22,222 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:22,722 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:22,746 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:22,769 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:22,770 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:22,770 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:22,771 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:22,771 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:23,271 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:23,287 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:23,305 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:23,306 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:23,307 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:23,307 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:23,308 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:23,807 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:23,823 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:23,842 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:23,843 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:23,843 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:23,844 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:23,844 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:24,345 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:24,363 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:24,387 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:24,388 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:24,388 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:24,389 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:24,389 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:24,889 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:24,897 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:24,923 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:24,924 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:24,924 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:24,925 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:24,926 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:25,426 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:25,441 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:25,467 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:25,469 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:25,469 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:25,469 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:25,470 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:25,970 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:25,986 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:26,029 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:26,031 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:26,031 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:26,032 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:26,033 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:26,533 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:26,550 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:26,577 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:26,578 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:26,578 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:26,579 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:26,580 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:27,080 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:27,097 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:27,124 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:27,125 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:27,125 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:27,126 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:27,127 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:27,626 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:27,634 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:27,662 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:27,663 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:27,663 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:27,664 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:27,665 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:28,165 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:28,182 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:28,202 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:28,203 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:28,203 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:28,204 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:28,204 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:28,708 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:28,745 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:28,767 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:28,768 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:28,769 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:28,769 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:28,770 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:29,270 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:29,299 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:29,322 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:29,323 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:29,323 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:29,324 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:29,326 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:29,824 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:29,832 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:29,853 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:29,855 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:29,855 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:29,856 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:29,856 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:30,356 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:30,378 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:30,401 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:30,403 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:30,403 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:30,403 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:30,404 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:30,904 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:30,916 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:30,944 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:30,945 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:30,946 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:30,947 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:30,948 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:31,447 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:31,465 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:31,492 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:31,493 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:31,493 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:31,493 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:31,494 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:31,995 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:32,003 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:32,046 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:32,070 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:32,071 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:32,073 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:32,074 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:32,074 - WardenControlClient - WARNING - Listener thread stopped. Reconnecting.
+2026-05-16 14:32:32,074 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:32,089 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:32,121 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:32,122 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:32,122 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:32,123 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:32,123 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:32,623 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:32,648 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:32,670 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:32,672 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:32,672 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:32,673 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:32,673 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:33,173 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:33,189 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:33,232 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:33,235 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:33,235 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:33,236 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:33,237 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:33,737 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:33,759 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:33,796 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:33,798 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:33,798 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:33,799 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:33,800 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:34,299 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:34,315 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:34,334 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:34,336 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:34,336 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:34,337 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:34,338 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:34,837 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:34,851 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:34,878 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:34,879 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:34,882 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:34,883 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:34,884 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:35,384 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:35,390 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:35,469 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:35,482 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:35,483 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:35,483 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:35,484 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:35,983 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:35,999 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:36,020 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:36,021 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:36,022 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:36,022 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:36,023 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:36,522 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:36,530 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:36,562 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:36,567 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:36,567 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:36,569 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:36,571 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:37,087 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:37,105 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:37,163 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:37,177 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:37,178 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:37,181 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:37,182 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:37,680 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:37,696 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:37,716 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:37,717 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:37,718 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:37,718 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:37,719 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:38,219 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:38,235 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:38,256 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:38,257 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:38,257 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:38,258 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:38,259 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:38,759 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:38,768 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:38,800 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:38,801 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:38,801 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:38,802 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:38,802 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:39,302 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:39,318 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:39,356 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:39,357 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:39,358 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:39,358 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:39,359 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:39,859 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:39,875 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:39,922 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:39,923 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:39,923 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:39,924 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:39,925 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:40,425 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:40,433 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:40,461 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:40,462 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:40,462 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:40,463 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:40,464 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:40,963 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:40,979 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:41,014 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:41,015 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:41,016 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:41,017 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:41,018 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:41,517 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:41,523 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:41,551 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:41,553 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:41,553 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:41,554 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:41,555 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:42,054 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:42,082 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:42,106 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:42,107 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:42,108 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:42,108 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:42,109 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:42,608 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:42,629 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:42,651 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:42,652 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:42,652 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:42,653 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:42,653 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:43,153 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:43,169 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:43,192 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:43,193 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:43,193 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:43,194 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:43,194 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:43,694 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:43,710 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:43,730 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:43,731 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:43,732 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:43,732 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:43,733 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:44,233 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:44,248 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:44,291 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:44,293 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:44,293 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:44,294 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:44,295 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:44,795 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:44,810 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:44,847 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:44,849 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:44,850 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:44,850 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:44,851 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:45,350 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:45,366 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:45,392 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:45,394 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:45,394 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:45,395 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:45,395 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:45,895 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:45,911 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:45,937 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:45,938 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:45,939 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:45,939 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:45,940 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:46,440 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:46,455 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:46,492 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:46,493 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:46,494 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:46,494 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:46,495 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:46,995 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:47,017 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:47,042 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:47,043 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:47,044 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:47,044 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:47,045 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:47,544 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:47,560 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:47,586 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:47,587 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:47,588 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:47,588 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:47,589 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:48,089 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:48,105 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:48,141 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:48,142 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:48,142 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:48,143 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:48,144 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:48,643 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:48,659 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:48,685 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:48,686 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:48,687 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:48,687 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:48,688 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:49,188 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:49,203 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:49,246 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:49,248 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:49,248 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:49,250 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:49,251 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:49,750 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:49,766 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:49,802 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:49,803 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:49,803 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:49,804 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:49,804 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:50,304 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:50,320 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:50,362 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:50,364 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:50,365 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:50,366 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:50,367 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:50,866 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:50,882 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:50,908 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:50,910 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:50,911 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:50,911 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:50,912 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:51,412 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:51,427 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:51,470 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:51,472 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:51,473 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:51,474 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:51,475 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:51,974 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:51,990 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:52,033 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:52,035 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:52,035 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:52,036 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:52,037 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:52,537 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:52,552 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:52,588 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:52,590 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:52,590 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:52,591 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:52,591 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:53,091 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:53,107 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:53,149 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:53,151 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:53,152 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:53,153 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:53,154 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:53,653 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:53,669 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:53,694 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:53,696 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:53,697 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:53,697 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:53,698 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:54,198 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:54,214 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:54,239 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:54,241 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:54,242 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:54,242 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:54,243 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:54,743 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:54,758 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:54,784 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:54,786 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:54,787 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:54,787 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:54,788 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:55,287 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:55,303 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:55,339 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:55,340 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:55,340 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:55,341 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:55,341 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:55,841 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:55,857 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:55,882 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:55,885 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:55,885 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:55,885 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:55,886 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:56,386 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:56,402 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:56,429 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:56,431 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:56,431 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:56,432 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:56,432 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:56,932 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:56,948 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:56,973 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:56,975 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:56,975 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:56,976 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:56,977 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:57,476 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:57,492 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:57,529 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:57,531 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:57,531 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:57,532 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:57,532 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:58,032 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:58,048 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:58,075 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:58,076 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:58,077 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:58,077 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:58,078 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:58,578 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:58,593 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:58,640 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:58,642 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:58,642 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:58,643 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:58,643 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:59,143 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:59,159 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:59,185 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:59,186 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:59,187 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:59,187 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:59,188 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:32:59,688 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:32:59,704 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:32:59,730 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:32:59,732 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:32:59,732 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:32:59,733 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:32:59,733 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:00,233 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:00,249 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:00,274 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:00,276 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:00,276 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:00,277 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:00,278 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:00,777 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:00,793 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:00,829 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:00,831 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:00,831 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:00,831 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:00,832 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:01,332 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:01,347 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:01,373 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:01,374 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:01,375 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:01,375 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:01,376 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:01,875 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:01,891 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:01,917 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:01,918 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:01,919 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:01,919 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:01,920 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:02,420 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:02,436 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:02,462 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:02,464 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:02,464 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:02,464 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:02,465 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:02,965 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:02,980 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:03,006 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:03,008 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:03,008 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:03,009 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:03,009 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:03,509 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:03,525 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:03,561 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:03,562 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:03,563 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:03,563 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:03,564 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:04,064 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:04,080 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:04,105 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:04,107 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:04,107 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:04,107 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:04,108 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:04,608 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:04,624 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:04,649 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:04,651 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:04,651 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:04,652 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:04,652 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:05,152 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:05,168 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:05,194 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:05,195 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:05,196 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:05,196 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:05,197 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:05,696 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:05,712 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:05,730 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:05,732 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:05,732 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:05,733 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:05,734 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:06,233 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:06,249 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:06,295 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:06,297 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:06,297 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:06,298 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:06,298 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:06,798 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:06,830 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:06,872 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:06,874 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:06,875 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:06,876 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:06,877 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:07,376 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:07,392 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:07,428 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:07,429 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:07,430 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:07,430 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:07,431 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:07,931 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:07,937 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:07,972 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:07,973 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:07,973 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:07,974 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:07,975 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:08,475 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:08,506 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:08,532 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:08,533 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:08,533 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:08,534 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:08,535 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:09,034 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:09,066 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:09,101 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:09,103 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:09,103 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:09,103 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:09,104 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:09,604 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:09,620 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:09,645 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:09,646 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:09,647 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:09,648 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:09,648 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:10,148 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:10,164 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:10,190 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:10,191 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:10,192 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:10,192 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:10,193 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:10,692 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:10,708 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:10,745 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:10,746 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:10,746 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:10,747 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:10,747 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:11,247 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:11,263 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:11,288 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:11,289 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:11,290 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:11,290 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:11,291 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:11,790 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:11,806 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:11,831 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:11,833 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:11,833 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:11,834 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:11,834 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:12,334 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:12,350 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:12,375 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:12,376 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:12,377 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:12,377 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:12,378 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:12,878 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:12,894 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:12,919 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:12,920 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:12,920 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:12,921 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:12,921 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:13,421 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:13,437 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:13,473 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:13,474 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:13,474 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:13,475 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:13,475 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:13,976 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:13,992 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:14,027 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:14,029 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:14,029 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:14,029 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:14,030 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:14,530 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:14,546 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:14,588 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:14,590 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:14,590 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:14,591 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:14,593 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:15,092 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:15,107 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:15,133 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:15,134 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:15,135 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:15,135 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:15,136 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:15,635 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:15,651 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:15,677 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:15,678 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:15,678 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:15,679 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:15,679 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:16,179 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:16,195 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:16,220 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:16,222 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:16,222 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:16,223 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:16,223 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:16,723 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:16,754 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:16,802 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:16,803 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:16,803 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:16,804 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:16,806 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:17,304 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:17,320 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:17,356 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:17,357 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:17,358 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:17,358 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:17,359 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:17,859 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:17,874 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:17,917 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:17,919 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:17,920 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:17,921 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:17,922 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:18,421 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:18,437 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:18,479 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:18,481 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:18,481 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:18,482 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:18,484 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:18,982 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:18,998 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:19,034 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:19,036 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:19,036 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:19,037 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:19,037 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:19,537 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:19,553 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:19,596 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:19,598 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:19,599 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:19,600 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:19,600 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:20,100 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:20,116 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:20,141 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:20,143 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:20,143 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:20,144 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:20,144 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:20,644 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:20,660 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:20,686 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:20,688 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:20,688 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:20,688 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:20,689 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:21,189 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:21,205 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:21,231 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:21,232 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:21,232 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:21,232 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:21,233 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:21,733 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:21,749 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:21,785 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:21,786 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:21,786 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:21,787 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:21,787 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:22,287 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:22,303 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:22,329 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:22,330 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:22,330 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:22,331 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:22,331 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:22,831 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:22,847 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:22,892 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:22,894 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:22,894 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:22,895 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:22,895 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:23,395 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:23,411 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:23,447 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:23,448 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:23,448 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:23,449 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:23,450 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:23,949 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:23,965 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:24,007 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:24,009 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:24,010 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:24,011 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:24,012 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:24,511 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:24,526 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:24,552 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:24,553 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:24,553 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:24,554 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:24,554 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:25,054 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:25,070 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:25,096 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:25,097 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:25,098 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:25,098 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:25,099 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:25,598 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:25,614 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:25,640 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:25,641 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:25,641 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:25,642 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:25,643 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:26,142 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:26,158 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:26,195 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:26,196 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:26,196 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:26,196 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:26,197 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:26,697 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:26,712 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:26,738 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:26,739 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:26,739 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:26,740 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:26,740 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:27,240 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:27,255 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:27,278 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:27,279 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:27,280 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:27,280 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:27,281 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:27,780 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:27,796 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:27,814 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:27,815 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:27,816 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:27,816 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:27,817 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:28,317 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:28,332 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:28,354 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:28,355 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:28,355 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:28,355 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:28,356 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:28,856 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:28,872 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:28,890 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:28,891 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:28,891 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:28,892 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:28,892 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:29,392 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:29,408 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:29,452 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:29,454 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:29,454 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:29,456 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:29,458 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:29,956 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:29,972 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:30,007 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:30,009 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:30,009 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:30,010 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:30,010 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:30,510 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:30,526 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:30,552 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:30,553 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:30,554 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:30,554 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:30,555 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:31,055 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:31,071 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:31,097 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:31,098 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:31,098 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:31,099 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:31,100 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:31,599 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:31,615 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:31,641 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:31,642 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:31,642 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:31,643 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:31,644 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:32,144 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:32,160 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:32,195 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:32,197 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:32,197 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:32,198 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:32,198 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:32,698 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:32,714 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:32,740 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:32,741 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:32,741 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:32,742 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:32,742 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:33,242 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:33,258 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:33,284 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:33,285 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:33,286 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:33,286 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:33,287 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:33,786 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:33,802 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:33,828 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:33,830 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:33,830 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:33,830 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:33,831 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:34,331 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:34,347 - WardenControlClient - INFO - Connection established.
+2026-05-16 14:33:34,383 - WardenControlClient - INFO - Authentication packet sent for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-16 14:33:34,384 - WardenControlClient - INFO - Entering receive loop.
+2026-05-16 14:33:34,384 - WardenControlClient - INFO - Listener thread started.
+2026-05-16 14:33:34,385 - WardenControlClient - ERROR - Receive loop error: Expecting value: line 1 column 1 (char 0)
+2026-05-16 14:33:34,385 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-16 14:33:34,885 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-16 14:33:44,899 - WardenControlClient - INFO - Received termination signal: 2
+2026-05-16 14:33:44,900 - WardenControlClient - ERROR - Socket connect failed: timed out
+2026-05-16 14:33:44,902 - WardenControlClient - INFO - Reconnect attempt in 1.0 seconds
+2026-05-16 14:33:45,918 - WardenControlClient - INFO - Shutting down WardenControlClient.
+2026-05-16 14:33:45,918 - WardenControlClient - INFO - Shutdown complete.
