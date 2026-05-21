@@ -28,7 +28,7 @@ class WardenServer:
         # Map of authenticated clients by SID -> {sock, aes_key}
         self.clients_by_sid = {}
         self.clients_lock = threading.Lock()
-        self.db_lock = threading.Lock()
+        self.db_lock = threading.RLock()
         self.locked_sessions = set()
         self.locked_sessions_lock = threading.Lock()
 
@@ -37,6 +37,7 @@ class WardenServer:
         self.is_running = True
 
     def start(self):
+        self._cleanup_stale_sessions()
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server_socket.bind((self.host, self.port))
@@ -78,6 +79,22 @@ class WardenServer:
             self.server_socket.close()
         self.logger.info("Server stopped.")
         print("[SERVER] Server stopped.")
+
+    def _cleanup_stale_sessions(self):
+        """Close any RUNNING sessions left over from a previous server run."""
+        with self.db_lock:
+            cursor = self.db.db.cursor(buffered=True)
+            try:
+                cursor.execute(
+                    "UPDATE app_sessions SET status='CLOSED', end_time=NOW() "
+                    "WHERE status='RUNNING'"
+                )
+                affected = cursor.rowcount
+                self.db.db.commit()
+                if affected:
+                    self.logger.info("Cleaned up %d stale RUNNING sessions from previous run.", affected)
+            finally:
+                cursor.close()
 
     def _lock_monitor_loop(self):
         self.logger.info("Lock monitor loop entering periodic scan mode.")
@@ -139,20 +156,21 @@ class WardenServer:
             finally:
                 cursor.close()
 
-            apps = []
-            for app_name, in rules:
-                status = self._get_app_time_status(sid, app_name)
-                if not status:
-                    continue
-                apps.append({
-                    "app": app_name,
-                    "allowed": status["allowed"],
-                    "used": status["used"],
-                    "active": status["active"],
-                    "remaining": status["remaining"]
-                })
+        # db_lock released — safe to call _get_app_time_status which acquires its own lock
+        apps = []
+        for app_name, in rules:
+            status = self._get_app_time_status(sid, app_name)
+            if not status:
+                continue
+            apps.append({
+                "app": app_name,
+                "allowed": status["allowed"],
+                "used": status["used"],
+                "active": status["active"],
+                "remaining": status["remaining"]
+            })
 
-            return {"name": name, "apps": apps}
+        return {"name": name, "apps": apps}
 
     def _get_app_time_status(self, sid, app_name):
         with self.db_lock:
@@ -248,7 +266,8 @@ class WardenServer:
             lock_payload = {"action": "time_up", "app": app}
             lock_msg = Protocol.serialize_message("time_up", lock_payload)
             encrypted = CryptoManager.encrypt_aes(client_info["aes_key"], lock_msg)
-            Protocol.send_packet(client_info["sock"], encrypted)
+            with client_info["write_lock"]:
+                Protocol.send_packet(client_info["sock"], encrypted)
             self.logger.info(f"Sent lock command to {sid} for app {app}")
             return True
         except Exception as e:
@@ -272,6 +291,7 @@ class WardenServer:
 
             # Track whether this socket has completed auth and which SID it belongs to
             client_sid = None
+            socket_write_lock = threading.Lock()
 
             # --- Communication Loop ---
             while True:
@@ -291,13 +311,14 @@ class WardenServer:
                         client_sid = data.get("sid")
                     if client_sid:
                         with self.clients_lock:
-                            self.clients_by_sid[client_sid] = {"sock": client_sock, "aes_key": aes_key}
+                            self.clients_by_sid[client_sid] = {"sock": client_sock, "aes_key": aes_key, "write_lock": socket_write_lock}
                         self.logger.info(f"Registered client for SID {client_sid}")
                         print(f"[SERVER] Registered client SID {client_sid} from {addr}")
 
-                response_bytes = Protocol.serialize_message("response", response_data)
-                encrypted_response = CryptoManager.encrypt_aes(aes_key, response_bytes)
-                Protocol.send_packet(client_sock, encrypted_response)
+                with socket_write_lock:
+                    response_bytes = Protocol.serialize_message("response", response_data)
+                    encrypted_response = CryptoManager.encrypt_aes(aes_key, response_bytes)
+                    Protocol.send_packet(client_sock, encrypted_response)
                 
         except ConnectionResetError:
             self.logger.warning(f"Connection reset by {addr}")
