@@ -28,7 +28,7 @@ class WardenServer:
         # Map of authenticated clients by SID -> {sock, aes_key}
         self.clients_by_sid = {}
         self.clients_lock = threading.Lock()
-        self.db_lock = threading.Lock()
+        self.db_lock = threading.RLock()
         self.locked_sessions = set()
         self.locked_sessions_lock = threading.Lock()
 
@@ -37,6 +37,7 @@ class WardenServer:
         self.is_running = True
 
     def start(self):
+        self._cleanup_stale_sessions()
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server_socket.bind((self.host, self.port))
@@ -78,6 +79,22 @@ class WardenServer:
             self.server_socket.close()
         self.logger.info("Server stopped.")
         print("[SERVER] Server stopped.")
+
+    def _cleanup_stale_sessions(self):
+        """Close any RUNNING sessions left over from a previous server run."""
+        with self.db_lock:
+            cursor = self.db.db.cursor(buffered=True)
+            try:
+                cursor.execute(
+                    "UPDATE app_sessions SET status='CLOSED', end_time=NOW() "
+                    "WHERE status='RUNNING'"
+                )
+                affected = cursor.rowcount
+                self.db.db.commit()
+                if affected:
+                    self.logger.info("Cleaned up %d stale RUNNING sessions from previous run.", affected)
+            finally:
+                cursor.close()
 
     def _lock_monitor_loop(self):
         self.logger.info("Lock monitor loop entering periodic scan mode.")
@@ -139,20 +156,21 @@ class WardenServer:
             finally:
                 cursor.close()
 
-            apps = []
-            for app_name, in rules:
-                status = self._get_app_time_status(sid, app_name)
-                if not status:
-                    continue
-                apps.append({
-                    "app": app_name,
-                    "allowed": status["allowed"],
-                    "used": status["used"],
-                    "active": status["active"],
-                    "remaining": status["remaining"]
-                })
+        # db_lock released — safe to call _get_app_time_status which acquires its own lock
+        apps = []
+        for app_name, in rules:
+            status = self._get_app_time_status(sid, app_name)
+            if not status:
+                continue
+            apps.append({
+                "app": app_name,
+                "allowed": status["allowed"],
+                "used": status["used"],
+                "active": status["active"],
+                "remaining": status["remaining"]
+            })
 
-            return {"name": name, "apps": apps}
+        return {"name": name, "apps": apps}
 
     def _get_app_time_status(self, sid, app_name):
         with self.db_lock:
@@ -233,26 +251,29 @@ class WardenServer:
                     with self.locked_sessions_lock:
                         self.locked_sessions.add(session_id)
 
-    def _push_lock_command(self, sid, app):
+    def _push_command(self, sid, action, app=None):
         client_info = None
         with self.clients_lock:
             client_info = self.clients_by_sid.get(sid)
 
         if not client_info:
-            self.logger.warning(f"No connected client found for SID {sid} to send lock command")
+            self.logger.warning(f"No connected client found for SID {sid} to send {action} command")
             return False
 
-        self.logger.info(f"Pushing time_up lock command to SID {sid} for app {app}")
+        self.logger.info(f"Pushing {action} command to SID {sid}" + (f" for app {app}" if app else ""))
 
         try:
-            lock_payload = {"action": "time_up", "app": app}
-            lock_msg = Protocol.serialize_message("time_up", lock_payload)
-            encrypted = CryptoManager.encrypt_aes(client_info["aes_key"], lock_msg)
-            Protocol.send_packet(client_info["sock"], encrypted)
-            self.logger.info(f"Sent lock command to {sid} for app {app}")
+            payload = {"action": action}
+            if app:
+                payload["app"] = app
+            msg = Protocol.serialize_message(action, payload)
+            encrypted = CryptoManager.encrypt_aes(client_info["aes_key"], msg)
+            with client_info["write_lock"]:
+                Protocol.send_packet(client_info["sock"], encrypted)
+            self.logger.info(f"Sent {action} command to {sid}")
             return True
         except Exception as e:
-            self.logger.exception(f"Failed to send lock command to {sid}: {e}")
+            self.logger.exception(f"Failed to send {action} command to {sid}: {e}")
             return False
 
     def handle_client(self, client_sock, addr):
@@ -272,6 +293,7 @@ class WardenServer:
 
             # Track whether this socket has completed auth and which SID it belongs to
             client_sid = None
+            socket_write_lock = threading.Lock()
 
             # --- Communication Loop ---
             while True:
@@ -291,13 +313,14 @@ class WardenServer:
                         client_sid = data.get("sid")
                     if client_sid:
                         with self.clients_lock:
-                            self.clients_by_sid[client_sid] = {"sock": client_sock, "aes_key": aes_key}
+                            self.clients_by_sid[client_sid] = {"sock": client_sock, "aes_key": aes_key, "write_lock": socket_write_lock}
                         self.logger.info(f"Registered client for SID {client_sid}")
                         print(f"[SERVER] Registered client SID {client_sid} from {addr}")
 
-                response_bytes = Protocol.serialize_message("response", response_data)
-                encrypted_response = CryptoManager.encrypt_aes(aes_key, response_bytes)
-                Protocol.send_packet(client_sock, encrypted_response)
+                with socket_write_lock:
+                    response_bytes = Protocol.serialize_message("response", response_data)
+                    encrypted_response = CryptoManager.encrypt_aes(aes_key, response_bytes)
+                    Protocol.send_packet(client_sock, encrypted_response)
                 
         except ConnectionResetError:
             self.logger.warning(f"Connection reset by {addr}")
@@ -417,15 +440,86 @@ class WardenServer:
                 else:
                     # if no rule existed, giving time means giving an explicit allowance
                     self.db.update_app_rule(user_id, app_name, 120 + added_minutes) 
+                
+                # Push unlock to kill lock screen
+                with self.db_lock:
+                    cursor = self.db.db.cursor(buffered=True)
+                    try:
+                        cursor.execute("SELECT sid FROM users WHERE id=%s", (user_id,))
+                        row = cursor.fetchone()
+                    finally:
+                        cursor.close()
+                if row:
+                    self._push_command(row[0], "unlock", app_name)
+                    
                 return {"status": "success"}
                 
-            elif cmd == "unlock_app":
+            elif cmd == "unlock_app" or cmd == "UNLOCK_APP":
                 user_id = data["user_id"]
                 app_name = data["app"]
                 # 1440 mins = 24 hours (forces unlock)
                 self.db.update_app_rule(user_id, app_name, 1440)
+                
+                # Push unlock to kill lock screen
+                with self.db_lock:
+                    cursor = self.db.db.cursor(buffered=True)
+                    try:
+                        cursor.execute("SELECT sid FROM users WHERE id=%s", (user_id,))
+                        row = cursor.fetchone()
+                    finally:
+                        cursor.close()
+                if row:
+                    self._push_command(row[0], "unlock", app_name)
+                    
                 return {"status": "success"}
                 
+            elif cmd == "lock_app":
+                user_id = data["user_id"]
+                app_name = data["app"]
+                
+                # Verify if process is running before pushing lock
+                is_running = False
+                with self.db_lock:
+                    session = self.db.get_running_session(user_id, app_name)
+                    if session:
+                        is_running = True
+                
+                # Set allowed_minutes=0 to lock the app immediately
+                self.db.update_app_rule(user_id, app_name, 0)
+                self.logger.info(f"App '{app_name}' locked for user_id={user_id} via admin panel. Running={is_running}")
+                
+                # Push lock command to connected client if online AND app is running
+                if is_running:
+                    with self.db_lock:
+                        cursor = self.db.db.cursor(buffered=True)
+                        try:
+                            cursor.execute("SELECT sid FROM users WHERE id=%s", (user_id,))
+                            row = cursor.fetchone()
+                        finally:
+                            cursor.close()
+                    if row:
+                        self._push_command(row[0], "time_up", app_name)
+                return {"status": "success"}
+
+            elif cmd == "emergency_unlock":
+                user_id = data["user_id"]
+                with self.db_lock:
+                    cursor = self.db.db.cursor(buffered=True)
+                    try:
+                        cursor.execute("SELECT sid FROM users WHERE id=%s", (user_id,))
+                        row = cursor.fetchone()
+                    finally:
+                        cursor.close()
+                if row:
+                    self._push_command(row[0], "emergency_unlock")
+                return {"status": "success"}
+
+            elif cmd == "get_known_apps":
+                user_id = data["user_id"]
+                with self.db_lock:
+                    apps = self.db.get_known_apps(user_id)
+                return {"status": "success", "apps": apps}
+
             else:
                 return {"error": "Unknown command"}
         except Exception as e:
