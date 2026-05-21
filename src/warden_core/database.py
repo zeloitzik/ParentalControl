@@ -520,6 +520,55 @@ class DatabaseManager:
             return cursor.fetchone()[0]
         finally:
             cursor.close()
+
+    def get_known_apps(self, user_id):
+        """Return distinct app names this user has ever run (from sessions + usage logs)."""
+        sql = """
+        SELECT DISTINCT app_name FROM (
+            SELECT app_name FROM app_sessions WHERE user_id = %s
+            UNION
+            SELECT app_name FROM usage_logs WHERE user_id = %s
+        ) AS combined
+        ORDER BY app_name
+        """
+        cursor = self._new_cursor()
+        try:
+            cursor.execute(sql, (user_id, user_id))
+            return [row[0] for row in cursor.fetchall()]
+        finally:
+            cursor.close()
+
+    def email_exists(self, email):
+        """Check if a parent email already exists in the families table."""
+        sql = "SELECT COUNT(*) FROM families WHERE parent_email = %s"
+        cursor = self._new_cursor()
+        try:
+            cursor.execute(sql, (email,))
+            return cursor.fetchone()[0] > 0
+        finally:
+            cursor.close()
+
+    def register_parent(self, email, password):
+        """Register a new parent with bcrypt-hashed password. Returns the new family ID."""
+        if self.email_exists(email):
+            raise ValueError("An account with this email already exists.")
+        hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        sql = "INSERT INTO families (parent_email, password_hash) VALUES (%s, %s)"
+        try:
+            self.cursor.execute(sql, (email, hashed.decode('utf-8')))
+            self.db.commit()
+            return self.cursor.lastrowid
+        except mysql.connector.Error as err:
+            self.db.rollback()
+            raise err
+
+    def ensure_connection(self):
+        """Ping the MySQL connection and reconnect if it has gone stale."""
+        try:
+            self.db.ping(reconnect=True, attempts=3, delay=1)
+        except Exception:
+            self._connect()
+
 # TEST
 
 if __name__ == "__main__":

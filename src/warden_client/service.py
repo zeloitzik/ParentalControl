@@ -22,6 +22,7 @@ DEFAULT_SERVER_PORT = 8000
 RECONNECT_BASE_DELAY = 1.0
 RECONNECT_MAX_DELAY = 30.0
 LOCK_COMMANDS = {"lock", "lock_screen", "times_up", "timeout", "time_up", "lockout"}
+UNLOCK_COMMANDS = {"unlock", "emergency_unlock", "unlock_app"}
 
 try:
     import win32serviceutil
@@ -230,6 +231,11 @@ class WardenControlClient:
                 or normalized_command in LOCK_COMMANDS):
             self.logger.info("Lock command detected from server: %s", cmd)
             self.launch_lock_screen()
+        elif (normalized_cmd in UNLOCK_COMMANDS
+                or normalized_action in UNLOCK_COMMANDS
+                or normalized_command in UNLOCK_COMMANDS):
+            self.logger.info("Unlock command detected from server: %s", cmd)
+            self.kill_lock_screen()
         else:
             self.logger.debug("Unhandled command received: %s", cmd)
 
@@ -261,6 +267,27 @@ class WardenControlClient:
             self.logger.info("Lock screen launched successfully.")
         except Exception as exc:
             self.logger.error("Failed to launch lock screen: %s", exc)
+
+    def kill_lock_screen(self):
+        if self.lock_screen_process:
+            self.logger.info("Attempting to kill lock screen process...")
+            try:
+                self.lock_screen_process.terminate()
+                self.lock_screen_process.wait(timeout=2)
+                self.logger.info("Lock screen process terminated gracefully.")
+            except subprocess.TimeoutExpired:
+                self.logger.warning("Lock screen did not terminate in time. Forcing kill.")
+                try:
+                    self.lock_screen_process.kill()
+                    self.logger.info("Lock screen process killed forcefully.")
+                except Exception as force_exc:
+                    self.logger.error("Force kill failed: %s", force_exc)
+            except Exception as exc:
+                self.logger.error("Error terminating lock screen: %s", exc)
+            finally:
+                self.lock_screen_process = None
+        else:
+            self.logger.info("No active lock screen process to kill.")
 
     def send_message(self, cmd, data):
         if not self.sock or not self.aes_key:
