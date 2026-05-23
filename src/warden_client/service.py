@@ -9,8 +9,29 @@ import signal
 import traceback
 from pathlib import Path
 
+# --- PATH & EXECUTION CONTEXT FIXES ---
+# Determine the absolute base directory (handling both script and PyInstaller .exe)
+if getattr(sys, "frozen", False):
+    _base_dir = os.path.dirname(sys.executable)
+else:
+    _base_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 1. Force the Current Working Directory away from C:\Windows\System32
+os.chdir(_base_dir)
+
+# 2. Redirect stdout and stderr to a global debug file to catch Windows Service crashes
+try:
+    os.makedirs(r"C:\temp", exist_ok=True)
+    _debug_log = open(r"C:\temp\warden_debug.log", "a", buffering=1)
+    sys.stdout = _debug_log
+    sys.stderr = _debug_log
+except Exception:
+    pass
+
 # Add src directory to path so warden_core modules can be imported
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+_src_dir = str(Path(_base_dir).resolve().parent)
+if _src_dir not in sys.path:
+    sys.path.insert(0, _src_dir)
 
 from warden_core.protocol import Protocol
 from warden_core.sid_helper import SID
@@ -54,8 +75,12 @@ class WardenControlClient:
         self.retry_count = 0
         self.app_states = {}
         
-        # Ensure log path is absolute so the Windows Service doesn't write to System32
-        log_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "service.log")
+        # Ensure log path is absolute and handles frozen execution properly
+        if getattr(sys, "frozen", False):
+            base_dir = os.path.dirname(sys.executable)
+        else:
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+        log_path = os.path.join(base_dir, "service.log")
         logger_instance = my_logger(self.__class__.__name__, log_path)
         self.logger = logger_instance.setup_logger()
 

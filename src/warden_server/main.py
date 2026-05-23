@@ -559,7 +559,7 @@ class WardenServer:
                 # 1440 mins = 24 hours (forces unlock)
                 self.db.update_app_rule(user_id, app_name, 1440)
                 
-                # Push unlock to kill lock screen
+                # Retrieve sid and broadcast TIME_UPDATE_SIGNAL & unlock
                 with self.db_lock:
                     cursor = self.db.db.cursor(buffered=True)
                     try:
@@ -568,7 +568,24 @@ class WardenServer:
                     finally:
                         cursor.close()
                 if row:
-                    self._push_command(row[0], "unlock", app_name)
+                    sid = row[0]
+                    # Broadcast TIME_UPDATE_SIGNAL
+                    payload = {
+                        "action": "TIME_UPDATE_SIGNAL",
+                        "app": app_name,
+                        "new_allowed_minutes": 1440.0
+                    }
+                    client_info = None
+                    with self.clients_lock:
+                        client_info = self.clients_by_sid.get(sid)
+                    if client_info:
+                        msg = Protocol.serialize_message("TIME_UPDATE_SIGNAL", payload)
+                        encrypted = CryptoManager.encrypt_aes(client_info["aes_key"], msg)
+                        with client_info["write_lock"]:
+                            Protocol.send_packet(client_info["sock"], encrypted)
+                            
+                    # Push unlock
+                    self._push_command(sid, "unlock", app_name)
                     
                 return {"status": "success"}
                 
@@ -576,28 +593,38 @@ class WardenServer:
                 user_id = data["user_id"]
                 app_name = data["app"]
                 
-                # Verify if process is running before pushing lock
-                is_running = False
-                with self.db_lock:
-                    session = self.db.get_running_session(user_id, app_name)
-                    if session:
-                        is_running = True
-                
                 # Set allowed_minutes=0 to lock the app immediately
                 self.db.update_app_rule(user_id, app_name, 0)
-                self.logger.info(f"App '{app_name}' locked for user_id={user_id} via admin panel. Running={is_running}")
+                self.logger.info(f"App '{app_name}' locked for user_id={user_id} via admin panel.")
                 
-                # Push lock command to connected client if online AND app is running
-                if is_running:
-                    with self.db_lock:
-                        cursor = self.db.db.cursor(buffered=True)
-                        try:
-                            cursor.execute("SELECT sid FROM users WHERE id=%s", (user_id,))
-                            row = cursor.fetchone()
-                        finally:
-                            cursor.close()
-                    if row:
-                        self._push_command(row[0], "time_up", app_name)
+                # Retrieve sid and broadcast TIME_UPDATE_SIGNAL & time_up
+                with self.db_lock:
+                    cursor = self.db.db.cursor(buffered=True)
+                    try:
+                        cursor.execute("SELECT sid FROM users WHERE id=%s", (user_id,))
+                        row = cursor.fetchone()
+                    finally:
+                        cursor.close()
+                if row:
+                    sid = row[0]
+                    # Broadcast TIME_UPDATE_SIGNAL
+                    payload = {
+                        "action": "TIME_UPDATE_SIGNAL",
+                        "app": app_name,
+                        "new_allowed_minutes": 0.0
+                    }
+                    client_info = None
+                    with self.clients_lock:
+                        client_info = self.clients_by_sid.get(sid)
+                    if client_info:
+                        msg = Protocol.serialize_message("TIME_UPDATE_SIGNAL", payload)
+                        encrypted = CryptoManager.encrypt_aes(client_info["aes_key"], msg)
+                        with client_info["write_lock"]:
+                            Protocol.send_packet(client_info["sock"], encrypted)
+                            
+                    # Push time_up to lock immediately
+                    self._push_command(sid, "time_up", app_name)
+                
                 return {"status": "success"}
 
             elif cmd == "emergency_unlock":
