@@ -459,10 +459,9 @@ class WardenServer:
                 user_id = data["user_id"]
                 app_name = data["app"]
                 allowed = data["allowed"]
-                if allowed == 0:
-                    self.db.delete_app_rule(user_id, app_name)
-                else:
-                    self.db.update_app_rule(user_id, app_name, allowed)
+                
+                # 0 means lock explicitly, do not delete the rule!
+                self.db.update_app_rule(user_id, app_name, allowed)
                 
                 # Retrieve sid and broadcast TIME_UPDATE_SIGNAL
                 with self.db_lock:

@@ -299,6 +299,7 @@ class WardenControlClient:
                 or normalized_action in UNLOCK_COMMANDS
                 or normalized_command in UNLOCK_COMMANDS):
             self.logger.info("Unlock command detected from server: %s", cmd)
+            self.locked_app_name = None
             self.kill_lock_screen()
         elif (normalized_cmd == "disconnect_and_clear"
                 or normalized_action == "disconnect_and_clear"
@@ -317,6 +318,8 @@ class WardenControlClient:
             self.logger.info("Reconciliation check for %s: allowed=%.2f, used=%.2f", app_name, new_allowed, used)
             if new_allowed > used:
                 self.logger.info("Reconciliation logic: Unlocking app %s", app_name)
+                if self.locked_app_name and self.locked_app_name.lower() == app_name:
+                    self.locked_app_name = None
                 self.kill_lock_screen()
             else:
                 self.logger.info("Reconciliation logic: Locking app %s", app_name)
