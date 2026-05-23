@@ -308,7 +308,7 @@ class WardenControlClient:
             normalized_action = str(data.get("action", "")).strip().lower()
             normalized_command = str(data.get("command", "")).strip().lower()
 
-        if normalized_cmd == "auth":
+        if normalized_cmd == "auth" or (normalized_cmd == "response" and isinstance(data, dict) and data.get("status") == "authenticated"):
             app_states = data.get("app_states", {}) if isinstance(data, dict) else {}
             for app, state in app_states.items():
                 app_lower = app.lower()
