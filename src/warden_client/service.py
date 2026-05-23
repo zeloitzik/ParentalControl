@@ -28,6 +28,8 @@ try:
     import win32serviceutil
     import win32service
     import win32event
+    import servicemanager
+    import win32timezone
     HAS_WIN32 = True
 except ImportError:
     HAS_WIN32 = False
