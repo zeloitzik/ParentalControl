@@ -1,86 +1,173 @@
-2026-05-16 22:27:50,706 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
-2026-05-16 22:27:50,718 - WardenControlClient - INFO - Connection established.
-2026-05-16 22:27:50,719 - WardenControlClient - INFO - Waiting to receive server public key...
-2026-05-16 22:27:50,723 - WardenControlClient - INFO - Received server RSA public key
-2026-05-16 22:27:50,732 - WardenControlClient - INFO - Generated and encrypted AES session key
-2026-05-16 22:27:50,733 - WardenControlClient - INFO - Sent encrypted AES key to server
-2026-05-16 22:27:51,265 - WardenControlClient - INFO - Sent authenticated registration message for SID S-1-5-21-1782710462-1921316265-2944239350-1001
-2026-05-16 22:27:51,268 - WardenControlClient - INFO - Entering receive loop.
-2026-05-16 22:27:51,268 - WardenControlClient - INFO - Listener thread started.
-2026-05-16 22:27:51,270 - WardenControlClient - INFO - Starting process event monitor.
-2026-05-16 22:27:51,270 - WardenControlClient - INFO - Event scanner thread started.
-2026-05-16 22:27:51,277 - WardenControlClient - INFO - Received server command: response data={'status': 'authenticated', 'message': 'Client registered successfully'}
-2026-05-16 22:27:51,871 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'powershell.exe', 'pid': 248}, 'timestamp': '2026-05-16T19:27:51.295144+00:00'}
-2026-05-16 22:27:51,872 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'pet.exe', 'pid': 876}, 'timestamp': '2026-05-16T19:27:51.361990+00:00'}
-2026-05-16 22:27:51,872 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 916}, 'timestamp': '2026-05-16T19:27:51.372405+00:00'}
-2026-05-16 22:27:51,873 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 1832}, 'timestamp': '2026-05-16T19:27:51.481422+00:00'}
-2026-05-16 22:27:51,873 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 2220}, 'timestamp': '2026-05-16T19:27:51.502324+00:00'}
-2026-05-16 22:27:51,873 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 2416}, 'timestamp': '2026-05-16T19:27:51.539706+00:00'}
-2026-05-16 22:27:51,874 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'pet.exe', 'pid': 2432}, 'timestamp': '2026-05-16T19:27:51.539859+00:00'}
-2026-05-16 22:27:51,874 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'notepad.exe', 'pid': 3472}, 'timestamp': '2026-05-16T19:27:51.632524+00:00'}
-2026-05-16 22:27:51,874 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Microsoft.Photos.exe', 'pid': 3676}, 'timestamp': '2026-05-16T19:27:51.648201+00:00'}
-2026-05-16 22:27:51,875 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'LockApp.exe', 'pid': 3864}, 'timestamp': '2026-05-16T19:27:51.663791+00:00'}
-2026-05-16 22:27:51,875 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 4148}, 'timestamp': '2026-05-16T19:27:51.710450+00:00'}
-2026-05-16 22:27:51,876 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OpenConsole.exe', 'pid': 4244}, 'timestamp': '2026-05-16T19:27:51.710617+00:00'}
-2026-05-16 22:27:51,877 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 4764}, 'timestamp': '2026-05-16T19:27:51.721079+00:00'}
-2026-05-16 22:27:51,877 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'cmd.exe', 'pid': 5084}, 'timestamp': '2026-05-16T19:27:51.726381+00:00'}
-2026-05-16 22:27:51,878 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'StartMenuExperienceHost.exe', 'pid': 6724}, 'timestamp': '2026-05-16T19:27:51.788156+00:00'}
-2026-05-16 22:27:51,878 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'TextInputHost.exe', 'pid': 6884}, 'timestamp': '2026-05-16T19:27:51.788301+00:00'}
-2026-05-16 22:27:51,879 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 6952}, 'timestamp': '2026-05-16T19:27:51.788428+00:00'}
-2026-05-16 22:27:51,879 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 7624}, 'timestamp': '2026-05-16T19:27:51.804056+00:00'}
-2026-05-16 22:27:51,880 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 7780}, 'timestamp': '2026-05-16T19:27:51.804215+00:00'}
-2026-05-16 22:27:51,880 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 8040}, 'timestamp': '2026-05-16T19:27:51.804370+00:00'}
-2026-05-16 22:27:51,881 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'taskhostw.exe', 'pid': 8428}, 'timestamp': '2026-05-16T19:27:51.804526+00:00'}
-2026-05-16 22:27:51,881 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 8948}, 'timestamp': '2026-05-16T19:27:51.804659+00:00'}
-2026-05-16 22:27:51,882 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'explorer.exe', 'pid': 9304}, 'timestamp': '2026-05-16T19:27:51.804808+00:00'}
-2026-05-16 22:27:51,882 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9352}, 'timestamp': '2026-05-16T19:27:51.805134+00:00'}
-2026-05-16 22:27:51,883 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'py.exe', 'pid': 9504}, 'timestamp': '2026-05-16T19:27:51.805437+00:00'}
-2026-05-16 22:27:51,883 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9636}, 'timestamp': '2026-05-16T19:27:51.805632+00:00'}
-2026-05-16 22:27:51,884 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'smartscreen.exe', 'pid': 9784}, 'timestamp': '2026-05-16T19:27:51.816337+00:00'}
-2026-05-16 22:27:51,884 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9868}, 'timestamp': '2026-05-16T19:27:51.816546+00:00'}
-2026-05-16 22:27:51,885 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9908}, 'timestamp': '2026-05-16T19:27:51.816932+00:00'}
-2026-05-16 22:27:51,885 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'python.exe', 'pid': 9952}, 'timestamp': '2026-05-16T19:27:51.817245+00:00'}
-2026-05-16 22:27:51,885 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 9984}, 'timestamp': '2026-05-16T19:27:51.817489+00:00'}
-2026-05-16 22:27:51,886 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 10072}, 'timestamp': '2026-05-16T19:27:51.817683+00:00'}
-2026-05-16 22:27:51,886 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 10364}, 'timestamp': '2026-05-16T19:27:51.817872+00:00'}
-2026-05-16 22:27:51,887 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'sihost.exe', 'pid': 10456}, 'timestamp': '2026-05-16T19:27:51.818135+00:00'}
-2026-05-16 22:27:51,888 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OpenConsole.exe', 'pid': 10512}, 'timestamp': '2026-05-16T19:27:51.818331+00:00'}
-2026-05-16 22:27:51,888 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 10544}, 'timestamp': '2026-05-16T19:27:51.818515+00:00'}
-2026-05-16 22:27:51,889 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OpenConsole.exe', 'pid': 10648}, 'timestamp': '2026-05-16T19:27:51.818699+00:00'}
-2026-05-16 22:27:51,889 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SystemSettings.exe', 'pid': 10892}, 'timestamp': '2026-05-16T19:27:51.818962+00:00'}
-2026-05-16 22:27:51,890 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 10988}, 'timestamp': '2026-05-16T19:27:51.829555+00:00'}
-2026-05-16 22:27:51,890 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 11216}, 'timestamp': '2026-05-16T19:27:51.829764+00:00'}
-2026-05-16 22:27:51,891 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ShellExperienceHost.exe', 'pid': 11416}, 'timestamp': '2026-05-16T19:27:51.830069+00:00'}
-2026-05-16 22:27:51,891 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 11420}, 'timestamp': '2026-05-16T19:27:51.830272+00:00'}
-2026-05-16 22:27:51,892 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SearchApp.exe', 'pid': 11508}, 'timestamp': '2026-05-16T19:27:51.830564+00:00'}
-2026-05-16 22:27:51,893 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 11580}, 'timestamp': '2026-05-16T19:27:51.830762+00:00'}
-2026-05-16 22:27:51,893 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 11636}, 'timestamp': '2026-05-16T19:27:51.830955+00:00'}
-2026-05-16 22:27:51,894 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'MusNotifyIcon.exe', 'pid': 11764}, 'timestamp': '2026-05-16T19:27:51.831217+00:00'}
-2026-05-16 22:27:51,894 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 11892}, 'timestamp': '2026-05-16T19:27:51.831410+00:00'}
-2026-05-16 22:27:51,894 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 11900}, 'timestamp': '2026-05-16T19:27:51.831596+00:00'}
-2026-05-16 22:27:51,895 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'powershell.exe', 'pid': 11908}, 'timestamp': '2026-05-16T19:27:51.831783+00:00'}
-2026-05-16 22:27:51,895 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ApplicationFrameHost.exe', 'pid': 11932}, 'timestamp': '2026-05-16T19:27:51.832044+00:00'}
-2026-05-16 22:27:51,896 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 11944}, 'timestamp': '2026-05-16T19:27:51.832247+00:00'}
-2026-05-16 22:27:51,896 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'powershell.exe', 'pid': 12112}, 'timestamp': '2026-05-16T19:27:51.842749+00:00'}
-2026-05-16 22:27:51,896 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 12224}, 'timestamp': '2026-05-16T19:27:51.842955+00:00'}
-2026-05-16 22:27:51,897 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Taskmgr.exe', 'pid': 12684}, 'timestamp': '2026-05-16T19:27:51.844512+00:00'}
-2026-05-16 22:27:51,897 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'UserOOBEBroker.exe', 'pid': 12988}, 'timestamp': '2026-05-16T19:27:51.844969+00:00'}
-2026-05-16 22:27:51,898 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ctfmon.exe', 'pid': 13008}, 'timestamp': '2026-05-16T19:27:51.846351+00:00'}
-2026-05-16 22:27:51,898 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13436}, 'timestamp': '2026-05-16T19:27:51.846723+00:00'}
-2026-05-16 22:27:51,898 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 13448}, 'timestamp': '2026-05-16T19:27:51.846925+00:00'}
-2026-05-16 22:27:51,899 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13476}, 'timestamp': '2026-05-16T19:27:51.847113+00:00'}
-2026-05-16 22:27:51,899 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 13644}, 'timestamp': '2026-05-16T19:27:51.857697+00:00'}
-2026-05-16 22:27:51,899 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13748}, 'timestamp': '2026-05-16T19:27:51.857900+00:00'}
-2026-05-16 22:27:51,900 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'taskhostw.exe', 'pid': 13836}, 'timestamp': '2026-05-16T19:27:51.859252+00:00'}
-2026-05-16 22:27:51,900 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13908}, 'timestamp': '2026-05-16T19:27:51.859607+00:00'}
-2026-05-16 22:27:51,901 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 13924}, 'timestamp': '2026-05-16T19:27:51.859801+00:00'}
-2026-05-16 22:27:51,901 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'Code.exe', 'pid': 14040}, 'timestamp': '2026-05-16T19:27:51.870203+00:00'}
-2026-05-16 22:27:51,901 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 14188}, 'timestamp': '2026-05-16T19:27:51.870410+00:00'}
-2026-05-16 22:27:51,902 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 14224}, 'timestamp': '2026-05-16T19:27:51.870600+00:00'}
-2026-05-16 22:27:51,902 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 14320}, 'timestamp': '2026-05-16T19:27:51.870786+00:00'}
-2026-05-16 22:28:08,621 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'Microsoft.Photos.exe', 'pid': 3676}, 'timestamp': '2026-05-16T19:28:08.621295+00:00'}
-2026-05-16 22:28:14,219 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'notepad.exe', 'pid': 10500}, 'timestamp': '2026-05-16T19:28:14.189172+00:00'}
-2026-05-16 22:28:14,220 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'notepad.exe', 'pid': 3472}, 'timestamp': '2026-05-16T19:28:14.219066+00:00'}
-2026-05-16 22:28:25,402 - WardenControlClient - INFO - Received termination signal: 2
-2026-05-16 22:28:25,447 - WardenControlClient - INFO - Shutting down WardenControlClient.
-2026-05-16 22:28:25,448 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-21 21:20:40,860 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-21 21:20:40,919 - WardenControlClient - INFO - Connection established.
+2026-05-21 21:20:40,919 - WardenControlClient - INFO - Waiting to receive server public key...
+2026-05-21 21:20:40,921 - WardenControlClient - INFO - Received server RSA public key
+2026-05-21 21:20:40,932 - WardenControlClient - INFO - Generated and encrypted AES session key
+2026-05-21 21:20:40,934 - WardenControlClient - INFO - Sent encrypted AES key to server
+2026-05-21 21:20:41,522 - WardenControlClient - INFO - Sent authenticated registration message for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-21 21:20:41,525 - WardenControlClient - INFO - Entering receive loop.
+2026-05-21 21:20:41,525 - WardenControlClient - INFO - Listener thread started.
+2026-05-21 21:20:41,526 - WardenControlClient - INFO - Starting process event monitor.
+2026-05-21 21:20:41,533 - WardenControlClient - INFO - Received server command: response data={'status': 'authenticated', 'message': 'Client registered successfully'}
+2026-05-21 21:20:41,527 - WardenControlClient - INFO - Event scanner thread started.
+2026-05-21 21:20:42,298 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 1736}, 'timestamp': '2026-05-21T18:20:41.769528+00:00'}
+2026-05-21 21:20:42,299 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 2128}, 'timestamp': '2026-05-21T18:20:41.819902+00:00'}
+2026-05-21 21:20:42,299 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 2428}, 'timestamp': '2026-05-21T18:20:41.864695+00:00'}
+2026-05-21 21:20:42,300 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 2520}, 'timestamp': '2026-05-21T18:20:41.881617+00:00'}
+2026-05-21 21:20:42,300 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'igfxEM.exe', 'pid': 3432}, 'timestamp': '2026-05-21T18:20:41.959614+00:00'}
+2026-05-21 21:20:42,300 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 3848}, 'timestamp': '2026-05-21T18:20:42.041664+00:00'}
+2026-05-21 21:20:42,301 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 4104}, 'timestamp': '2026-05-21T18:20:42.074892+00:00'}
+2026-05-21 21:20:42,301 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 4384}, 'timestamp': '2026-05-21T18:20:42.091607+00:00'}
+2026-05-21 21:20:42,302 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'M365Copilot.exe', 'pid': 4524}, 'timestamp': '2026-05-21T18:20:42.091771+00:00'}
+2026-05-21 21:20:42,302 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'taskhostw.exe', 'pid': 4728}, 'timestamp': '2026-05-21T18:20:42.108498+00:00'}
+2026-05-21 21:20:42,303 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 4980}, 'timestamp': '2026-05-21T18:20:42.125194+00:00'}
+2026-05-21 21:20:42,303 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'MusNotifyIcon.exe', 'pid': 5356}, 'timestamp': '2026-05-21T18:20:42.131061+00:00'}
+2026-05-21 21:20:42,304 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 5684}, 'timestamp': '2026-05-21T18:20:42.165421+00:00'}
+2026-05-21 21:20:42,305 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'UserOOBEBroker.exe', 'pid': 5692}, 'timestamp': '2026-05-21T18:20:42.165613+00:00'}
+2026-05-21 21:20:42,305 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ctfmon.exe', 'pid': 5792}, 'timestamp': '2026-05-21T18:20:42.167302+00:00'}
+2026-05-21 21:20:42,305 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 5892}, 'timestamp': '2026-05-21T18:20:42.178550+00:00'}
+2026-05-21 21:20:42,306 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 6040}, 'timestamp': '2026-05-21T18:20:42.178697+00:00'}
+2026-05-21 21:20:42,307 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SecurityHealthSystray.exe', 'pid': 6064}, 'timestamp': '2026-05-21T18:20:42.178815+00:00'}
+2026-05-21 21:20:42,307 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'sihost.exe', 'pid': 6080}, 'timestamp': '2026-05-21T18:20:42.178932+00:00'}
+2026-05-21 21:20:42,307 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 6136}, 'timestamp': '2026-05-21T18:20:42.179048+00:00'}
+2026-05-21 21:20:42,308 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SearchApp.exe', 'pid': 6260}, 'timestamp': '2026-05-21T18:20:42.179170+00:00'}
+2026-05-21 21:20:42,308 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'explorer.exe', 'pid': 6276}, 'timestamp': '2026-05-21T18:20:42.179312+00:00'}
+2026-05-21 21:20:42,309 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 6332}, 'timestamp': '2026-05-21T18:20:42.179519+00:00'}
+2026-05-21 21:20:42,309 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 6608}, 'timestamp': '2026-05-21T18:20:42.179692+00:00'}
+2026-05-21 21:20:42,310 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 6668}, 'timestamp': '2026-05-21T18:20:42.179886+00:00'}
+2026-05-21 21:20:42,310 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SearchApp.exe', 'pid': 6948}, 'timestamp': '2026-05-21T18:20:42.180080+00:00'}
+2026-05-21 21:20:42,311 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,311 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 7044}, 'timestamp': '2026-05-21T18:20:42.180367+00:00'}
+2026-05-21 21:20:42,312 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 7256}, 'timestamp': '2026-05-21T18:20:42.191550+00:00'}
+2026-05-21 21:20:42,312 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'smartscreen.exe', 'pid': 7304}, 'timestamp': '2026-05-21T18:20:42.191858+00:00'}
+2026-05-21 21:20:42,313 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 7328}, 'timestamp': '2026-05-21T18:20:42.192044+00:00'}
+2026-05-21 21:20:42,313 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ShellExperienceHost.exe', 'pid': 7576}, 'timestamp': '2026-05-21T18:20:42.214051+00:00'}
+2026-05-21 21:20:42,314 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RAVBg64.exe', 'pid': 7648}, 'timestamp': '2026-05-21T18:20:42.214292+00:00'}
+2026-05-21 21:20:42,314 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 7712}, 'timestamp': '2026-05-21T18:20:42.214468+00:00'}
+2026-05-21 21:20:42,314 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'TextInputHost.exe', 'pid': 7728}, 'timestamp': '2026-05-21T18:20:42.214737+00:00'}
+2026-05-21 21:20:42,315 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'StartMenuExperienceHost.exe', 'pid': 7796}, 'timestamp': '2026-05-21T18:20:42.214976+00:00'}
+2026-05-21 21:20:42,315 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RAVCpl64.exe', 'pid': 7856}, 'timestamp': '2026-05-21T18:20:42.215199+00:00'}
+2026-05-21 21:20:42,316 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 8108}, 'timestamp': '2026-05-21T18:20:42.215393+00:00'}
+2026-05-21 21:20:42,316 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 8184}, 'timestamp': '2026-05-21T18:20:42.215562+00:00'}
+2026-05-21 21:20:42,317 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 8200}, 'timestamp': '2026-05-21T18:20:42.215727+00:00'}
+2026-05-21 21:20:42,318 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 8208}, 'timestamp': '2026-05-21T18:20:42.215891+00:00'}
+2026-05-21 21:20:42,318 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,319 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 8592}, 'timestamp': '2026-05-21T18:20:42.227192+00:00'}
+2026-05-21 21:20:42,320 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 8888}, 'timestamp': '2026-05-21T18:20:42.227408+00:00'}
+2026-05-21 21:20:42,321 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'taskhostw.exe', 'pid': 8964}, 'timestamp': '2026-05-21T18:20:42.227590+00:00'}
+2026-05-21 21:20:42,321 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ApplicationFrameHost.exe', 'pid': 9084}, 'timestamp': '2026-05-21T18:20:42.227862+00:00'}
+2026-05-21 21:20:42,322 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 9208}, 'timestamp': '2026-05-21T18:20:42.239123+00:00'}
+2026-05-21 21:20:42,323 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OneDrive.exe', 'pid': 9312}, 'timestamp': '2026-05-21T18:20:42.250687+00:00'}
+2026-05-21 21:20:42,323 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 9536}, 'timestamp': '2026-05-21T18:20:42.250883+00:00'}
+2026-05-21 21:20:42,322 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,324 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 10216}, 'timestamp': '2026-05-21T18:20:42.273291+00:00'}
+2026-05-21 21:20:42,325 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,325 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'py.exe', 'pid': 10220}, 'timestamp': '2026-05-21T18:20:42.273568+00:00'}
+2026-05-21 21:20:42,326 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'cmd.exe', 'pid': 10224}, 'timestamp': '2026-05-21T18:20:42.273790+00:00'}
+2026-05-21 21:20:42,327 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'LockApp.exe', 'pid': 10856}, 'timestamp': '2026-05-21T18:20:42.285319+00:00'}
+2026-05-21 21:20:42,328 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,328 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SystemSettings.exe', 'pid': 11000}, 'timestamp': '2026-05-21T18:20:42.285572+00:00'}
+2026-05-21 21:20:42,328 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'python.exe', 'pid': 11060}, 'timestamp': '2026-05-21T18:20:42.285816+00:00'}
+2026-05-21 21:20:42,329 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 11164}, 'timestamp': '2026-05-21T18:20:42.285998+00:00'}
+2026-05-21 21:20:42,329 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 11216}, 'timestamp': '2026-05-21T18:20:42.286165+00:00'}
+2026-05-21 21:20:42,330 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'LocationNotificationWindows.exe', 'pid': 11432}, 'timestamp': '2026-05-21T18:20:42.286394+00:00'}
+2026-05-21 21:20:42,330 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 11788}, 'timestamp': '2026-05-21T18:20:42.297676+00:00'}
+2026-05-21 21:20:42,331 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedge.exe', 'pid': 11904}, 'timestamp': '2026-05-21T18:20:42.297864+00:00'}
+2026-05-21 21:20:42,331 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 12128}, 'timestamp': '2026-05-21T18:20:42.298051+00:00'}
+2026-05-21 21:20:42,332 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,332 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,333 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,333 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,336 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,343 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,393 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,394 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,394 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,394 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,395 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,395 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,395 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,395 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,396 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,396 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,396 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,397 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,397 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,398 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,398 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,398 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,398 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,399 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,399 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,399 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,446 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,446 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,446 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,447 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,447 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,447 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,447 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,448 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,448 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,448 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,448 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,449 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,449 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,449 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,500 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,500 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,501 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,501 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,501 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,501 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,502 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,502 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,502 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,503 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,503 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,503 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,504 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:42,504 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:59,228 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 4000}, 'timestamp': '2026-05-21T18:20:59.061517+00:00'}
+2026-05-21 21:20:59,229 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 5684}, 'timestamp': '2026-05-21T18:20:59.227869+00:00'}
+2026-05-21 21:20:59,229 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 11164}, 'timestamp': '2026-05-21T18:20:59.227915+00:00'}
+2026-05-21 21:20:59,237 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:59,245 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:20:59,302 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:21:10,575 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 1500}, 'timestamp': '2026-05-21T18:21:10.037918+00:00'}
+2026-05-21 21:21:10,576 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 1944}, 'timestamp': '2026-05-21T18:21:10.104577+00:00'}
+2026-05-21 21:21:10,576 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 4860}, 'timestamp': '2026-05-21T18:21:10.428643+00:00'}
+2026-05-21 21:21:10,576 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 7180}, 'timestamp': '2026-05-21T18:21:10.500066+00:00'}
+2026-05-21 21:21:10,577 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 8636}, 'timestamp': '2026-05-21T18:21:10.530867+00:00'}
+2026-05-21 21:21:10,577 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 10760}, 'timestamp': '2026-05-21T18:21:10.563858+00:00'}
+2026-05-21 21:21:10,577 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 4980}, 'timestamp': '2026-05-21T18:21:10.575306+00:00'}
+2026-05-21 21:21:10,578 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'LocationNotificationWindows.exe', 'pid': 11432}, 'timestamp': '2026-05-21T18:21:10.575348+00:00'}
+2026-05-21 21:21:10,599 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:21:10,603 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:21:10,608 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:21:10,663 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:21:10,664 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:21:10,664 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:21:10,665 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:21:10,665 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:21:16,222 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 8636}, 'timestamp': '2026-05-21T18:21:16.222153+00:00'}
+2026-05-21 21:21:16,233 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:21:55,670 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 4000}, 'timestamp': '2026-05-21T18:21:55.670410+00:00'}
+2026-05-21 21:21:55,671 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 6136}, 'timestamp': '2026-05-21T18:21:55.670447+00:00'}
+2026-05-21 21:21:55,683 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:21:55,688 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:22:06,904 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 1500}, 'timestamp': '2026-05-21T18:22:06.903542+00:00'}
+2026-05-21 21:22:06,904 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 1944}, 'timestamp': '2026-05-21T18:22:06.903582+00:00'}
+2026-05-21 21:22:06,904 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 7180}, 'timestamp': '2026-05-21T18:22:06.903595+00:00'}
+2026-05-21 21:22:06,905 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 10760}, 'timestamp': '2026-05-21T18:22:06.903608+00:00'}
+2026-05-21 21:22:06,940 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:22:06,953 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:22:07,012 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:22:07,013 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:22:40,319 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 4860}, 'timestamp': '2026-05-21T18:22:40.318889+00:00'}
+2026-05-21 21:22:40,328 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-21 21:23:22,717 - WardenControlClient - INFO - Received server command: time_up data={'action': 'time_up', 'app': 'Microsoft.Photos.exe'}
+2026-05-21 21:23:22,718 - WardenControlClient - INFO - Lock command detected from server: time_up
+2026-05-21 21:23:22,758 - WardenControlClient - INFO - Lock screen launched successfully.
+2026-05-21 21:23:24,651 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'python.exe', 'pid': 3240}, 'timestamp': '2026-05-21T18:23:24.408391+00:00'}
+2026-05-21 21:23:24,659 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
