@@ -120,6 +120,10 @@ class WardenServer:
             return
 
         for sid in active_sids:
+            if sid in ("ADMIN_PANEL", "ADMIN_EVENTS"):
+                print(f"[SERVER STATUS] Admin component '{sid}' connected.")
+                continue
+
             user_info = self._get_client_session_status(sid)
             if not user_info:
                 print(f"[SERVER STATUS] SID {sid} connected, no user record found.")

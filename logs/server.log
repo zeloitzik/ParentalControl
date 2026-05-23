@@ -1,3 +1,41 @@
-2026-05-23 19:18:08,292 - server - INFO - Warden Server listening on 0.0.0.0:8000 (Raw Sockets)
-2026-05-23 19:18:08,293 - server - INFO - Lock monitor loop entering periodic scan mode.
-2026-05-23 19:18:08,293 - server - INFO - Lock monitor thread started.
+2026-05-23 19:48:17,234 - server - INFO - Cleaned up 1 stale RUNNING sessions from previous run.
+2026-05-23 19:48:17,234 - server - INFO - Warden Server listening on 0.0.0.0:8000 (Raw Sockets)
+2026-05-23 19:48:17,234 - server - INFO - Lock monitor loop entering periodic scan mode.
+2026-05-23 19:48:17,234 - server - INFO - Lock monitor thread started.
+2026-05-23 19:48:18,874 - server - INFO - Accepted connection from ('192.168.1.248', 50123)
+2026-05-23 19:48:18,888 - server - INFO - Secure AES session established with ('192.168.1.248', 50123)
+2026-05-23 19:48:18,940 - server - INFO - Client authentication: SID=S-1-5-21-1782710462-1921316265-2944239350-1004, purpose=registration
+2026-05-23 19:48:18,943 - server - INFO - Registered client for SID S-1-5-21-1782710462-1921316265-2944239350-1004
+2026-05-23 19:48:21,850 - server - INFO - Accepted connection from ('127.0.0.1', 56687)
+2026-05-23 19:48:21,862 - server - INFO - Secure AES session established with ('127.0.0.1', 56687)
+2026-05-23 19:48:21,862 - server - INFO - Client authentication: SID=ADMIN_EVENTS, purpose=admin_events
+2026-05-23 19:48:21,862 - server - INFO - Registered client for SID ADMIN_EVENTS
+2026-05-23 19:50:05,995 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'LocationNotificationWindows.exe', 'pid': 14644}, 'timestamp': '2026-05-23T16:50:04.994203+00:00'}
+2026-05-23 19:51:07,109 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'LocationNotificationWindows.exe', 'pid': 14644}, 'timestamp': '2026-05-23T16:51:06.106314+00:00'}
+2026-05-23 19:52:49,675 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'UserOOBEBroker.exe', 'pid': 8592}, 'timestamp': '2026-05-23T16:52:48.662696+00:00'}
+2026-05-23 19:53:30,893 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 1080}, 'timestamp': '2026-05-23T16:53:29.630255+00:00'}
+2026-05-23 19:53:30,906 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 7756}, 'timestamp': '2026-05-23T16:53:29.670439+00:00'}
+2026-05-23 19:53:30,906 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 14016}, 'timestamp': '2026-05-23T16:53:29.691862+00:00'}
+2026-05-23 19:53:30,909 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ctfmon.exe', 'pid': 14796}, 'timestamp': '2026-05-23T16:53:29.692503+00:00'}
+2026-05-23 19:53:30,915 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'UserOOBEBroker.exe', 'pid': 8592}, 'timestamp': '2026-05-23T16:53:29.693301+00:00'}
+2026-05-23 19:53:35,830 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'dllhost.exe', 'pid': 7756}, 'timestamp': '2026-05-23T16:53:34.827601+00:00'}
+2026-05-23 19:53:40,942 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 2784}, 'timestamp': '2026-05-23T16:53:39.910453+00:00'}
+2026-05-23 19:53:40,954 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'ShellExperienceHost.exe', 'pid': 5712}, 'timestamp': '2026-05-23T16:53:39.918795+00:00'}
+2026-05-23 19:53:40,959 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'LocationNotificationWindows.exe', 'pid': 14840}, 'timestamp': '2026-05-23T16:53:39.940284+00:00'}
+2026-05-23 19:53:40,959 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 15184}, 'timestamp': '2026-05-23T16:53:39.941063+00:00'}
+2026-05-23 19:53:46,054 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'mmc.exe', 'pid': 4360}, 'timestamp': '2026-05-23T16:53:45.027550+00:00'}
+2026-05-23 19:53:46,062 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'WindowsPackageManagerServer.exe', 'pid': 4376}, 'timestamp': '2026-05-23T16:53:45.027928+00:00'}
+2026-05-23 19:53:46,062 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'smartscreen.exe', 'pid': 5276}, 'timestamp': '2026-05-23T16:53:45.029871+00:00'}
+2026-05-23 19:53:51,138 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 5108}, 'timestamp': '2026-05-23T16:53:50.121160+00:00'}
+2026-05-23 19:53:56,230 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'dllhost.exe', 'pid': 5108}, 'timestamp': '2026-05-23T16:53:55.223837+00:00'}
+2026-05-23 19:54:41,974 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 1080}, 'timestamp': '2026-05-23T16:54:40.971713+00:00'}
+2026-05-23 19:54:41,984 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'LocationNotificationWindows.exe', 'pid': 14840}, 'timestamp': '2026-05-23T16:54:40.971754+00:00'}
+2026-05-23 19:54:52,656 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'WindowsPackageManagerServer.exe', 'pid': 4376}, 'timestamp': '2026-05-23T16:54:51.283326+00:00'}
+2026-05-23 19:54:52,658 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 14016}, 'timestamp': '2026-05-23T16:54:51.283373+00:00'}
+2026-05-23 19:54:52,664 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'ctfmon.exe', 'pid': 14796}, 'timestamp': '2026-05-23T16:54:51.283388+00:00'}
+2026-05-23 19:55:02,652 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'LocationNotificationWindows.exe', 'pid': 10988}, 'timestamp': '2026-05-23T16:55:01.618134+00:00'}
+2026-05-23 19:55:23,042 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 15184}, 'timestamp': '2026-05-23T16:55:22.039043+00:00'}
+2026-05-23 19:55:23,399 - server - INFO - Accepted connection from ('127.0.0.1', 56421)
+2026-05-23 19:55:23,403 - server - INFO - Secure AES session established with ('127.0.0.1', 56421)
+2026-05-23 19:55:23,403 - server - INFO - Client authentication: SID=ADMIN_PANEL, purpose=admin_dashboard
+2026-05-23 19:55:23,403 - server - INFO - Registered client for SID ADMIN_PANEL
