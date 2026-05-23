@@ -41,46 +41,10 @@ class ServerEngine:
         # This ensures the user sees 'notepad.exe' in the sessions table even if it's already over the limit.
         self.db.start_app_session(user_id, app, timestamp)
     def can_user_run_app(self, sid, app):
-        user_id = self.db.get_user_id_by_sid(sid)
-        if not user_id:
+        remaining = self.db.remaining_time(sid, app)
+        if remaining is None:
             return True
-
-        rule = self.db.get_app_rule(user_id, app)
-        if not rule:
-            return True
-
-        allowed_minutes = rule.get("allowed_minutes")
-        if allowed_minutes is None:
-            self.logger.warning(
-                "Missing allowed_minutes for user_id=%s app=%s; defaulting to allow",
-                user_id,
-                app,
-            )
-            return True
-
-        try:
-            allowed_minutes = float(allowed_minutes)
-        except (TypeError, ValueError):
-            self.logger.warning(
-                "Malformed allowed_minutes for user_id=%s app=%s: %r; defaulting to allow",
-                user_id,
-                app,
-                rule.get("allowed_minutes"),
-            )
-            return True
-
-        try:
-            used_today = float(self.db.get_used_time_today(user_id, app) or 0.0)
-        except (TypeError, ValueError):
-            used_today = 0.0
-
-        try:
-            active_time = float(self.db.get_active_session_time(user_id, app) or 0.0)
-        except (TypeError, ValueError):
-            active_time = 0.0
-
-        total_used = used_today + active_time
-        return total_used < allowed_minutes
+        return remaining > 0
 
     def handle_app_stop(self, sid, app, timestamp):
 

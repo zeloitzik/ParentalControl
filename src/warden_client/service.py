@@ -22,7 +22,7 @@ DEFAULT_SERVER_PORT = 8000
 RECONNECT_BASE_DELAY = 1.0
 RECONNECT_MAX_DELAY = 30.0
 LOCK_COMMANDS = {"lock", "lock_screen", "times_up", "timeout", "time_up", "lockout"}
-UNLOCK_COMMANDS = {"unlock", "emergency_unlock", "unlock_app"}
+UNLOCK_COMMANDS = {"unlock", "emergency_unlock", "unlock_app", "unlock_command"}
 
 try:
     import win32serviceutil
@@ -49,6 +49,7 @@ class WardenControlClient:
         self.tracker = TimeTracker()
         self.max_retries = 5
         self.retry_count = 0
+        self.app_states = {}
         logger_instance = my_logger(self.__class__.__name__, "service.log")
         self.logger = logger_instance.setup_logger()
 
@@ -178,6 +179,14 @@ class WardenControlClient:
                     pass
 
                 events = self.tracker.scan_processes(self.sid)
+                
+                # Maintain local time for reconciliation
+                for pid, name in self.tracker.active_processes.items():
+                    app_lower = name.lower()
+                    if app_lower not in self.app_states:
+                        self.app_states[app_lower] = {"total_used_time": 0.0, "allowed_minutes": float('inf')}
+                    self.app_states[app_lower]["total_used_time"] += (5.0 / 60.0)
+
                 for event in events:
                     payload = {
                         "sid": self.sid,
@@ -247,6 +256,17 @@ class WardenControlClient:
             normalized_action = str(data.get("action", "")).strip().lower()
             normalized_command = str(data.get("command", "")).strip().lower()
 
+        if normalized_cmd == "auth":
+            app_states = data.get("app_states", {}) if isinstance(data, dict) else {}
+            for app, state in app_states.items():
+                app_lower = app.lower()
+                self.app_states[app_lower] = {
+                    "total_used_time": state.get("total_used_time", 0.0),
+                    "allowed_minutes": state.get("allowed_minutes", 0.0)
+                }
+            self.logger.info("Synchronized initial state from server: %s", self.app_states)
+            return
+
         if (normalized_cmd in LOCK_COMMANDS
                 or normalized_action in LOCK_COMMANDS
                 or normalized_command in LOCK_COMMANDS):
@@ -260,6 +280,29 @@ class WardenControlClient:
                 or normalized_command in UNLOCK_COMMANDS):
             self.logger.info("Unlock command detected from server: %s", cmd)
             self.kill_lock_screen()
+        elif (normalized_cmd == "disconnect_and_clear"
+                or normalized_action == "disconnect_and_clear"
+                or normalized_command == "disconnect_and_clear"):
+            self.logger.warning("Received DISCONNECT_AND_CLEAR. Shutting down service completely.")
+            self.shutdown()
+        elif normalized_action == "time_update_signal":
+            app_name = data.get("app", "").lower()
+            new_allowed = data.get("new_allowed_minutes", 0.0)
+            if app_name not in self.app_states:
+                self.app_states[app_name] = {"total_used_time": 0.0, "allowed_minutes": new_allowed}
+            
+            self.app_states[app_name]["allowed_minutes"] = new_allowed
+            used = self.app_states[app_name]["total_used_time"]
+            
+            self.logger.info("Reconciliation check for %s: allowed=%.2f, used=%.2f", app_name, new_allowed, used)
+            if new_allowed > used:
+                self.logger.info("Reconciliation logic: Unlocking app %s", app_name)
+                self.kill_lock_screen()
+            else:
+                self.logger.info("Reconciliation logic: Keeping lock screen active for %s", app_name)
+            
+            # Acknowledge the update
+            self.send_message("ack_time_update", {"app": app_name})
         else:
             self.logger.debug("Unhandled command received: %s", cmd)
 
@@ -293,25 +336,36 @@ class WardenControlClient:
             self.logger.error("Failed to launch lock screen: %s", exc)
 
     def kill_lock_screen(self):
-        if self.lock_screen_process:
-            self.logger.info("Attempting to kill lock screen process...")
-            try:
-                self.lock_screen_process.terminate()
-                self.lock_screen_process.wait(timeout=2)
-                self.logger.info("Lock screen process terminated gracefully.")
-            except subprocess.TimeoutExpired:
-                self.logger.warning("Lock screen did not terminate in time. Forcing kill.")
+        self.logger.info("Attempting robust kill of lock_screen processes...")
+        killed_any = False
+        try:
+            for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
                 try:
-                    self.lock_screen_process.kill()
-                    self.logger.info("Lock screen process killed forcefully.")
-                except Exception as force_exc:
-                    self.logger.error("Force kill failed: %s", force_exc)
-            except Exception as exc:
-                self.logger.error("Error terminating lock screen: %s", exc)
-            finally:
-                self.lock_screen_process = None
+                    name = proc.info.get('name')
+                    if name and name.lower() == 'lock_screen.exe':
+                        proc.kill()
+                        killed_any = True
+                    elif name and 'python' in name.lower():
+                        cmdline = proc.info.get('cmdline')
+                        if cmdline and any('lock_screen.py' in cmd for cmd in cmdline):
+                            proc.kill()
+                            killed_any = True
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    pass
+        except Exception as e:
+            self.logger.error("Error during robust process kill: %s", e)
+            
+        if killed_any:
+            self.logger.info("Lock screen processes successfully terminated.")
         else:
-            self.logger.info("No active lock screen process to kill.")
+            self.logger.info("No active lock screen process found via psutil.")
+            
+        if self.lock_screen_process:
+            try:
+                self.lock_screen_process.kill()
+            except Exception:
+                pass
+            self.lock_screen_process = None
 
     def send_message(self, cmd, data):
         if not self.sock or not self.aes_key:

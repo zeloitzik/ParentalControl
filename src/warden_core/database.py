@@ -80,9 +80,14 @@ class DatabaseManager:
             sid VARCHAR(255) UNIQUE,
             name VARCHAR(255),
             type ENUM('parent','child'),
+            status ENUM('PENDING','ACTIVE') DEFAULT 'ACTIVE',
             FOREIGN KEY (family_id) REFERENCES families(id)
         )
         """)
+        try:
+            self.cursor.execute("ALTER TABLE users ADD COLUMN status ENUM('PENDING', 'ACTIVE') DEFAULT 'ACTIVE'")
+        except mysql.connector.Error:
+            pass
 
         # Devices table
         self.cursor.execute("""
@@ -150,15 +155,15 @@ class DatabaseManager:
             self.db.rollback()
             raise err
 
-    def add_user(self, family_id, sid, name, user_type):
+    def add_user(self, family_id, sid, name, user_type, status='ACTIVE'):
         if not all([family_id, sid, name, user_type]):
             raise ValueError("All user fields are required")
         sql = """
-        INSERT INTO users (family_id, sid, name, type)
-        VALUES (%s, %s, %s, %s)
+        INSERT INTO users (family_id, sid, name, type, status)
+        VALUES (%s, %s, %s, %s, %s)
         """
         try:
-            self.cursor.execute(sql, (family_id, sid, name, user_type))
+            self.cursor.execute(sql, (family_id, sid, name, user_type, status))
             self.db.commit()
             return self.cursor.lastrowid
         except mysql.connector.Error as err:
@@ -291,6 +296,18 @@ class DatabaseManager:
         sql = "DELETE FROM app_rules WHERE user_id = %s AND app_name = %s"
         try:
             self.cursor.execute(sql, (user_id, app_name))
+            self.db.commit()
+        except mysql.connector.Error as err:
+            self.db.rollback()
+            raise err
+            
+    def delete_user(self, user_id):
+        """Safely delete a user and all their associated records to maintain DB integrity."""
+        try:
+            self.cursor.execute("DELETE FROM app_sessions WHERE user_id = %s", (user_id,))
+            self.cursor.execute("DELETE FROM usage_logs WHERE user_id = %s", (user_id,))
+            self.cursor.execute("DELETE FROM app_rules WHERE user_id = %s", (user_id,))
+            self.cursor.execute("DELETE FROM users WHERE id = %s", (user_id,))
             self.db.commit()
         except mysql.connector.Error as err:
             self.db.rollback()
@@ -563,8 +580,8 @@ class DatabaseManager:
             raise err
 
     def update_child_name(self, user_id, new_name):
-        """Update the human-readable name for a child user."""
-        sql = "UPDATE users SET name = %s WHERE id = %s"
+        """Update the human-readable name for a child user and set status to ACTIVE."""
+        sql = "UPDATE users SET name = %s, status = 'ACTIVE' WHERE id = %s"
         cursor = self._new_cursor()
         try:
             cursor.execute(sql, (new_name, user_id))
@@ -600,7 +617,17 @@ class DatabaseManager:
         # Create user with placeholder name
         short_sid = sid[-8:] if len(sid) > 8 else sid
         placeholder_name = f"Child ({short_sid})"
-        self.add_user(family_id, sid, placeholder_name, "child")
+        self.add_user(family_id, sid, placeholder_name, "child", status="PENDING")
+
+    def get_pending_devices(self):
+        """Fetch all child devices that are awaiting setup."""
+        sql = "SELECT id, sid, name FROM users WHERE type = 'child' AND status = 'PENDING'"
+        cursor = self._new_cursor()
+        try:
+            cursor.execute(sql)
+            return [{"id": row[0], "sid": row[1], "name": row[2]} for row in cursor.fetchall()]
+        finally:
+            cursor.close()
 
     def ensure_connection(self):
         """Ping the MySQL connection and reconnect if it has gone stale."""
