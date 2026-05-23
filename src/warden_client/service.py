@@ -186,10 +186,19 @@ class WardenControlClient:
         self.shutdown()
 
     def _install_signal_handlers(self):
-        if hasattr(signal, "SIGINT"):
-            signal.signal(signal.SIGINT, self._signal_handler)
-        if hasattr(signal, "SIGTERM"):
-            signal.signal(signal.SIGTERM, self._signal_handler)
+        # In a Windows Service, SvcDoRun is executed in a background thread.
+        # Python's signal module only allows setting signals in the main thread.
+        if threading.current_thread() is not threading.main_thread():
+            self.logger.info("Not in main thread. Skipping signal handler installation.")
+            return
+            
+        try:
+            if hasattr(signal, "SIGINT"):
+                signal.signal(signal.SIGINT, self._signal_handler)
+            if hasattr(signal, "SIGTERM"):
+                signal.signal(signal.SIGTERM, self._signal_handler)
+        except ValueError as e:
+            self.logger.warning(f"Failed to install signal handlers: {e}")
 
     def _signal_handler(self, signum, frame):
         self.logger.info("Received termination signal: %s", signum)

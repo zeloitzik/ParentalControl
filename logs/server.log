@@ -1,20 +1,3 @@
-2026-05-23 18:37:33,001 - server - INFO - Cleaned up 51 stale RUNNING sessions from previous run.
-2026-05-23 18:37:33,001 - server - INFO - Warden Server listening on 0.0.0.0:8000 (Raw Sockets)
-2026-05-23 18:37:33,001 - server - INFO - Lock monitor loop entering periodic scan mode.
-2026-05-23 18:37:33,001 - server - INFO - Lock monitor thread started.
-2026-05-23 18:37:56,787 - server - INFO - Accepted connection from ('127.0.0.1', 61646)
-2026-05-23 18:37:56,796 - server - INFO - Secure AES session established with ('127.0.0.1', 61646)
-2026-05-23 18:37:56,797 - server - INFO - Client authentication: SID=ADMIN_EVENTS, purpose=admin_events
-2026-05-23 18:37:56,797 - server - INFO - Registered client for SID ADMIN_EVENTS
-2026-05-23 18:37:57,762 - server - INFO - Accepted connection from ('127.0.0.1', 61647)
-2026-05-23 18:37:57,765 - server - INFO - Secure AES session established with ('127.0.0.1', 61647)
-2026-05-23 18:37:57,765 - server - INFO - Client authentication: SID=ADMIN_PANEL, purpose=admin_dashboard
-2026-05-23 18:37:57,766 - server - INFO - Registered client for SID ADMIN_PANEL
-2026-05-23 18:38:38,101 - server - INFO - App 'notepad.exe' locked for user_id=3 via admin panel.
-2026-05-23 18:38:38,102 - server - WARNING - No connected client found for SID S-1-5-21-1782710462-1921316265-2944239350-1001 to send time_up command
-2026-05-23 18:38:41,875 - server - INFO - App 'notepad.exe' locked for user_id=3 via admin panel.
-2026-05-23 18:38:41,877 - server - WARNING - No connected client found for SID S-1-5-21-1782710462-1921316265-2944239350-1001 to send time_up command
-2026-05-23 18:38:44,008 - server - INFO - App 'notepad.exe' locked for user_id=3 via admin panel.
-2026-05-23 18:38:44,009 - server - WARNING - No connected client found for SID S-1-5-21-1782710462-1921316265-2944239350-1001 to send time_up command
-2026-05-23 18:50:51,714 - server - INFO - App 'notepad.exe' locked for user_id=3 via admin panel.
-2026-05-23 18:50:51,715 - server - WARNING - No connected client found for SID S-1-5-21-1782710462-1921316265-2944239350-1001 to send time_up command
+2026-05-23 19:18:08,292 - server - INFO - Warden Server listening on 0.0.0.0:8000 (Raw Sockets)
+2026-05-23 19:18:08,293 - server - INFO - Lock monitor loop entering periodic scan mode.
+2026-05-23 19:18:08,293 - server - INFO - Lock monitor thread started.
