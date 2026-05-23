@@ -463,6 +463,31 @@ class WardenServer:
                     self.db.delete_app_rule(user_id, app_name)
                 else:
                     self.db.update_app_rule(user_id, app_name, allowed)
+                
+                # Retrieve sid and broadcast TIME_UPDATE_SIGNAL
+                with self.db_lock:
+                    cursor = self.db.db.cursor(buffered=True)
+                    try:
+                        cursor.execute("SELECT sid FROM users WHERE id=%s", (user_id,))
+                        row = cursor.fetchone()
+                    finally:
+                        cursor.close()
+                if row:
+                    sid = row[0]
+                    payload = {
+                        "action": "TIME_UPDATE_SIGNAL",
+                        "app": app_name,
+                        "new_allowed_minutes": float(allowed)
+                    }
+                    client_info = None
+                    with self.clients_lock:
+                        client_info = self.clients_by_sid.get(sid)
+                    if client_info:
+                        msg = Protocol.serialize_message("TIME_UPDATE_SIGNAL", payload)
+                        encrypted = CryptoManager.encrypt_aes(client_info["aes_key"], msg)
+                        with client_info["write_lock"]:
+                            Protocol.send_packet(client_info["sock"], encrypted)
+                            
                 return {"status": "success"}
                 
             elif cmd == "add_time":

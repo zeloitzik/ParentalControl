@@ -183,6 +183,11 @@ class WardenControlClient:
                 # Maintain local time for reconciliation
                 for pid, name in self.tracker.active_processes.items():
                     app_lower = name.lower()
+                    
+                    # Do not inflate time if this app is currently locked
+                    if self.locked_app_name and app_lower == self.locked_app_name.lower():
+                        continue
+                        
                     if app_lower not in self.app_states:
                         self.app_states[app_lower] = {"total_used_time": 0.0, "allowed_minutes": float('inf')}
                     self.app_states[app_lower]["total_used_time"] += (5.0 / 60.0)
@@ -270,10 +275,25 @@ class WardenControlClient:
         if (normalized_cmd in LOCK_COMMANDS
                 or normalized_action in LOCK_COMMANDS
                 or normalized_command in LOCK_COMMANDS):
+            
+            # Client-side reconciliation check before honoring the lock
+            app_name = ""
+            if isinstance(data, dict):
+                app_name = data.get("app", "")
+            
+            if app_name:
+                app_lower = app_name.lower()
+                state = self.app_states.get(app_lower, {})
+                allowed = state.get("allowed_minutes", 0.0)
+                used = state.get("total_used_time", 0.0)
+                if allowed > used:
+                    self.logger.info("Ignoring server lock command for %s because local allowed (%.2f) > used (%.2f)", app_name, allowed, used)
+                    return
+                    
             self.logger.info("Lock command detected from server: %s", cmd)
             # Track which app triggered the lock for the watchdog
-            if isinstance(data, dict) and data.get("app"):
-                self.locked_app_name = data["app"]
+            if app_name:
+                self.locked_app_name = app_name
             self.launch_lock_screen()
         elif (normalized_cmd in UNLOCK_COMMANDS
                 or normalized_action in UNLOCK_COMMANDS
@@ -299,7 +319,9 @@ class WardenControlClient:
                 self.logger.info("Reconciliation logic: Unlocking app %s", app_name)
                 self.kill_lock_screen()
             else:
-                self.logger.info("Reconciliation logic: Keeping lock screen active for %s", app_name)
+                self.logger.info("Reconciliation logic: Locking app %s", app_name)
+                self.locked_app_name = app_name
+                self.launch_lock_screen()
             
             # Acknowledge the update
             self.send_message("ack_time_update", {"app": app_name})
