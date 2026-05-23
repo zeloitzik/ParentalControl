@@ -247,7 +247,7 @@ class WardenServer:
                     f"Session overdue for SID {sid}, app {app_name}: "
                     f"used={status['used']:.2f}, active={status['active']:.2f}, allowed={status['allowed']}"
                 )
-                if self._push_lock_command(sid, app_name):
+                if self._push_command(sid, "time_up", app_name):
                     with self.locked_sessions_lock:
                         self.locked_sessions.add(session_id)
 
@@ -348,8 +348,25 @@ class WardenServer:
                 sid = data.get("sid")
                 purpose = data.get("purpose", "registration")
                 self.logger.info(f"Client authentication: SID={sid}, purpose={purpose}")
+
+                # Auto-register unknown SIDs as children
+                if sid and sid != "ADMIN_PANEL":
+                    with self.db_lock:
+                        user_id = self.db.get_user_id_by_sid(sid)
+                        if not user_id:
+                            self.db.auto_register_sid(sid)
+                            self.logger.info(f"Auto-registered new child SID: {sid}")
+
                 return {"status": "authenticated", "message": "Client registered successfully"}
-                
+
+            elif cmd == "assign_child_name":
+                user_id = data["user_id"]
+                new_name = data["name"]
+                with self.db_lock:
+                    self.db.update_child_name(user_id, new_name)
+                self.logger.info(f"Renamed user_id={user_id} to '{new_name}'")
+                return {"status": "success"}
+
             elif cmd == "event":
                 self.engine.process_event(data)
                 self.logger.info("Event processed: %s", data)
@@ -364,7 +381,7 @@ class WardenServer:
                     if sid and app:
                         status = self._get_app_time_status(sid, app)
                         if status and status["remaining"] <= 0.0:
-                            self._push_lock_command(sid, app)
+                            self._push_command(sid, "time_up", app)
                 except Exception:
                     self.logger.exception("Error while evaluating lock condition for event")
 

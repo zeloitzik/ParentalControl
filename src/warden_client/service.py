@@ -43,6 +43,7 @@ class WardenControlClient:
         self.stop_event = threading.Event()
         self.sid_helper = SID()
         self.lock_screen_process = None
+        self.locked_app_name = None
         self.aes_key = None
         self.sid = None
         self.tracker = TimeTracker()
@@ -166,6 +167,16 @@ class WardenControlClient:
         self.logger.info("Starting process event monitor.")
         while not self.stop_event.is_set() and self.sock and self.aes_key and self.sid:
             try:
+                # --- Dynamic SID switching ---
+                try:
+                    current_sid = self.get_sid()
+                    if current_sid != self.sid:
+                        self.logger.info("SID changed from %s to %s — re-authenticating.", self.sid, current_sid)
+                        self.close_socket()
+                        break
+                except Exception:
+                    pass
+
                 events = self.tracker.scan_processes(self.sid)
                 for event in events:
                     payload = {
@@ -179,6 +190,16 @@ class WardenControlClient:
                     }
                     self.send_message("event", payload)
                     self.logger.info("Sent event to server: %s", payload)
+
+                    # --- Process Watchdog ---
+                    # If the locked app has stopped, dismiss the lock screen
+                    if (event["event_name"] == "APP_STOPPED"
+                            and self.locked_app_name
+                            and event["app"].lower() == self.locked_app_name.lower()):
+                        self.logger.info("Locked app '%s' has closed. Dismissing lock screen.", event["app"])
+                        self.kill_lock_screen()
+                        self.locked_app_name = None
+
             except Exception as exc:
                 if self.stop_event.is_set():
                     break
@@ -230,6 +251,9 @@ class WardenControlClient:
                 or normalized_action in LOCK_COMMANDS
                 or normalized_command in LOCK_COMMANDS):
             self.logger.info("Lock command detected from server: %s", cmd)
+            # Track which app triggered the lock for the watchdog
+            if isinstance(data, dict) and data.get("app"):
+                self.locked_app_name = data["app"]
             self.launch_lock_screen()
         elif (normalized_cmd in UNLOCK_COMMANDS
                 or normalized_action in UNLOCK_COMMANDS
