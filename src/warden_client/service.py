@@ -338,20 +338,30 @@ class WardenControlClient:
 
         try:
             script_path = Path(__file__).resolve().parent / "lock_manager" / "lock_screen.py"
+            
+            cmd_args = []
             if getattr(sys, "frozen", False):
                 exe_path = Path(sys.executable).with_name("lock_screen.exe")
                 if exe_path.exists():
-                    self.lock_screen_process = subprocess.Popen(
-                        [str(exe_path)],
-                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
-                    )
+                    cmd_args = [str(exe_path)]
                 else:
                     raise FileNotFoundError("lock_screen.exe not found next to service executable.")
+            else:
+                cmd_args = [sys.executable, str(script_path)]
+
+            if self.locked_app_name:
+                cmd_args.extend(["--app", self.locked_app_name])
+
+            if getattr(sys, "frozen", False):
+                self.lock_screen_process = subprocess.Popen(
+                    cmd_args,
+                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+                )
             else:
                 env = os.environ.copy()
                 env["PYTHONPATH"] = str(Path(__file__).resolve().parent.parent)
                 self.lock_screen_process = subprocess.Popen(
-                    [sys.executable, str(script_path)],
+                    cmd_args,
                     env=env,
                     creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
                 )
