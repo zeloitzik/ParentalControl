@@ -6,6 +6,7 @@ import time
 import logging
 import subprocess
 import signal
+import traceback
 from pathlib import Path
 
 # Add src directory to path so warden_core modules can be imported
@@ -52,7 +53,10 @@ class WardenControlClient:
         self.max_retries = 5
         self.retry_count = 0
         self.app_states = {}
-        logger_instance = my_logger(self.__class__.__name__, "service.log")
+        
+        # Ensure log path is absolute so the Windows Service doesn't write to System32
+        log_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "service.log")
+        logger_instance = my_logger(self.__class__.__name__, log_path)
         self.logger = logger_instance.setup_logger()
 
     def get_sid(self):
@@ -439,17 +443,28 @@ if HAS_WIN32:
         _svc_description_ = "Monitors user SIDs and enforces lockouts."
 
         def __init__(self, args):
-            super().__init__(args)
-            self.hWaitStop = win32event.CreateEvent(None, 0, 0, None)
-            self.client = WardenControlClient()
+            try:
+                super().__init__(args)
+                self.hWaitStop = win32event.CreateEvent(None, 0, 0, None)
+                self.client = WardenControlClient()
+            except Exception as e:
+                with open(r"C:\warden_service_crash.log", "a", encoding="utf-8") as f:
+                    f.write(f"CRITICAL CRASH IN __init__: {e}\n{traceback.format_exc()}\n")
+                raise
 
         def SvcStop(self):
             self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
             win32event.SetEvent(self.hWaitStop)
-            self.client.stop_event.set()
+            if hasattr(self, 'client'):
+                self.client.stop_event.set()
 
         def SvcDoRun(self):
-            self.client.start()
+            try:
+                self.client.start()
+            except Exception as e:
+                with open(r"C:\warden_service_crash.log", "a", encoding="utf-8") as f:
+                    f.write(f"CRITICAL CRASH IN SvcDoRun: {e}\n{traceback.format_exc()}\n")
+                raise
 
 
 def main():

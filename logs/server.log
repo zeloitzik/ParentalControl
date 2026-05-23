@@ -1,12 +1,49 @@
-2026-05-23 17:20:01,230 - server - INFO - Cleaned up 35 stale RUNNING sessions from previous run.
-2026-05-23 17:20:01,230 - server - INFO - Warden Server listening on 0.0.0.0:8000 (Raw Sockets)
-2026-05-23 17:20:01,230 - server - INFO - Lock monitor loop entering periodic scan mode.
-2026-05-23 17:20:01,230 - server - INFO - Lock monitor thread started.
-2026-05-23 17:20:28,013 - server - INFO - Accepted connection from ('127.0.0.1', 59158)
-2026-05-23 17:20:28,020 - server - INFO - Secure AES session established with ('127.0.0.1', 59158)
-2026-05-23 17:20:28,021 - server - INFO - Client authentication: SID=ADMIN_EVENTS, purpose=admin_events
-2026-05-23 17:20:28,021 - server - INFO - Registered client for SID ADMIN_EVENTS
-2026-05-23 17:20:28,744 - server - INFO - Accepted connection from ('127.0.0.1', 59159)
-2026-05-23 17:20:28,747 - server - INFO - Secure AES session established with ('127.0.0.1', 59159)
-2026-05-23 17:20:28,747 - server - INFO - Client authentication: SID=ADMIN_PANEL, purpose=admin_dashboard
-2026-05-23 17:20:28,748 - server - INFO - Registered client for SID ADMIN_PANEL
+2026-05-23 17:34:13,299 - server - INFO - Warden Server listening on 0.0.0.0:8000 (Raw Sockets)
+2026-05-23 17:34:13,300 - server - INFO - Lock monitor loop entering periodic scan mode.
+2026-05-23 17:34:13,300 - server - INFO - Lock monitor thread started.
+2026-05-23 17:34:22,442 - server - INFO - Accepted connection from ('192.168.1.248', 54178)
+2026-05-23 17:34:22,522 - server - INFO - Secure AES session established with ('192.168.1.248', 54178)
+2026-05-23 17:34:22,616 - server - INFO - Client authentication: SID=S-1-5-21-1782710462-1921316265-2944239350-1004, purpose=registration
+2026-05-23 17:34:22,622 - server - INFO - Auto-registered new child SID: S-1-5-21-1782710462-1921316265-2944239350-1004
+2026-05-23 17:34:22,622 - server - WARNING - No connected client found for SID ADMIN_EVENTS to send new_device command
+2026-05-23 17:34:22,623 - server - INFO - Registered client for SID S-1-5-21-1782710462-1921316265-2944239350-1004
+2026-05-23 17:34:22,796 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 904}, 'timestamp': '2026-05-23T14:34:21.722229+00:00'}
+2026-05-23 17:34:22,799 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 1152}, 'timestamp': '2026-05-23T14:34:21.727587+00:00'}
+2026-05-23 17:34:22,802 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 2484}, 'timestamp': '2026-05-23T14:34:21.731259+00:00'}
+2026-05-23 17:34:22,806 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'StartMenuExperienceHost.exe', 'pid': 3036}, 'timestamp': '2026-05-23T14:34:21.733876+00:00'}
+2026-05-23 17:34:22,808 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'explorer.exe', 'pid': 4204}, 'timestamp': '2026-05-23T14:34:21.737408+00:00'}
+2026-05-23 17:34:22,810 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 4328}, 'timestamp': '2026-05-23T14:34:21.738905+00:00'}
+2026-05-23 17:34:22,812 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SearchApp.exe', 'pid': 5228}, 'timestamp': '2026-05-23T14:34:21.744398+00:00'}
+2026-05-23 17:34:22,814 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 5244}, 'timestamp': '2026-05-23T14:34:21.745171+00:00'}
+2026-05-23 17:34:22,815 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 6220}, 'timestamp': '2026-05-23T14:34:21.761306+00:00'}
+2026-05-23 17:34:22,817 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SettingSyncHost.exe', 'pid': 6328}, 'timestamp': '2026-05-23T14:34:21.761542+00:00'}
+2026-05-23 17:34:22,820 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'taskhostw.exe', 'pid': 7940}, 'timestamp': '2026-05-23T14:34:21.772720+00:00'}
+2026-05-23 17:34:22,822 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'igfxEM.exe', 'pid': 8080}, 'timestamp': '2026-05-23T14:34:21.773566+00:00'}
+2026-05-23 17:34:22,825 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SecurityHealthSystray.exe', 'pid': 8904}, 'timestamp': '2026-05-23T14:34:21.779092+00:00'}
+2026-05-23 17:34:22,826 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'SearchApp.exe', 'pid': 9420}, 'timestamp': '2026-05-23T14:34:21.782532+00:00'}
+2026-05-23 17:34:22,829 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'sihost.exe', 'pid': 9872}, 'timestamp': '2026-05-23T14:34:21.784272+00:00'}
+2026-05-23 17:34:22,830 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 9960}, 'timestamp': '2026-05-23T14:34:21.784672+00:00'}
+2026-05-23 17:34:22,833 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'dllhost.exe', 'pid': 11220}, 'timestamp': '2026-05-23T14:34:21.786879+00:00'}
+2026-05-23 17:34:22,835 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 11476}, 'timestamp': '2026-05-23T14:34:21.788597+00:00'}
+2026-05-23 17:34:22,836 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 11532}, 'timestamp': '2026-05-23T14:34:21.788812+00:00'}
+2026-05-23 17:34:22,838 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RAVBg64.exe', 'pid': 11776}, 'timestamp': '2026-05-23T14:34:21.790511+00:00'}
+2026-05-23 17:34:22,840 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 12360}, 'timestamp': '2026-05-23T14:34:21.792919+00:00'}
+2026-05-23 17:34:22,841 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 13176}, 'timestamp': '2026-05-23T14:34:21.793683+00:00'}
+2026-05-23 17:34:22,844 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'TextInputHost.exe', 'pid': 13616}, 'timestamp': '2026-05-23T14:34:21.795884+00:00'}
+2026-05-23 17:34:22,847 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RAVCpl64.exe', 'pid': 13864}, 'timestamp': '2026-05-23T14:34:21.796208+00:00'}
+2026-05-23 17:34:22,850 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'OneDrive.exe', 'pid': 14576}, 'timestamp': '2026-05-23T14:34:21.797235+00:00'}
+2026-05-23 17:34:22,851 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'msedgewebview2.exe', 'pid': 14980}, 'timestamp': '2026-05-23T14:34:21.797404+00:00'}
+2026-05-23 17:34:22,852 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'svchost.exe', 'pid': 15016}, 'timestamp': '2026-05-23T14:34:21.797577+00:00'}
+2026-05-23 17:34:22,853 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 15160}, 'timestamp': '2026-05-23T14:34:21.798135+00:00'}
+2026-05-23 17:34:33,006 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'LocationNotificationWindows.exe', 'pid': 6836}, 'timestamp': '2026-05-23T14:34:31.995903+00:00'}
+2026-05-23 17:34:57,868 - server - INFO - Accepted connection from ('127.0.0.1', 52644)
+2026-05-23 17:34:57,877 - server - INFO - Secure AES session established with ('127.0.0.1', 52644)
+2026-05-23 17:34:57,877 - server - INFO - Client authentication: SID=ADMIN_EVENTS, purpose=admin_events
+2026-05-23 17:34:57,877 - server - INFO - Registered client for SID ADMIN_EVENTS
+2026-05-23 17:34:58,822 - server - INFO - Accepted connection from ('127.0.0.1', 52645)
+2026-05-23 17:34:58,823 - server - INFO - Secure AES session established with ('127.0.0.1', 52645)
+2026-05-23 17:34:58,823 - server - INFO - Client authentication: SID=ADMIN_PANEL, purpose=admin_dashboard
+2026-05-23 17:34:58,823 - server - INFO - Registered client for SID ADMIN_PANEL
+2026-05-23 17:35:34,152 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'LocationNotificationWindows.exe', 'pid': 6836}, 'timestamp': '2026-05-23T14:35:33.153783+00:00'}
+2026-05-23 17:36:38,928 - server - INFO - Unregistered client for SID S-1-5-21-1782710462-1921316265-2944239350-1004
+2026-05-23 17:36:38,928 - server - INFO - Connection closed for ('192.168.1.248', 54178)
