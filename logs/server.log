@@ -16,3 +16,5 @@
 2026-05-23 18:38:41,877 - server - WARNING - No connected client found for SID S-1-5-21-1782710462-1921316265-2944239350-1001 to send time_up command
 2026-05-23 18:38:44,008 - server - INFO - App 'notepad.exe' locked for user_id=3 via admin panel.
 2026-05-23 18:38:44,009 - server - WARNING - No connected client found for SID S-1-5-21-1782710462-1921316265-2944239350-1001 to send time_up command
+2026-05-23 18:50:51,714 - server - INFO - App 'notepad.exe' locked for user_id=3 via admin panel.
+2026-05-23 18:50:51,715 - server - WARNING - No connected client found for SID S-1-5-21-1782710462-1921316265-2944239350-1001 to send time_up command

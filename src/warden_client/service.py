@@ -17,6 +17,10 @@ else:
     _base_dir = os.path.dirname(os.path.abspath(__file__))
 
 # 1. Force the Current Working Directory away from C:\Windows\System32
+# Fix sys.argv[0] so win32serviceutil can find the script even after chdir
+if sys.argv and sys.argv[0]:
+    sys.argv[0] = os.path.abspath(sys.argv[0])
+    
 os.chdir(_base_dir)
 
 # 2. Redirect stdout and stderr to a global debug file ONLY if running as a service.
