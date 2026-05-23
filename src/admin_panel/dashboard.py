@@ -279,6 +279,42 @@ def login_view():
             st.rerun()
 
 
+import time
+
+# ═══════════════════════════════════════════════════════════════════
+#  CACHED DATA FETCHERS
+# ═══════════════════════════════════════════════════════════════════
+
+@st.cache_data(ttl=10)
+def get_known_apps_cached(child_id):
+    known_apps = []
+    try:
+        res = send_remote_command("get_known_apps", {"user_id": child_id})
+        if res and res.get("status") == "success":
+            known_apps = res.get("apps", [])
+    except Exception:
+        pass
+    if not known_apps:
+        try:
+            known_apps = db.get_known_apps(child_id)
+        except Exception:
+            known_apps = []
+    return known_apps
+
+@st.cache_data(ttl=2)
+def get_locked_apps_cached(child_id):
+    locked = set()
+    try:
+        rules_query = "SELECT app_name, allowed_minutes FROM app_rules WHERE user_id = %s"
+        df_current_rules = db.get_dataframe_data(rules_query, params=(child_id,))
+        if not df_current_rules.empty:
+            for _, row in df_current_rules.iterrows():
+                if row["allowed_minutes"] == 0:
+                    locked.add(row["app_name"])
+    except Exception:
+        pass
+    return locked
+
 # ═══════════════════════════════════════════════════════════════════
 #  DASHBOARD VIEW
 # ═══════════════════════════════════════════════════════════════════
@@ -544,109 +580,102 @@ def dashboard_view():
 
         for idx, child in enumerate(active_children):
             with blocker_tabs[idx]:
-                child_id = child["id"]
+@st.fragment
+def render_app_blocker(child):
+    child_id = child["id"]
 
-                # Fetch known apps
-                known_apps = []
-                try:
-                    res = send_remote_command("get_known_apps", {"user_id": child_id})
-                    if res and res.get("status") == "success":
-                        known_apps = res.get("apps", [])
-                except Exception:
-                    pass
-                if not known_apps:
-                    try:
-                        known_apps = db.get_known_apps(child_id)
-                    except Exception:
-                        known_apps = []
+    # Fetch data using caching
+    known_apps = get_known_apps_cached(child_id)
+    locked_apps = get_locked_apps_cached(child_id)
 
-                # Fetch locked status from rules (single source of truth)
-                locked_apps = set()
-                try:
-                    rules_query = "SELECT app_name, allowed_minutes FROM app_rules WHERE user_id = %s"
-                    df_current_rules = db.get_dataframe_data(rules_query, params=(child_id,))
-                    if not df_current_rules.empty:
-                        for _, row in df_current_rules.iterrows():
-                            if row["allowed_minutes"] == 0:
-                                locked_apps.add(row["app_name"])
-                except Exception:
-                    pass
+    # Search bar
+    search_query = st.text_input(
+        "🔍 Search apps...", key=f"blocker_search_{child_id}",
+        placeholder="Type to filter (e.g. 'chrome', 'notepad')"
+    )
 
-                # Search bar
-                search_query = st.text_input(
-                    "🔍 Search apps...", key=f"blocker_search_{child_id}",
-                    placeholder="Type to filter (e.g. 'chrome', 'notepad')"
-                )
+    filtered_apps = [app for app in known_apps if search_query.strip().lower() in app.lower()] if search_query.strip() else known_apps
 
-                filtered_apps = [app for app in known_apps if search_query.strip().lower() in app.lower()] if search_query.strip() else known_apps
+    if filtered_apps:
+        st.caption(f"**{len(filtered_apps)}** app(s) found")
+        for app_name in filtered_apps:
+            # Sync session state with DB on first render
+            status_key = f"status_{child_id}_{app_name}"
+            actual_status = "locked" if app_name in locked_apps else "allowed"
+            
+            if status_key not in st.session_state:
+                st.session_state[status_key] = actual_status
+                
+            current_status = st.session_state[status_key]
+            
+            col_name, col_status, col_action = st.columns([3, 1.5, 2])
 
-                if filtered_apps:
-                    st.caption(f"**{len(filtered_apps)}** app(s) found")
-                    for app_name in filtered_apps:
-                        is_locked = app_name in locked_apps
-                        col_name, col_status, col_action = st.columns([3, 1.5, 2])
-
-                        with col_name:
-                            st.write(f"📦 `{app_name}`")
-                        with col_status:
-                            if is_locked:
-                                st.markdown('<div class="status-locked">🔴 Locked</div>', unsafe_allow_html=True)
-                            else:
-                                st.markdown('<div class="status-allowed">🟢 Allowed</div>', unsafe_allow_html=True)
-                        with col_action:
-                            if is_locked:
-                                if st.button("🔓 Unlock", key=f"ub_{child_id}_{app_name}"):
-                                    try:
-                                        res = send_remote_command("unlock_app", {"user_id": child_id, "app": app_name})
-                                        if res and res.get("status") == "success":
-                                            st.success(f"Unlocked {app_name}")
-                                            st.rerun()
-                                        else:
-                                            st.error(f"Failed: {res}")
-                                    except Exception as e:
-                                        st.error(f"Error: {e}")
-                            else:
-                                if st.button("🔒 Lock", key=f"lb_{child_id}_{app_name}"):
-                                    try:
-                                        res = send_remote_command("lock_app", {"user_id": child_id, "app": app_name})
-                                        if res and res.get("status") == "success":
-                                            st.success(f"Locked {app_name}")
-                                            st.rerun()
-                                        else:
-                                            st.error(f"Failed: {res}")
-                                    except Exception as e:
-                                        st.error(f"Error: {e}")
-                elif search_query.strip():
-                    st.info(f"No apps matching '{search_query}' found.")
+            with col_name:
+                st.write(f"📦 `{app_name}`")
+            with col_status:
+                if current_status == "locked":
+                    st.markdown('<div class="status-locked">🔴 Locked</div>', unsafe_allow_html=True)
                 else:
-                    st.info("No known apps recorded yet. Use the form below to add one manually.")
+                    st.markdown('<div class="status-allowed">🟢 Allowed</div>', unsafe_allow_html=True)
+            with col_action:
+                if current_status == "locked":
+                    if st.button("🔓 Unlock", key=f"ub_{child_id}_{app_name}"):
+                        st.session_state[status_key] = "allowed"
+                        with st.spinner("Unlocking..."):
+                            send_remote_command("unlock_app", {"user_id": child_id, "app": app_name})
+                            time.sleep(1)
+                            get_locked_apps_cached.clear()
+                            st.session_state[status_key] = "allowed" if app_name not in get_locked_apps_cached(child_id) else "locked"
+                        st.rerun()
+                else:
+                    if st.button("🔒 Lock", key=f"lb_{child_id}_{app_name}"):
+                        st.session_state[status_key] = "locked"
+                        with st.spinner("Locking..."):
+                            send_remote_command("lock_app", {"user_id": child_id, "app": app_name})
+                            time.sleep(1)
+                            get_locked_apps_cached.clear()
+                            st.session_state[status_key] = "locked" if app_name in get_locked_apps_cached(child_id) else "allowed"
+                        st.rerun()
+    elif search_query.strip():
+        st.info(f"No apps matching '{search_query}' found.")
+    else:
+        st.info("No known apps recorded yet. Use the form below to add one manually.")
 
-                # Manual app entry
-                st.divider()
-                with st.form(f"custom_app_form_{child_id}"):
-                    st.markdown("**Add Custom App**")
-                    custom_app = st.text_input("Executable name", key=f"custom_app_{child_id}", placeholder="e.g. game.exe")
-                    custom_action = st.selectbox("Action", ["Lock (0 minutes)", "Allow (60 minutes)", "Allow (120 minutes)"], key=f"custom_action_{child_id}")
-                    if st.form_submit_button("Apply"):
-                        if not custom_app.strip():
-                            st.error("Please enter an app name.")
-                        else:
-                            minutes_map = {"Lock (0 minutes)": 0, "Allow (60 minutes)": 60, "Allow (120 minutes)": 120}
-                            minutes = minutes_map.get(custom_action, 60)
-                            try:
-                                cmd = "lock_app" if minutes == 0 else "update_rule"
-                                payload = {"user_id": child_id, "app": custom_app.strip()}
-                                if cmd == "update_rule":
-                                    payload["allowed"] = minutes
-                                res = send_remote_command(cmd, payload)
-                                if res and res.get("status") == "success":
-                                    st.success(f"{'Locked' if minutes == 0 else 'Allowed'} {custom_app.strip()} ({minutes} min)")
-                                    st.rerun()
-                                else:
-                                    st.error(f"Failed: {res}")
-                            except Exception as e:
-                                st.error(f"Error: {e}")
+    # Manual app entry
+    st.divider()
+    with st.form(f"custom_app_form_{child_id}"):
+        st.markdown("**Add Custom App**")
+        custom_app = st.text_input("Executable name", key=f"custom_app_{child_id}", placeholder="e.g. game.exe")
+        custom_action = st.selectbox("Action", ["Lock (0 minutes)", "Allow (60 minutes)", "Allow (120 minutes)"], key=f"custom_action_{child_id}")
+        if st.form_submit_button("Apply"):
+            if not custom_app.strip():
+                st.error("Please enter an app name.")
+            else:
+                minutes_map = {"Lock (0 minutes)": 0, "Allow (60 minutes)": 60, "Allow (120 minutes)": 120}
+                minutes = minutes_map.get(custom_action, 60)
+                try:
+                    cmd = "lock_app" if minutes == 0 else "update_rule"
+                    payload = {"user_id": child_id, "app": custom_app.strip()}
+                    if cmd == "update_rule":
+                        payload["allowed"] = minutes
+                    res = send_remote_command(cmd, payload)
+                    if res and res.get("status") == "success":
+                        st.success(f"{'Locked' if minutes == 0 else 'Allowed'} {custom_app.strip()} ({minutes} min)")
+                        get_locked_apps_cached.clear()
+                        get_known_apps_cached.clear()
+                        st.rerun()
+                    else:
+                        st.error(f"Failed: {res}")
+                except Exception as e:
+                    st.error(f"Error: {e}")
 
+# ═══════════════════════════════════════════════════════════════════
+#  DASHBOARD INTEGRATION
+# ═══════════════════════════════════════════════════════════════════
+
+
+
+                render_app_blocker(child)
 
 # ═══════════════════════════════════════════════════════════════════
 #  ROUTING
