@@ -19,14 +19,17 @@ else:
 # 1. Force the Current Working Directory away from C:\Windows\System32
 os.chdir(_base_dir)
 
-# 2. Redirect stdout and stderr to a global debug file to catch Windows Service crashes
-try:
-    os.makedirs(r"C:\temp", exist_ok=True)
-    _debug_log = open(r"C:\temp\warden_debug.log", "a", buffering=1)
-    sys.stdout = _debug_log
-    sys.stderr = _debug_log
-except Exception:
-    pass
+# 2. Redirect stdout and stderr to a global debug file ONLY if running as a service.
+# If we're passing CLI arguments like 'install', 'remove', or 'run', keep output in the console!
+_cli_commands = {"install", "remove", "update", "start", "stop", "restart", "debug", "run"}
+if len(sys.argv) <= 1 or sys.argv[1].lower() not in _cli_commands:
+    try:
+        os.makedirs(r"C:\temp", exist_ok=True)
+        _debug_log = open(r"C:\temp\warden_debug.log", "a", buffering=1)
+        sys.stdout = _debug_log
+        sys.stderr = _debug_log
+    except Exception:
+        pass
 
 # Add src directory to path so warden_core modules can be imported
 _src_dir = str(Path(_base_dir).resolve().parent)
