@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import simpledialog
 import sys
 import os
+import argparse
 from pathlib import Path
 
 PARENT_PIN_PATH = Path(os.getenv('APPDATA', '')) / "Warden" / "parent_pin.txt"
@@ -19,8 +20,9 @@ def load_parent_pin():
 
 
 class Screen:
-    def __init__(self):
+    def __init__(self, target_app=None):
         self.root = None
+        self.target_app = target_app
 
     def create_lock_screen(self):
         self.root = tk.Tk()
@@ -78,6 +80,19 @@ class Screen:
             command=self._parent_override
         )
         override_btn.pack(pady=(0, 15))
+
+        # --- Close Application Button ---
+        if self.target_app:
+            close_app_btn = tk.Button(
+                main_frame,
+                text=f"🛑 Close {self.target_app} & Continue",
+                font=("Segoe UI", 13, "bold"),
+                fg="#ffffff", bg="#dc2626",
+                activeforeground="#ffffff", activebackground="#b91c1c",
+                relief="flat", padx=20, pady=8, cursor="hand2",
+                command=self._close_target_app
+            )
+            close_app_btn.pack(pady=(0, 15))
 
         # Prevent closing with Alt+F4
         self.root.protocol("WM_DELETE_WINDOW", lambda: None)
@@ -158,7 +173,32 @@ class Screen:
             error_label.place(relx=0.5, rely=0.85, anchor='center')
             self.root.after(2000, error_label.destroy)
 
+    def _close_target_app(self):
+        """Kill the locked application and close the lock screen."""
+        if self.target_app:
+            try:
+                import psutil
+                for proc in psutil.process_iter(['name']):
+                    try:
+                        if proc.info['name'] and proc.info['name'].lower() == self.target_app.lower():
+                            proc.kill()
+                    except (psutil.NoSuchProcess, psutil.AccessDenied):
+                        pass
+            except Exception:
+                os.system(f"taskkill /F /IM {self.target_app}")
+            
+            if self.root:
+                self.root.destroy()
+                self.root = None
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--app", default=None, help="The application executable name that is locked")
+    return parser.parse_args()
+
 
 if __name__ == "__main__":
-    s = Screen()
+    args = parse_args()
+    s = Screen(target_app=args.app)
     s.create_lock_screen()
