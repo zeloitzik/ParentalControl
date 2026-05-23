@@ -350,14 +350,34 @@ class WardenServer:
                 self.logger.info(f"Client authentication: SID={sid}, purpose={purpose}")
 
                 # Auto-register unknown SIDs as children
-                if sid and sid != "ADMIN_PANEL":
+                user_id = None
+                if sid and sid not in ("ADMIN_PANEL", "ADMIN_EVENTS"):
                     with self.db_lock:
                         user_id = self.db.get_user_id_by_sid(sid)
                         if not user_id:
                             self.db.auto_register_sid(sid)
                             self.logger.info(f"Auto-registered new child SID: {sid}")
+                            # Broadcast to dashboard
+                            self._push_command("ADMIN_EVENTS", "new_device", {"sid": sid})
+                            user_id = self.db.get_user_id_by_sid(sid)
 
-                return {"status": "authenticated", "message": "Client registered successfully"}
+                app_states = {}
+                if user_id:
+                    with self.db_lock:
+                        cursor = self.db.db.cursor(buffered=True)
+                        try:
+                            cursor.execute("SELECT app_name, allowed_minutes FROM app_rules WHERE user_id = %s", (user_id,))
+                            rules = cursor.fetchall()
+                            for app, allowed in rules:
+                                used_today = float(self.db.get_used_time_today(user_id, app) or 0.0)
+                                app_states[app] = {
+                                    "allowed_minutes": float(allowed),
+                                    "total_used_time": used_today
+                                }
+                        finally:
+                            cursor.close()
+
+                return {"status": "authenticated", "message": "Client registered successfully", "app_states": app_states}
 
             elif cmd == "assign_child_name":
                 user_id = data["user_id"]
@@ -456,9 +476,10 @@ class WardenServer:
                     self.db.update_app_rule(user_id, app_name, new_limit)
                 else:
                     # if no rule existed, giving time means giving an explicit allowance
-                    self.db.update_app_rule(user_id, app_name, 120 + added_minutes) 
+                    new_limit = 120 + added_minutes
+                    self.db.update_app_rule(user_id, app_name, new_limit) 
                 
-                # Push unlock to kill lock screen
+                # Retrieve sid
                 with self.db_lock:
                     cursor = self.db.db.cursor(buffered=True)
                     try:
@@ -467,8 +488,45 @@ class WardenServer:
                     finally:
                         cursor.close()
                 if row:
-                    self._push_command(row[0], "unlock", app_name)
+                    sid = row[0]
+                    # Broadcast TIME_UPDATE_SIGNAL as per new reconciliation logic
+                    payload = {
+                        "action": "TIME_UPDATE_SIGNAL",
+                        "app": app_name,
+                        "new_allowed_minutes": float(new_limit)
+                    }
+                    client_info = None
+                    with self.clients_lock:
+                        client_info = self.clients_by_sid.get(sid)
+                    if client_info:
+                        msg = Protocol.serialize_message("TIME_UPDATE_SIGNAL", payload)
+                        encrypted = CryptoManager.encrypt_aes(client_info["aes_key"], msg)
+                        with client_info["write_lock"]:
+                            Protocol.send_packet(client_info["sock"], encrypted)
                     
+                return {"status": "success"}
+                
+            elif cmd == "remove_child":
+                user_id = data["user_id"]
+                sid = None
+                with self.db_lock:
+                    cursor = self.db.db.cursor(buffered=True)
+                    try:
+                        cursor.execute("SELECT sid FROM users WHERE id=%s", (user_id,))
+                        row = cursor.fetchone()
+                        if row:
+                            sid = row[0]
+                    finally:
+                        cursor.close()
+                
+                # Disconnect the client
+                if sid:
+                    self._push_command(sid, "disconnect_and_clear")
+                
+                # Delete user records
+                with self.db_lock:
+                    self.db.delete_user(user_id)
+                
                 return {"status": "success"}
                 
             elif cmd == "unlock_app" or cmd == "UNLOCK_APP":

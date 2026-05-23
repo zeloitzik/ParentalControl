@@ -1,6 +1,7 @@
 import streamlit as st
 import sys
 import logging
+import threading
 from pathlib import Path
 
 # Provide resolving for our imported warden_client and warden_core modules
@@ -11,8 +12,59 @@ if str(src_dir) not in sys.path:
 
 from warden_client.net_client import WardenNetClient
 from warden_core.database import DatabaseManager
+from warden_core.protocol import Protocol
+from warden_core.crypto import CryptoManager
 
 logger = logging.getLogger("admin_panel.socket_manager")
+
+NEW_DEVICE_QUEUE = []
+
+@st.cache_resource
+def start_event_listener():
+    """Starts a daemon thread to listen for broadcast events from the server."""
+    def listener_loop():
+        client = WardenNetClient(host="127.0.0.1", port=8000)
+        import time
+        while True:
+            try:
+                if not client.sock:
+                    if client.connect():
+                        # Authenticate as admin event listener
+                        client.send_command("auth", {
+                            "sid": "ADMIN_EVENTS",
+                            "purpose": "admin_events"
+                        })
+                        logger.info("Admin events listener connected.")
+                    else:
+                        time.sleep(5)
+                        continue
+
+                # Wait for push packets (blocking)
+                client.sock.settimeout(None) # Infinite timeout for listening
+                encrypted_response = Protocol.recv_packet(client.sock)
+                if not encrypted_response:
+                    client.close()
+                    continue
+                    
+                decrypted_bytes = CryptoManager.decrypt_aes(client.aes_key, encrypted_response)
+                # The server's _push_command sends an encrypted payload containing serialized cmd, data.
+                # However, in main.py _push_command uses:
+                # msg = Protocol.serialize_message(action, payload)
+                # So cmd is the action, data is the payload.
+                cmd, data = Protocol.deserialize_message(decrypted_bytes)
+                
+                if cmd == "new_device":
+                    logger.info("Received new_device broadcast for SID: %s", data.get("sid"))
+                    NEW_DEVICE_QUEUE.append(data.get("sid"))
+                    
+            except Exception as e:
+                logger.error("Event listener error: %s", e)
+                client.close()
+                time.sleep(5)
+
+    t = threading.Thread(target=listener_loop, daemon=True)
+    t.start()
+    return t
 
 
 @st.cache_resource
