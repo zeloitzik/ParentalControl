@@ -876,3 +876,13 @@
 2026-05-23 20:10:31,225 - WardenControlClient - ERROR - Receive loop error: [WinError 10054] An existing connection was forcibly closed by the remote host
 2026-05-23 20:10:31,227 - WardenControlClient - INFO - Receive loop exiting.
 2026-05-23 20:10:31,284 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-23 20:10:41,293 - WardenControlClient - ERROR - Socket connect failed: timed out
+2026-05-23 20:10:41,294 - WardenControlClient - INFO - Reconnect attempt in 1.0 seconds
+2026-05-23 20:10:42,295 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-23 20:10:52,303 - WardenControlClient - ERROR - Socket connect failed: timed out
+2026-05-23 20:10:52,304 - WardenControlClient - INFO - Reconnect attempt in 2.0 seconds
+2026-05-23 20:10:54,306 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
+2026-05-23 20:11:04,314 - WardenControlClient - ERROR - Socket connect failed: timed out
+2026-05-23 20:11:04,315 - WardenControlClient - INFO - Reconnect attempt in 4.0 seconds
+2026-05-23 20:11:08,316 - WardenControlClient - INFO - Shutting down WardenControlClient.
+2026-05-23 20:11:08,316 - WardenControlClient - INFO - Shutdown complete.
