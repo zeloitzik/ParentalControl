@@ -562,6 +562,46 @@ class DatabaseManager:
             self.db.rollback()
             raise err
 
+    def update_child_name(self, user_id, new_name):
+        """Update the human-readable name for a child user."""
+        sql = "UPDATE users SET name = %s WHERE id = %s"
+        cursor = self._new_cursor()
+        try:
+            cursor.execute(sql, (new_name, user_id))
+            self.db.commit()
+        except mysql.connector.Error as err:
+            self.db.rollback()
+            raise err
+        finally:
+            cursor.close()
+
+    def auto_register_sid(self, sid, family_id=None):
+        """Auto-register a new SID as a child user with a placeholder name.
+        If no family exists, creates a default family first."""
+        # Check if SID already exists
+        if self.get_user_id_by_sid(sid):
+            return  # Already registered
+
+        # Find or create a default family
+        if not family_id:
+            cursor = self._new_cursor()
+            try:
+                cursor.execute("SELECT id FROM families LIMIT 1")
+                row = cursor.fetchone()
+                if row:
+                    family_id = row[0]
+                else:
+                    cursor.execute("INSERT INTO families (parent_email) VALUES (%s)", ("admin@warden.local",))
+                    self.db.commit()
+                    family_id = cursor.lastrowid
+            finally:
+                cursor.close()
+
+        # Create user with placeholder name
+        short_sid = sid[-8:] if len(sid) > 8 else sid
+        placeholder_name = f"Child ({short_sid})"
+        self.add_user(family_id, sid, placeholder_name, "child")
+
     def ensure_connection(self):
         """Ping the MySQL connection and reconnect if it has gone stale."""
         try:

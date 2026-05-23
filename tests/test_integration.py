@@ -191,6 +191,8 @@ class TestTimeTracking:
 
     def test_handle_app_stop_timezone_awareness(self):
         mock_db = MagicMock()
+        mock_cursor = MagicMock()
+        mock_db._new_cursor.return_value = mock_cursor
         engine = ServerEngine(mock_db)
         
         start_time = datetime.datetime(2026, 3, 29, 10, 0, 0) # Naive
@@ -201,8 +203,8 @@ class TestTimeTracking:
         
         engine.handle_app_stop("S-1-5-X", "App.exe", stop_time)
         
-        # Verify duration calculation (30 mins)
-        args, kwargs = mock_db.cursor.execute.call_args_list[1]
+        # Verify duration calculation (30 mins) — now via the new cursor
+        args, kwargs = mock_cursor.execute.call_args_list[1]
         duration = args[1][2]
         assert duration == 30.0
 
