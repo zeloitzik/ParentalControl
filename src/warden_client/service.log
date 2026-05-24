@@ -427,3 +427,18 @@ service using Control Panel, or 'net start service_name'
 2026-05-24 13:41:16,758 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
 2026-05-24 13:41:21,984 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'HxTsr.exe', 'pid': 16572}, 'timestamp': '2026-05-24T10:41:21.983733+00:00'}
 2026-05-24 13:41:21,996 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-24 13:41:27,054 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 4824}, 'timestamp': '2026-05-24T10:41:27.026806+00:00'}
+2026-05-24 13:41:27,054 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'git.exe', 'pid': 5132}, 'timestamp': '2026-05-24T10:41:27.028274+00:00'}
+2026-05-24 13:41:27,055 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'git.exe', 'pid': 9044}, 'timestamp': '2026-05-24T10:41:27.040132+00:00'}
+2026-05-24 13:41:27,064 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-24 13:41:27,073 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-24 13:41:27,122 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-24 13:41:32,128 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'conhost.exe', 'pid': 4824}, 'timestamp': '2026-05-24T10:41:32.127628+00:00'}
+2026-05-24 13:41:32,129 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'git.exe', 'pid': 5132}, 'timestamp': '2026-05-24T10:41:32.127681+00:00'}
+2026-05-24 13:41:32,129 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'git.exe', 'pid': 9044}, 'timestamp': '2026-05-24T10:41:32.127701+00:00'}
+2026-05-24 13:41:32,140 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-24 13:41:32,149 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-24 13:41:32,197 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-24 13:41:41,552 - WardenControlClient - INFO - Shutting down WardenControlClient.
+2026-05-24 13:41:41,564 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-24 13:41:42,189 - WardenControlClient - INFO - Shutdown complete.
