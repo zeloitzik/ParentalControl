@@ -425,14 +425,13 @@ class WardenControlClient:
                     user_token = win32ts.WTSQueryUserToken(session_id)
 
                     # 3. Duplicate into a primary token suitable for CreateProcessAsUser
-                    #    Correct parameter order: ExistingToken, DesiredAccess, SecurityAttributes,
-                    #    ImpersonationLevel, TokenType
+                    #    pywin32 signature: (ExistingToken, DesiredAccess, ImpersonationLevel, TokenType, SecurityAttributes=None)
                     primary_token = win32security.DuplicateTokenEx(
                         user_token,                                # ExistingToken
                         win32security.TOKEN_ALL_ACCESS,             # DesiredAccess
-                        None,                                      # SecurityAttributes
                         win32security.SecurityImpersonation,        # ImpersonationLevel
                         win32security.TokenPrimary,                 # TokenType
+                        None                                       # SecurityAttributes (optional)
                     )
                     win32api.CloseHandle(user_token)
 
