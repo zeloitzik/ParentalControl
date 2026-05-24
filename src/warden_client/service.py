@@ -220,6 +220,21 @@ class WardenControlClient:
                     current_sid = self.get_sid()
                     if current_sid != self.sid:
                         self.logger.info("SID changed from %s to %s — re-authenticating.", self.sid, current_sid)
+                        
+                        # Check if lock screen is currently active
+                        was_locked = False
+                        if hasattr(self, 'lock_screen_process') and self.lock_screen_process:
+                            if getattr(self.lock_screen_process, 'poll', lambda: 0)() is None:
+                                was_locked = True
+                                
+                        # Kill the old one in the old session
+                        self.kill_lock_screen()
+                        
+                        # Re-launch in the new active session
+                        if was_locked:
+                            self.logger.info("Carrying over lock screen to new session...")
+                            self.launch_lock_screen()
+                            
                         self.close_socket()
                         break
                 except Exception:
