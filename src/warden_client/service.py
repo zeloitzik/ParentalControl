@@ -393,7 +393,20 @@ class WardenControlClient:
         else:
             self.logger.debug("Unhandled command received: %s", cmd)
 
+    def log_session_debug_info(self):
+        try:
+            import ctypes
+            session_id = ctypes.windll.kernel32.WTSGetActiveConsoleSessionId()
+            if session_id == 0xFFFFFFFF:
+                self.logger.info("DEBUG: Current Session ID: NONE (0xFFFFFFFF) | Active Desktop: Unknown")
+            else:
+                self.logger.info(f"DEBUG: Current Session ID: {session_id} | Active Desktop: winsta0\\default")
+        except Exception as e:
+            self.logger.error(f"Failed to log session debug info: {e}")
+
     def launch_lock_screen(self):
+        self.log_session_debug_info()
+        
         if hasattr(self, 'lock_screen_process') and self.lock_screen_process:
             try:
                 if getattr(self.lock_screen_process, 'poll', lambda: 0)() is None:
@@ -428,14 +441,20 @@ class WardenControlClient:
                     user_token = None
                     for attempt in range(15):
                         try:
+                            # Re-query the active session inside the loop in case it changes!
+                            curr_sess = ctypes.windll.kernel32.WTSGetActiveConsoleSessionId()
+                            if curr_sess != 0xFFFFFFFF and curr_sess != session_id:
+                                self.logger.info(f"Active session changed from {session_id} to {curr_sess} while waiting.")
+                                session_id = curr_sess
+
                             user_token = win32ts.WTSQueryUserToken(session_id)
-                            break
+                            if user_token:
+                                break
                         except Exception as e:
-                            if "1008" in str(e) or getattr(e, 'winerror', 0) == 1008:
-                                self.logger.info(f"User token for session {session_id} not ready yet (attempt {attempt+1}/15). Waiting 1s...")
-                                time.sleep(1)
-                            else:
-                                raise
+                            err_code = getattr(e, 'winerror', 0)
+                            # E.g., 1008 (ERROR_NO_TOKEN) or 2 (ERROR_FILE_NOT_FOUND) when switching sessions
+                            self.logger.info(f"User token for session {session_id} not ready yet (attempt {attempt+1}/15, err: {err_code}). Waiting 1s...")
+                            time.sleep(1)
                     
                     if not user_token:
                         raise RuntimeError(f"Failed to obtain user token for session {session_id} after 15 seconds.")
@@ -494,18 +513,24 @@ class WardenControlClient:
                     self.logger.info(f"Working dir:   {working_dir}")
 
                     # 8. Launch the process in the user's session
-                    hProcess, hThread, dwProcessId, dwThreadId = win32process.CreateProcessAsUser(
-                        user_token,          # hToken (primary token from WTSQueryUserToken)
-                        None,                # lpApplicationName
-                        cmd_str,             # lpCommandLine
-                        None,                # lpProcessAttributes
-                        None,                # lpThreadAttributes
-                        False,               # bInheritHandles
-                        creation_flags,      # dwCreationFlags
-                        environment,         # lpEnvironment (Unicode multi-string)
-                        working_dir,         # lpCurrentDirectory
-                        startup              # lpStartupInfo
-                    )
+                    try:
+                        hProcess, hThread, dwProcessId, dwThreadId = win32process.CreateProcessAsUser(
+                            user_token,          # hToken (primary token from WTSQueryUserToken)
+                            None,                # lpApplicationName
+                            cmd_str,             # lpCommandLine
+                            None,                # lpProcessAttributes
+                            None,                # lpThreadAttributes
+                            False,               # bInheritHandles
+                            creation_flags,      # dwCreationFlags
+                            environment,         # lpEnvironment (Unicode multi-string)
+                            working_dir,         # lpCurrentDirectory
+                            startup              # lpStartupInfo
+                        )
+                    except Exception as e:
+                        err_code = getattr(e, 'winerror', 0)
+                        self.logger.error(f"CreateProcessAsUser failed with Windows Error Code {err_code}: {e}")
+                        raise
+
                     win32api.CloseHandle(hThread)
                     win32api.CloseHandle(user_token)
                     self.logger.info(
