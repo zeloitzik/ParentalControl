@@ -433,19 +433,20 @@ class WardenControlClient:
                         cmd_args.extend(["--app", self.locked_app_name])
 
                     # 4. Create the environment block for the target user.
-                    #    CreateEnvironmentBlock returns an opaque Unicode multi-string,
-                    #    NOT a Python dict. We must NOT index into it with [].
                     environment = win32profile.CreateEnvironmentBlock(user_token, False)
 
                     # 5. If running from source, inject PYTHONPATH into the env block.
-                    #    The block is a \0-separated string ending with \0\0.
                     if not getattr(sys, "frozen", False):
                         pythonpath_val = str(Path(__file__).resolve().parent.parent)
-                        extra_var = f"PYTHONPATH={pythonpath_val}\0"
-                        if environment.endswith('\0\0'):
-                            environment = environment[:-1] + extra_var + '\0'
+                        if isinstance(environment, dict):
+                            environment["PYTHONPATH"] = pythonpath_val
                         else:
-                            environment = environment + extra_var + '\0'
+                            # If it's a raw \0-separated string ending with \0\0
+                            extra_var = f"PYTHONPATH={pythonpath_val}\0"
+                            if environment.endswith('\0\0'):
+                                environment = environment[:-1] + extra_var + '\0'
+                            else:
+                                environment = environment + extra_var + '\0'
 
                     # 6. Configure startup info to target the interactive desktop
                     startup = win32process.STARTUPINFO()
