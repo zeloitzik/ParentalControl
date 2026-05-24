@@ -232,3 +232,5 @@
 2026-05-24 12:48:37,242 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
 2026-05-24 12:48:47,250 - WardenControlClient - ERROR - Socket connect failed: timed out
 2026-05-24 12:48:47,251 - WardenControlClient - INFO - Reconnect attempt in 30.0 seconds
+2026-05-24 12:49:17,252 - WardenControlClient - INFO - Shutting down WardenControlClient.
+2026-05-24 12:49:17,254 - WardenControlClient - INFO - Shutdown complete.
