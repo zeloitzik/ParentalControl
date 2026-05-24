@@ -423,3 +423,7 @@ service using Control Panel, or 'net start service_name'
 2026-05-24 13:41:01,542 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'HxTsr.exe', 'pid': 11536}, 'timestamp': '2026-05-24T10:41:01.541080+00:00'}
 2026-05-24 13:41:01,554 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
 2026-05-24 13:41:01,565 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-24 13:41:16,745 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'HxTsr.exe', 'pid': 16572}, 'timestamp': '2026-05-24T10:41:16.744593+00:00'}
+2026-05-24 13:41:16,758 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-24 13:41:21,984 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'HxTsr.exe', 'pid': 16572}, 'timestamp': '2026-05-24T10:41:21.983733+00:00'}
+2026-05-24 13:41:21,996 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
