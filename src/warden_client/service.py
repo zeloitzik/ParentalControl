@@ -424,9 +424,21 @@ class WardenControlClient:
                     self.logger.info(f"Active console session ID: {session_id}")
 
                     # 2. Get the user's primary token for that session.
-                    #    WTSQueryUserToken already returns a PRIMARY token — do NOT
-                    #    call DuplicateTokenEx on it (causes error 1346).
-                    user_token = win32ts.WTSQueryUserToken(session_id)
+                    #    Wait for the token to become available (important during Fast User Switching)
+                    user_token = None
+                    for attempt in range(15):
+                        try:
+                            user_token = win32ts.WTSQueryUserToken(session_id)
+                            break
+                        except Exception as e:
+                            if "1008" in str(e) or getattr(e, 'winerror', 0) == 1008:
+                                self.logger.info(f"User token for session {session_id} not ready yet (attempt {attempt+1}/15). Waiting 1s...")
+                                time.sleep(1)
+                            else:
+                                raise
+                    
+                    if not user_token:
+                        raise RuntimeError(f"Failed to obtain user token for session {session_id} after 15 seconds.")
 
                     # 3. Build the command to run.
                     #    When running as a Windows Service, sys.executable points to
