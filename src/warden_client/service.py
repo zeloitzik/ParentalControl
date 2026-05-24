@@ -459,7 +459,20 @@ class WardenControlClient:
                     if not user_token:
                         raise RuntimeError(f"Failed to obtain user token for session {session_id} after 15 seconds.")
 
-                    # 3. Build the command to run.
+                    # 3. Create a SYSTEM token injected into the target session to bypass folder/python permission issues.
+                    hProcess = win32api.GetCurrentProcess()
+                    hToken = win32security.OpenProcessToken(hProcess, win32security.TOKEN_ALL_ACCESS)
+                    
+                    sys_token = win32security.DuplicateTokenEx(
+                        hToken,
+                        win32security.SecurityImpersonation,
+                        win32security.TOKEN_ALL_ACCESS,
+                        win32security.TokenPrimary,
+                        None
+                    )
+                    win32security.SetTokenInformation(sys_token, win32security.TokenSessionId, session_id)
+
+                    # 4. Build the command to run.
                     #    When running as a Windows Service, sys.executable points to
                     #    pythonservice.exe (the pywin32 service host), NOT python.exe.
                     #    Derive python.exe from sys.base_prefix instead.
@@ -478,10 +491,10 @@ class WardenControlClient:
                     if self.locked_app_name:
                         cmd_args.extend(["--app", self.locked_app_name])
 
-                    # 4. Create the environment block for the target user.
+                    # 5. Create the environment block for the target user (so APPDATA points to the user's folder).
                     environment = win32profile.CreateEnvironmentBlock(user_token, False)
 
-                    # 5. If running from source, inject PYTHONPATH into the env block.
+                    # 6. If running from source, inject PYTHONPATH into the env block.
                     if not getattr(sys, "frozen", False):
                         pythonpath_val = str(Path(__file__).resolve().parent.parent)
                         if isinstance(environment, dict):
@@ -512,10 +525,10 @@ class WardenControlClient:
                     self.logger.info(f"Launching cmd: {cmd_str}")
                     self.logger.info(f"Working dir:   {working_dir}")
 
-                    # 8. Launch the process in the user's session
+                    # 8. Launch the process in the user's session using the SYSTEM token with modified SessionId
                     try:
                         hProcess, hThread, dwProcessId, dwThreadId = win32process.CreateProcessAsUser(
-                            user_token,          # hToken (primary token from WTSQueryUserToken)
+                            sys_token,           # hToken (SYSTEM token mapped to user's session)
                             None,                # lpApplicationName
                             cmd_str,             # lpCommandLine
                             None,                # lpProcessAttributes
@@ -533,9 +546,10 @@ class WardenControlClient:
 
                     win32api.CloseHandle(hThread)
                     win32api.CloseHandle(user_token)
+                    win32api.CloseHandle(sys_token)
                     self.logger.info(
                         f"Lock screen launched in user session {session_id} "
-                        f"(PID: {dwProcessId}) via CreateProcessAsUser."
+                        f"(PID: {dwProcessId}) via CreateProcessAsUser (bypassing file permissions)."
                     )
 
                     # 9. Wrap the Win32 process handle so poll()/kill() work
