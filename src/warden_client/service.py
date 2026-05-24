@@ -389,7 +389,7 @@ class WardenControlClient:
 
         try:
             script_path = Path(__file__).resolve().parent / "lock_manager" / "lock_screen.py"
-            
+
             cmd_args = []
             if getattr(sys, "frozen", False):
                 exe_path = Path(sys.executable).with_name("lock_screen.exe")
@@ -403,7 +403,7 @@ class WardenControlClient:
             if self.locked_app_name:
                 cmd_args.extend(["--app", self.locked_app_name])
 
-            # Try to launch into the active user session (bypass Session 0 isolation)
+            # --- Primary: Launch into the active user session (bypass Session 0) ---
             launched_as_user = False
             if HAS_WIN32:
                 try:
@@ -412,91 +412,168 @@ class WardenControlClient:
                     import win32con
                     import win32ts
                     import win32profile
+                    import win32api
                     import ctypes
-                    import subprocess
 
+                    # 1. Find the active console session (the logged-in user's desktop)
                     session_id = ctypes.windll.kernel32.WTSGetActiveConsoleSessionId()
+                    if session_id == 0xFFFFFFFF:
+                        raise RuntimeError("No active console session found.")
+                    self.logger.info(f"Active console session ID: {session_id}")
+
+                    # 2. Get the user's token for that session
                     user_token = win32ts.WTSQueryUserToken(session_id)
+
+                    # 3. Duplicate into a primary token suitable for CreateProcessAsUser
+                    #    Correct parameter order: ExistingToken, DesiredAccess, SecurityAttributes,
+                    #    ImpersonationLevel, TokenType
                     primary_token = win32security.DuplicateTokenEx(
-                        user_token,
-                        win32security.SecurityImpersonation,
-                        win32security.TOKEN_ALL_ACCESS,
-                        win32security.TokenPrimary,
-                        None
+                        user_token,                                # ExistingToken
+                        win32security.TOKEN_ALL_ACCESS,             # DesiredAccess
+                        None,                                      # SecurityAttributes
+                        win32security.SecurityImpersonation,        # ImpersonationLevel
+                        win32security.TokenPrimary,                 # TokenType
                     )
-                    
+                    win32api.CloseHandle(user_token)
+
+                    # 4. Create the environment block for the target user.
+                    #    CreateEnvironmentBlock returns an opaque Unicode multi-string,
+                    #    NOT a Python dict. We must NOT index into it with [].
                     environment = win32profile.CreateEnvironmentBlock(primary_token, False)
+
+                    # 5. If running from source, inject PYTHONPATH into the env block.
+                    #    The block is a \0-separated string ending with \0\0.
                     if not getattr(sys, "frozen", False):
-                        environment["PYTHONPATH"] = str(Path(__file__).resolve().parent.parent)
-                        
+                        pythonpath_val = str(Path(__file__).resolve().parent.parent)
+                        extra_var = f"PYTHONPATH={pythonpath_val}\0"
+                        if environment.endswith('\0\0'):
+                            environment = environment[:-1] + extra_var + '\0'
+                        else:
+                            environment = environment + extra_var + '\0'
+
+                    # 6. Configure startup info to target the interactive desktop
                     startup = win32process.STARTUPINFO()
                     startup.lpDesktop = "winsta0\\default"
                     startup.dwFlags = win32process.STARTF_USESHOWWINDOW
                     startup.wShowWindow = win32con.SW_SHOW
-                    
+
+                    # 7. Build command line and working directory
                     cmd_str = subprocess.list2cmdline(cmd_args)
-                    creation_flags = win32process.CREATE_NEW_PROCESS_GROUP | win32process.CREATE_UNICODE_ENVIRONMENT
-                    
-                    hProcess, hThread, dwProcessId, dwThreadId = win32process.CreateProcessAsUser(
-                        primary_token,
-                        None,
-                        cmd_str,
-                        None,
-                        None,
-                        False,
-                        creation_flags,
-                        environment,
-                        None,
-                        startup
+                    working_dir = str(Path(__file__).resolve().parent / "lock_manager")
+                    creation_flags = (
+                        win32process.CREATE_NEW_PROCESS_GROUP |
+                        win32process.CREATE_UNICODE_ENVIRONMENT |
+                        win32con.NORMAL_PRIORITY_CLASS
                     )
-                    self.logger.info(f"Lock screen launched successfully in user session {session_id} (PID: {dwProcessId}).")
-                    
+
+                    # 8. Launch the process in the user's session
+                    hProcess, hThread, dwProcessId, dwThreadId = win32process.CreateProcessAsUser(
+                        primary_token,       # hToken
+                        None,                # lpApplicationName
+                        cmd_str,             # lpCommandLine
+                        None,                # lpProcessAttributes
+                        None,                # lpThreadAttributes
+                        False,               # bInheritHandles
+                        creation_flags,      # dwCreationFlags
+                        environment,         # lpEnvironment (Unicode multi-string)
+                        working_dir,         # lpCurrentDirectory
+                        startup              # lpStartupInfo
+                    )
+                    win32api.CloseHandle(hThread)
+                    self.logger.info(
+                        f"Lock screen launched in user session {session_id} "
+                        f"(PID: {dwProcessId}) via CreateProcessAsUser."
+                    )
+
+                    # 9. Wrap the Win32 process handle so poll()/kill() work
                     class WinProcessWrapper:
-                        def __init__(self, hp):
+                        def __init__(self, hp, pid):
                             self.hProcess = hp
+                            self.pid = pid
                         def poll(self):
-                            import win32event, win32process
+                            import win32event, win32process as wp
                             status = win32event.WaitForSingleObject(self.hProcess, 0)
                             if status == win32event.WAIT_TIMEOUT:
                                 return None
-                            return win32process.GetExitCodeProcess(self.hProcess)
+                            return wp.GetExitCodeProcess(self.hProcess)
                         def kill(self):
-                            import win32api
                             try:
                                 win32api.TerminateProcess(self.hProcess, 1)
                             except Exception:
                                 pass
-                                
-                    self.lock_screen_process = WinProcessWrapper(hProcess)
+
+                    self.lock_screen_process = WinProcessWrapper(hProcess, dwProcessId)
                     launched_as_user = True
+
+                    # 10. Post-launch health check: wait 2s, check if it crashed immediately
+                    time.sleep(2)
+                    exit_code = self.lock_screen_process.poll()
+                    if exit_code is not None:
+                        self.logger.error(
+                            f"Lock screen process exited immediately with code {exit_code}. "
+                            f"Check C:\\temp\\lock_screen_stderr.log for details."
+                        )
+                        self.lock_screen_process = None
+                        launched_as_user = False  # Fall through to fallback
+
                 except Exception as e:
-                    self.logger.warning(f"Failed to launch in user session (Session 0 isolation bypass failed): {e}")
-            
+                    self.logger.warning(
+                        f"CreateProcessAsUser failed (Session 0 bypass): {e}\n"
+                        f"{traceback.format_exc()}"
+                    )
+
+            # --- Fallback: subprocess.Popen with stderr capture ---
             if not launched_as_user:
-                # Fallback to standard Popen
-                import subprocess
-                if getattr(sys, "frozen", False):
-                    self.lock_screen_process = subprocess.Popen(
-                        cmd_args,
-                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
-                    )
-                else:
-                    env = os.environ.copy()
+                self.logger.warning(
+                    "Launching lock screen via fallback Popen. "
+                    "NOTE: This will NOT work from Session 0 (Windows Service). "
+                    "The lock screen will be invisible to the user."
+                )
+                try:
+                    os.makedirs(r"C:\temp", exist_ok=True)
+                    stderr_log = open(r"C:\temp\lock_screen_stderr.log", "a", buffering=1)
+                except Exception:
+                    stderr_log = subprocess.DEVNULL
+
+                env = os.environ.copy()
+                if not getattr(sys, "frozen", False):
                     env["PYTHONPATH"] = str(Path(__file__).resolve().parent.parent)
-                    self.lock_screen_process = subprocess.Popen(
-                        cmd_args,
-                        env=env,
-                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+
+                self.lock_screen_process = subprocess.Popen(
+                    cmd_args,
+                    env=env,
+                    stdout=stderr_log if stderr_log != subprocess.DEVNULL else subprocess.DEVNULL,
+                    stderr=stderr_log if stderr_log != subprocess.DEVNULL else subprocess.DEVNULL,
+                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+                )
+                self.logger.info(
+                    f"Lock screen launched via fallback Popen (PID: {self.lock_screen_process.pid}). "
+                    f"stderr -> C:\\temp\\lock_screen_stderr.log"
+                )
+
+                # Post-launch health check
+                time.sleep(2)
+                exit_code = self.lock_screen_process.poll()
+                if exit_code is not None:
+                    self.logger.error(
+                        f"Fallback lock screen exited immediately with code {exit_code}."
                     )
-                self.logger.info("Lock screen launched successfully (fallback mode).")
-                
+                    try:
+                        with open(r"C:\temp\lock_screen_stderr.log", "r") as f:
+                            tail = f.readlines()[-20:]
+                            self.logger.error("lock_screen stderr tail:\n%s", "".join(tail))
+                    except Exception:
+                        pass
+                    self.lock_screen_process = None
+
         except Exception as exc:
-            self.logger.error("Failed to launch lock screen: %s", exc)
+            self.logger.error("Failed to launch lock screen: %s\n%s", exc, traceback.format_exc())
 
     def kill_lock_screen(self):
         self.logger.info("Attempting robust kill of lock_screen processes...")
         killed_any = False
         try:
+            import psutil
             for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
                 try:
                     name = proc.info.get('name')
@@ -512,12 +589,12 @@ class WardenControlClient:
                     pass
         except Exception as e:
             self.logger.error("Error during robust process kill: %s", e)
-            
+
         if killed_any:
             self.logger.info("Lock screen processes successfully terminated.")
         else:
             self.logger.info("No active lock screen process found via psutil.")
-            
+
         if self.lock_screen_process:
             try:
                 self.lock_screen_process.kill()

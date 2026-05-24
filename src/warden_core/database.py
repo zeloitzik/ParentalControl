@@ -45,7 +45,8 @@ class DatabaseManager:
             host=self.host,
             user=self.user,
             password=self.password,
-            database=self.db_name
+            database=self.db_name,
+            autocommit=True
         )
 
         self.cursor = self.db.cursor(buffered=True)
@@ -635,6 +636,13 @@ class DatabaseManager:
             self.db.ping(reconnect=True, attempts=3, delay=1)
         except Exception:
             self._connect()
+
+    def force_fresh_read(self):
+        """Force MySQL to start a new read snapshot so the next SELECT sees latest committed data."""
+        try:
+            self.db.commit()
+        except Exception:
+            pass
 
 # TEST
 

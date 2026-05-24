@@ -285,7 +285,7 @@ import time
 #  CACHED DATA FETCHERS
 # ═══════════════════════════════════════════════════════════════════
 
-@st.cache_data(ttl=10)
+@st.cache_data(ttl=3)
 def get_known_apps_cached(child_id):
     known_apps = []
     try:
@@ -418,6 +418,18 @@ def dashboard_view():
         st.session_state["parent_email"] = ""
         st.rerun()
 
+    if st.sidebar.button("🔄 Refresh Data", type="primary", use_container_width=True):
+        # Force DB to see latest committed data
+        db.force_fresh_read()
+        # Clear all cached data
+        get_known_apps_cached.clear()
+        get_locked_apps_cached.clear()
+        st.cache_data.clear()
+        st.rerun()
+
+    st.sidebar.divider()
+    st.sidebar.caption("💡 Data auto-refreshes every 3 seconds.")
+
     st.markdown("## Control Center")
     st.caption("Manage your family's screen time and application access from one place.")
 
@@ -525,27 +537,31 @@ def dashboard_view():
     st.divider()
 
     # ── Section 2: Activity Monitor ─────────────────────────────────
-    with st.container():
-        st.markdown("### 📊 Activity Monitor")
+    @st.fragment(run_every=3)
+    def _activity_monitor_fragment():
+        db.force_fresh_read()
+        with st.container():
+            st.markdown("### 📊 Activity Monitor")
+            try:
+                usage_query = """
+                SELECT u.name as child_name, ul.app_name, ul.duration, ul.start_time
+                FROM usage_logs ul
+                JOIN users u ON ul.user_id = u.id
+                WHERE DATE(ul.start_time) = CURDATE()
+                """
+                df_usage = db.get_dataframe_data(usage_query)
 
-        try:
-            usage_query = """
-            SELECT u.name as child_name, ul.app_name, ul.duration, ul.start_time
-            FROM usage_logs ul
-            JOIN users u ON ul.user_id = u.id
-            WHERE DATE(ul.start_time) = CURDATE()
-            """
-            df_usage = db.get_dataframe_data(usage_query)
+                if not df_usage.empty:
+                    agg_df = df_usage.groupby(['child_name', 'app_name'])['duration'].sum().reset_index()
+                    st.bar_chart(data=agg_df, x="app_name", y="duration", color="child_name")
+                    with st.expander("📋 View Raw Logs"):
+                        st.dataframe(df_usage, use_container_width=True, hide_index=True)
+                else:
+                    st.info("No activity logged today yet.")
+            except Exception as e:
+                st.error(f"Failed to load activity data: {e}")
 
-            if not df_usage.empty:
-                agg_df = df_usage.groupby(['child_name', 'app_name'])['duration'].sum().reset_index()
-                st.bar_chart(data=agg_df, x="app_name", y="duration", color="child_name")
-                with st.expander("📋 View Raw Logs"):
-                    st.dataframe(df_usage, use_container_width=True, hide_index=True)
-            else:
-                st.info("No activity logged today yet.")
-        except Exception as e:
-            st.error(f"Failed to load activity data: {e}")
+    _activity_monitor_fragment()
 
     st.divider()
 
@@ -563,16 +579,20 @@ def dashboard_view():
                 col_rules, col_commands = st.columns(2)
 
                 with col_rules:
-                    st.markdown("#### 📏 Active Rules")
-                    try:
-                        rules_query = "SELECT app_name, allowed_minutes FROM app_rules WHERE user_id = %s"
-                        df_rules = db.get_dataframe_data(rules_query, params=(child['id'],))
-                        if not df_rules.empty:
-                            st.dataframe(df_rules, use_container_width=True, hide_index=True)
-                        else:
-                            st.info("No rules configured.")
-                    except Exception as e:
-                        st.error(f"Failed to load rules: {e}")
+                    @st.fragment(run_every=3)
+                    def _rules_fragment(child_id=child['id']):
+                        db.force_fresh_read()
+                        st.markdown("#### 📏 Active Rules")
+                        try:
+                            rules_query = "SELECT app_name, allowed_minutes FROM app_rules WHERE user_id = %s"
+                            df_rules = db.get_dataframe_data(rules_query, params=(child_id,))
+                            if not df_rules.empty:
+                                st.dataframe(df_rules, use_container_width=True, hide_index=True)
+                            else:
+                                st.info("No rules configured.")
+                        except Exception as e:
+                            st.error(f"Failed to load rules: {e}")
+                    _rules_fragment()
 
                     with st.form(f"rule_form_{child['id']}"):
                         st.markdown("**Add / Update Rule**")
