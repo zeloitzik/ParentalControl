@@ -388,6 +388,7 @@ class WardenControlClient:
                 pass
         try:
             script_path = Path(__file__).resolve().parent / "lock_manager" / "lock_screen.py"
+            cmd_args = None
 
             # --- Primary: Launch into the active user session (bypass Session 0) ---
             launched_as_user = False
