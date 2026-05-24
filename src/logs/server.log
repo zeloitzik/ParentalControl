@@ -746,3 +746,6 @@
 2026-05-24 13:53:58,413 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'RuntimeBroker.exe', 'pid': 12988}, 'timestamp': '2026-05-24T10:53:57.405419+00:00'}
 2026-05-24 13:53:58,418 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'taskhostw.exe', 'pid': 4916}, 'timestamp': '2026-05-24T10:53:57.411689+00:00'}
 2026-05-24 13:53:58,423 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'dllhost.exe', 'pid': 16072}, 'timestamp': '2026-05-24T10:53:57.411781+00:00'}
+2026-05-24 13:54:03,457 - server - INFO - Event processed: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'HxTsr.exe', 'pid': 8420}, 'timestamp': '2026-05-24T10:54:02.464689+00:00'}
+2026-05-24 13:54:05,904 - server - INFO - Unregistered client for SID S-1-5-21-1782710462-1921316265-2944239350-1001
+2026-05-24 13:54:05,904 - server - INFO - Connection closed for ('192.168.1.248', 50348)
