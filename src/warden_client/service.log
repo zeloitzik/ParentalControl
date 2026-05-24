@@ -211,7 +211,7 @@
 2026-05-24 13:47:41,802 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
 2026-05-24 13:47:57,082 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'ctfmon.exe', 'pid': 7352}, 'timestamp': '2026-05-24T10:47:57.082028+00:00'}
 2026-05-24 13:47:57,506 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
-2026-05-24 13:48:02,085 - WardenControlClient - INFO - SID changed from S-1-5-21-1782710462-1921316265-2944239350-1001 to S-1-5-21-1782710462-1921316265-2944239350-1004 — re-authenticating.
+2026-05-24 13:48:02,085 - WardenControlClient - INFO - SID changed from S-1-5-21-1782710462-1921316265-2944239350-1001 to S-1-5-21-1782710462-1921316265-2944239350-1004 ï¿½ re-authenticating.
 2026-05-24 13:48:02,089 - WardenControlClient - ERROR - Receive loop error: [WinError 10038] An operation was attempted on something that is not a socket
 2026-05-24 13:48:02,093 - WardenControlClient - INFO - Receive loop exiting.
 2026-05-24 13:48:02,128 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
@@ -373,7 +373,7 @@
 2026-05-24 13:48:02,310 - WardenControlClient - INFO - Received server command: time_up data={'action': 'time_up', 'app': 'notepad.exe'}
 2026-05-24 13:48:02,310 - WardenControlClient - INFO - Lock command detected from server: time_up
 2026-05-24 13:48:02,311 - WardenControlClient - INFO - Active console session ID: 4
-2026-05-24 13:48:02,312 - WardenControlClient - INFO - Using Python interpreter: C:\Users\porat\AppData\Local\Programs\Python\Python314\python.exe
+2026-05-24 13:48:02,312 - WardenControlClient - INFO - Using Python interpreter: C:\Users\porkkkkkkkat\AppData\Local\Programs\Python\Python314\python.exe
 2026-05-24 13:48:02,316 - WardenControlClient - INFO - Launching cmd: C:\Users\porat\AppData\Local\Programs\Python\Python314\python.exe C:\Users\porat\Downloads\ParentalControl\src\warden_client\lock_manager\lock_screen.py --app notepad.exe
 2026-05-24 13:48:02,317 - WardenControlClient - INFO - Working dir:   C:\Users\porat\Downloads\ParentalControl\src\warden_client\lock_manager
 2026-05-24 13:48:02,334 - WardenControlClient - INFO - Lock screen launched in user session 4 (PID: 10156) via CreateProcessAsUser.
@@ -530,7 +530,7 @@
 2026-05-24 13:53:41,442 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1004', 'event_name': 'APP_STARTED', 'metadata': {'app': 'backgroundTaskHost.exe', 'pid': 16528}, 'timestamp': '2026-05-24T10:53:41.440315+00:00'}
 2026-05-24 13:53:41,449 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
 2026-05-24 13:53:41,458 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
-2026-05-24 13:53:46,444 - WardenControlClient - INFO - SID changed from S-1-5-21-1782710462-1921316265-2944239350-1004 to S-1-5-21-1782710462-1921316265-2944239350-1001 — re-authenticating.
+2026-05-24 13:53:46,444 - WardenControlClient - INFO - SID changed from S-1-5-21-1782710462-1921316265-2944239350-1004 to S-1-5-21-1782710462-1921316265-2944239350-1001 ï¿½ re-authenticating.
 2026-05-24 13:53:46,444 - WardenControlClient - ERROR - Receive loop error: [WinError 10038] An operation was attempted on something that is not a socket
 2026-05-24 13:53:46,445 - WardenControlClient - INFO - Receive loop exiting.
 2026-05-24 13:53:46,600 - WardenControlClient - INFO - Connecting to server 192.168.1.213:8000
