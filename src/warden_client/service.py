@@ -386,22 +386,8 @@ class WardenControlClient:
                     return
             except Exception:
                 pass
-
         try:
             script_path = Path(__file__).resolve().parent / "lock_manager" / "lock_screen.py"
-
-            cmd_args = []
-            if getattr(sys, "frozen", False):
-                exe_path = Path(sys.executable).with_name("lock_screen.exe")
-                if exe_path.exists():
-                    cmd_args = [str(exe_path)]
-                else:
-                    raise FileNotFoundError("lock_screen.exe not found next to service executable.")
-            else:
-                cmd_args = [sys.executable, str(script_path)]
-
-            if self.locked_app_name:
-                cmd_args.extend(["--app", self.locked_app_name])
 
             # --- Primary: Launch into the active user session (bypass Session 0) ---
             launched_as_user = False
@@ -421,24 +407,34 @@ class WardenControlClient:
                         raise RuntimeError("No active console session found.")
                     self.logger.info(f"Active console session ID: {session_id}")
 
-                    # 2. Get the user's token for that session
+                    # 2. Get the user's primary token for that session.
+                    #    WTSQueryUserToken already returns a PRIMARY token — do NOT
+                    #    call DuplicateTokenEx on it (causes error 1346).
                     user_token = win32ts.WTSQueryUserToken(session_id)
 
-                    # 3. Duplicate into a primary token suitable for CreateProcessAsUser
-                    #    pywin32 signature: (ExistingToken, DesiredAccess, ImpersonationLevel, TokenType, SecurityAttributes=None)
-                    primary_token = win32security.DuplicateTokenEx(
-                        user_token,                                # ExistingToken
-                        win32security.TOKEN_ALL_ACCESS,             # DesiredAccess
-                        win32security.SecurityImpersonation,        # ImpersonationLevel
-                        win32security.TokenPrimary,                 # TokenType
-                        None                                       # SecurityAttributes (optional)
-                    )
-                    win32api.CloseHandle(user_token)
+                    # 3. Build the command to run.
+                    #    When running as a Windows Service, sys.executable points to
+                    #    pythonservice.exe (the pywin32 service host), NOT python.exe.
+                    #    Derive python.exe from sys.base_prefix instead.
+                    if getattr(sys, "frozen", False):
+                        exe_path = Path(sys.executable).with_name("lock_screen.exe")
+                        if not exe_path.exists():
+                            raise FileNotFoundError("lock_screen.exe not found next to service executable.")
+                        cmd_args = [str(exe_path)]
+                    else:
+                        python_exe = str(Path(sys.base_prefix) / "python.exe")
+                        if not Path(python_exe).exists():
+                            python_exe = str(Path(sys.base_prefix) / "Scripts" / "python.exe")
+                        self.logger.info(f"Using Python interpreter: {python_exe}")
+                        cmd_args = [python_exe, str(script_path)]
+
+                    if self.locked_app_name:
+                        cmd_args.extend(["--app", self.locked_app_name])
 
                     # 4. Create the environment block for the target user.
                     #    CreateEnvironmentBlock returns an opaque Unicode multi-string,
                     #    NOT a Python dict. We must NOT index into it with [].
-                    environment = win32profile.CreateEnvironmentBlock(primary_token, False)
+                    environment = win32profile.CreateEnvironmentBlock(user_token, False)
 
                     # 5. If running from source, inject PYTHONPATH into the env block.
                     #    The block is a \0-separated string ending with \0\0.
@@ -465,9 +461,12 @@ class WardenControlClient:
                         win32con.NORMAL_PRIORITY_CLASS
                     )
 
+                    self.logger.info(f"Launching cmd: {cmd_str}")
+                    self.logger.info(f"Working dir:   {working_dir}")
+
                     # 8. Launch the process in the user's session
                     hProcess, hThread, dwProcessId, dwThreadId = win32process.CreateProcessAsUser(
-                        primary_token,       # hToken
+                        user_token,          # hToken (primary token from WTSQueryUserToken)
                         None,                # lpApplicationName
                         cmd_str,             # lpCommandLine
                         None,                # lpProcessAttributes
@@ -479,6 +478,7 @@ class WardenControlClient:
                         startup              # lpStartupInfo
                     )
                     win32api.CloseHandle(hThread)
+                    win32api.CloseHandle(user_token)
                     self.logger.info(
                         f"Lock screen launched in user session {session_id} "
                         f"(PID: {dwProcessId}) via CreateProcessAsUser."
@@ -528,6 +528,15 @@ class WardenControlClient:
                     "NOTE: This will NOT work from Session 0 (Windows Service). "
                     "The lock screen will be invisible to the user."
                 )
+                # Resolve the real python.exe even in fallback path
+                if getattr(sys, "frozen", False):
+                    fallback_cmd = cmd_args if cmd_args else [sys.executable]
+                else:
+                    python_exe = str(Path(sys.base_prefix) / "python.exe")
+                    fallback_cmd = [python_exe, str(script_path)]
+                    if self.locked_app_name:
+                        fallback_cmd.extend(["--app", self.locked_app_name])
+                
                 try:
                     os.makedirs(r"C:\temp", exist_ok=True)
                     stderr_log = open(r"C:\temp\lock_screen_stderr.log", "a", buffering=1)
@@ -539,7 +548,7 @@ class WardenControlClient:
                     env["PYTHONPATH"] = str(Path(__file__).resolve().parent.parent)
 
                 self.lock_screen_process = subprocess.Popen(
-                    cmd_args,
+                    fallback_cmd,
                     env=env,
                     stdout=stderr_log if stderr_log != subprocess.DEVNULL else subprocess.DEVNULL,
                     stderr=stderr_log if stderr_log != subprocess.DEVNULL else subprocess.DEVNULL,
