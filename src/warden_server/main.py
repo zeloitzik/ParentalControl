@@ -267,7 +267,7 @@ class WardenServer:
         self.logger.info(f"Pushing {action} command to SID {sid}" + (f" for app {app}" if app else ""))
 
         try:
-            payload = {"action": action}
+            payload = {"action": action, "sid": sid}
             if app:
                 payload["app"] = app
             msg = Protocol.serialize_message(action, payload)

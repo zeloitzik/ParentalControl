@@ -221,19 +221,12 @@ class WardenControlClient:
                     if current_sid != self.sid:
                         self.logger.info("SID changed from %s to %s — re-authenticating.", self.sid, current_sid)
                         
-                        # Check if lock screen is currently active
-                        was_locked = False
-                        if hasattr(self, 'lock_screen_process') and self.lock_screen_process:
-                            if getattr(self.lock_screen_process, 'poll', lambda: 0)() is None:
-                                was_locked = True
-                                
-                        # Kill the old one in the old session
+                        # Kill the old lock screen in the old session
                         self.kill_lock_screen()
                         
-                        # Re-launch in the new active session
-                        if was_locked:
-                            self.logger.info("Carrying over lock screen to new session...")
-                            self.launch_lock_screen()
+                        # Clear local user state so it does not falsely carry over to the new user
+                        self.locked_app_name = None
+                        self.app_states.clear()
                             
                         self.close_socket()
                         break
@@ -342,6 +335,12 @@ class WardenControlClient:
             app_name = ""
             if isinstance(data, dict):
                 app_name = data.get("app", "")
+                
+                # Ensure the command is meant for the currently active user
+                target_sid = data.get("sid", "")
+                if target_sid and target_sid != self.sid:
+                    self.logger.info("Ignoring lock command meant for SID %s (current SID: %s)", target_sid, self.sid)
+                    return
             
             if app_name:
                 app_lower = app_name.lower()
@@ -360,6 +359,13 @@ class WardenControlClient:
         elif (normalized_cmd in UNLOCK_COMMANDS
                 or normalized_action in UNLOCK_COMMANDS
                 or normalized_command in UNLOCK_COMMANDS):
+            
+            if isinstance(data, dict):
+                target_sid = data.get("sid", "")
+                if target_sid and target_sid != self.sid:
+                    self.logger.info("Ignoring unlock command meant for SID %s", target_sid)
+                    return
+            
             self.logger.info("Unlock command detected from server: %s", cmd)
             self.locked_app_name = None
             self.kill_lock_screen()
@@ -369,6 +375,12 @@ class WardenControlClient:
             self.logger.warning("Received DISCONNECT_AND_CLEAR. Shutting down service completely.")
             self.shutdown()
         elif normalized_action == "time_update_signal":
+            if isinstance(data, dict):
+                target_sid = data.get("sid", "")
+                if target_sid and target_sid != self.sid:
+                    self.logger.info("Ignoring TIME_UPDATE_SIGNAL meant for SID %s", target_sid)
+                    return
+            
             app_name = data.get("app", "").lower()
             new_allowed = data.get("new_allowed_minutes", 0.0)
             if app_name not in self.app_states:
