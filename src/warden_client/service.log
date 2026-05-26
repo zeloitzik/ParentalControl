@@ -970,3 +970,42 @@
 2026-05-26 15:47:24,848 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
 2026-05-26 15:47:24,856 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
 2026-05-26 15:47:24,931 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:29,903 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'conhost.exe', 'pid': 9008}, 'timestamp': '2026-05-26T12:47:29.902579+00:00'}
+2026-05-26 15:47:29,904 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'git.exe', 'pid': 14172}, 'timestamp': '2026-05-26T12:47:29.902725+00:00'}
+2026-05-26 15:47:29,914 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:29,925 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:35,044 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 6452}, 'timestamp': '2026-05-26T12:47:34.997016+00:00'}
+2026-05-26 15:47:35,044 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'git.exe', 'pid': 6680}, 'timestamp': '2026-05-26T12:47:34.997616+00:00'}
+2026-05-26 15:47:35,045 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'git.exe', 'pid': 6972}, 'timestamp': '2026-05-26T12:47:34.999583+00:00'}
+2026-05-26 15:47:35,046 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 12372}, 'timestamp': '2026-05-26T12:47:35.032446+00:00'}
+2026-05-26 15:47:35,046 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'git.exe', 'pid': 13036}, 'timestamp': '2026-05-26T12:47:35.032995+00:00'}
+2026-05-26 15:47:35,047 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'git.exe', 'pid': 14876}, 'timestamp': '2026-05-26T12:47:35.035769+00:00'}
+2026-05-26 15:47:35,048 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'conhost.exe', 'pid': 16196}, 'timestamp': '2026-05-26T12:47:35.037159+00:00'}
+2026-05-26 15:47:35,048 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STARTED', 'metadata': {'app': 'git.exe', 'pid': 16920}, 'timestamp': '2026-05-26T12:47:35.039972+00:00'}
+2026-05-26 15:47:35,054 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:35,108 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:35,109 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:35,109 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:35,110 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:35,110 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:35,110 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:35,111 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:40,120 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'conhost.exe', 'pid': 6452}, 'timestamp': '2026-05-26T12:47:40.119585+00:00'}
+2026-05-26 15:47:40,120 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'git.exe', 'pid': 6680}, 'timestamp': '2026-05-26T12:47:40.119624+00:00'}
+2026-05-26 15:47:40,121 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'git.exe', 'pid': 6972}, 'timestamp': '2026-05-26T12:47:40.119635+00:00'}
+2026-05-26 15:47:40,121 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'conhost.exe', 'pid': 12372}, 'timestamp': '2026-05-26T12:47:40.119648+00:00'}
+2026-05-26 15:47:40,121 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'git.exe', 'pid': 13036}, 'timestamp': '2026-05-26T12:47:40.119659+00:00'}
+2026-05-26 15:47:40,121 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'git.exe', 'pid': 14876}, 'timestamp': '2026-05-26T12:47:40.119670+00:00'}
+2026-05-26 15:47:40,122 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'conhost.exe', 'pid': 16196}, 'timestamp': '2026-05-26T12:47:40.119680+00:00'}
+2026-05-26 15:47:40,122 - WardenControlClient - INFO - Sent event to server: {'sid': 'S-1-5-21-1782710462-1921316265-2944239350-1001', 'event_name': 'APP_STOPPED', 'metadata': {'app': 'git.exe', 'pid': 16920}, 'timestamp': '2026-05-26T12:47:40.119690+00:00'}
+2026-05-26 15:47:40,134 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:40,179 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:40,180 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:40,181 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:40,181 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:40,182 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:40,183 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:40,183 - WardenControlClient - INFO - Received server command: response data={'status': 'ok'}
+2026-05-26 15:47:43,942 - WardenControlClient - INFO - Shutting down WardenControlClient.
+2026-05-26 15:47:43,943 - WardenControlClient - INFO - Receive loop exiting.
+2026-05-26 15:47:45,124 - WardenControlClient - INFO - Shutdown complete.
