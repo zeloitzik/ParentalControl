@@ -7,3 +7,5 @@ pywin32
 pytest
 sqlalchemy
 pyinstaller
+pandas
+streamlit

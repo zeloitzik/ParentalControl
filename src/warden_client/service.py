@@ -81,6 +81,7 @@ class WardenControlClient:
         self.max_retries = 5
         self.retry_count = 0
         self.app_states = {}
+        self.lock_cooldown_until = 0
         
         # Ensure log path is absolute and handles frozen execution properly
         if getattr(sys, "frozen", False):
@@ -149,6 +150,7 @@ class WardenControlClient:
     def start(self):
         self.stop_event.clear()
         self._install_signal_handlers()
+        self._start_taskmgr_blocker()
         backoff = RECONNECT_BASE_DELAY
         self.retry_count = 0
 
@@ -203,6 +205,22 @@ class WardenControlClient:
     def _signal_handler(self, signum, frame):
         self.logger.info("Received termination signal: %s", signum)
         self.stop_event.set()
+
+    def _start_taskmgr_blocker(self):
+        """Start a daemon thread that kills taskmgr.exe while a lock is active."""
+        t = threading.Thread(target=self._taskmgr_blocker_loop, daemon=True)
+        t.start()
+        self.logger.info("Task Manager blocker thread started.")
+
+    def _taskmgr_blocker_loop(self):
+        """Periodically kill taskmgr.exe while a lock screen is active."""
+        while not self.stop_event.is_set():
+            if self.locked_app_name:
+                try:
+                    os.system("taskkill /f /im taskmgr.exe >nul 2>&1")
+                except Exception:
+                    pass
+            time.sleep(2)
 
     def _start_event_scanner(self):
         if self.event_thread and self.event_thread.is_alive():
@@ -268,6 +286,7 @@ class WardenControlClient:
                         self.logger.info("Locked app '%s' has closed. Dismissing lock screen.", event["app"])
                         self.kill_lock_screen()
                         self.locked_app_name = None
+                        self.lock_cooldown_until = time.time() + 5
 
             except Exception as exc:
                 if self.stop_event.is_set():
@@ -275,6 +294,22 @@ class WardenControlClient:
                 self.logger.error("Event scanner error: %s", exc)
                 self.close_socket()
                 break
+            # --- Lock screen watchdog: respawn if killed while still locked ---
+            if self.locked_app_name:
+                if self.lock_screen_process:
+                    exit_code = self.lock_screen_process.poll()
+                    if exit_code is not None:
+                        self.lock_screen_process = None
+                        if exit_code == 42:
+                            self.logger.info("Lock screen dismissed by user (exit 42). Cooldown 5s.")
+                            self.lock_cooldown_until = time.time() + 5
+                        else:
+                            self.logger.warning("Lock screen killed externally (code %s). Respawning.", exit_code)
+                            self.launch_lock_screen()
+                elif time.time() >= self.lock_cooldown_until:
+                    self.logger.warning("Lock screen not running while locked. Respawning.")
+                    self.launch_lock_screen()
+
             time.sleep(5)
 
     def _start_listener(self):
@@ -355,6 +390,7 @@ class WardenControlClient:
             # Track which app triggered the lock for the watchdog
             if app_name:
                 self.locked_app_name = app_name
+            self.lock_cooldown_until = 0
             self.launch_lock_screen()
         elif (normalized_cmd in UNLOCK_COMMANDS
                 or normalized_action in UNLOCK_COMMANDS
@@ -398,6 +434,7 @@ class WardenControlClient:
             else:
                 self.logger.info("Reconciliation logic: Locking app %s", app_name)
                 self.locked_app_name = app_name
+                self.lock_cooldown_until = 0
                 self.launch_lock_screen()
             
             # Acknowledge the update
@@ -418,7 +455,13 @@ class WardenControlClient:
 
     def launch_lock_screen(self):
         self.log_session_debug_info()
-        
+
+        # --- Cooldown guard: prevent re-launch during grace period ---
+        if time.time() < self.lock_cooldown_until:
+            self.logger.info("Lock screen launch skipped (cooldown active for %.1fs).",
+                             self.lock_cooldown_until - time.time())
+            return
+
         if hasattr(self, 'lock_screen_process') and self.lock_screen_process:
             try:
                 if getattr(self.lock_screen_process, 'poll', lambda: 0)() is None:

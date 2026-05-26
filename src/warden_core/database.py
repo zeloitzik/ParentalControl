@@ -10,8 +10,6 @@ class DatabaseManager:
 
     def __init__(self):
         self.host = "127.0.0.1"
-        # self.user = os.environ.get("DB_USER")
-        # self.password = os.environ.get("DB_PASSWORD")
         self.user = "root"
         self.password = "Itzik@2007"
         self.db_name = "warden_db"

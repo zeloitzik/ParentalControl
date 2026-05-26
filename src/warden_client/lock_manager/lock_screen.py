@@ -1,22 +1,8 @@
 import tkinter as tk
-from tkinter import simpledialog
 import sys
 import os
 import argparse
 from pathlib import Path
-
-PARENT_PIN_PATH = Path(os.getenv('APPDATA', '')) / "Warden" / "parent_pin.txt"
-DEFAULT_PIN = "1234"
-
-
-def load_parent_pin():
-    """Load the parent PIN from the local config file (Option A)."""
-    try:
-        if PARENT_PIN_PATH.exists():
-            return PARENT_PIN_PATH.read_text().strip()
-    except Exception:
-        pass
-    return DEFAULT_PIN
 
 
 class Screen:
@@ -69,30 +55,18 @@ class Screen:
         )
         sub_label.pack(pady=(5, 20))
 
-        # --- Parent Override Button ---
-        override_btn = tk.Button(
+        # --- Close / Dismiss Button (always visible) ---
+        btn_text = f"🛑 Close {self.target_app} & Continue" if self.target_app else "🛑 Dismiss Lock Screen"
+        close_btn = tk.Button(
             main_frame,
-            text="🔑  Parent Override",
+            text=btn_text,
             font=("Segoe UI", 13, "bold"),
-            fg="#e0e7ff", bg="#1e3a5f",
-            activeforeground="#ffffff", activebackground="#005A9C",
+            fg="#ffffff", bg="#dc2626",
+            activeforeground="#ffffff", activebackground="#b91c1c",
             relief="flat", padx=20, pady=8, cursor="hand2",
-            command=self._parent_override
+            command=self._dismiss
         )
-        override_btn.pack(pady=(0, 15))
-
-        # --- Close Application Button ---
-        if self.target_app:
-            close_app_btn = tk.Button(
-                main_frame,
-                text=f"🛑 Close {self.target_app} & Continue",
-                font=("Segoe UI", 13, "bold"),
-                fg="#ffffff", bg="#dc2626",
-                activeforeground="#ffffff", activebackground="#b91c1c",
-                relief="flat", padx=20, pady=8, cursor="hand2",
-                command=self._close_target_app
-            )
-            close_app_btn.pack(pady=(0, 15))
+        close_btn.pack(pady=(0, 15))
 
         # Prevent closing with Alt+F4
         self.root.protocol("WM_DELETE_WINDOW", lambda: None)
@@ -144,37 +118,9 @@ class Screen:
 
         self.root.mainloop()
 
-    def _parent_override(self):
-        """Prompt for parent PIN and close lock screen if correct."""
-        # Temporarily allow interaction by lowering topmost
-        self.root.attributes("-topmost", False)
-        entered_pin = simpledialog.askstring(
-            "Parent Override",
-            "Enter your Parent PIN to unlock:",
-            show='*',
-            parent=self.root
-        )
-        self.root.attributes("-topmost", True)
-
-        if entered_pin is None:
-            return  # User cancelled
-
-        correct_pin = load_parent_pin()
-        if entered_pin.strip() == correct_pin:
-            self.root.destroy()
-            self.root = None
-        else:
-            # Flash red briefly on incorrect PIN
-            error_label = tk.Label(
-                self.root, text="❌ Incorrect PIN",
-                font=("Segoe UI", 14, "bold"),
-                fg="#ef4444", bg="#0a0f1a"
-            )
-            error_label.place(relx=0.5, rely=0.85, anchor='center')
-            self.root.after(2000, error_label.destroy)
-
-    def _close_target_app(self):
-        """Kill the locked application and close the lock screen."""
+    def _dismiss(self):
+        """Close the locked application (if any) and dismiss the lock screen.
+        Exits with code 42 to signal intentional user dismissal to the service."""
         if self.target_app:
             try:
                 import psutil
@@ -186,10 +132,11 @@ class Screen:
                         pass
             except Exception:
                 os.system(f"taskkill /F /IM {self.target_app}")
-            
-            if self.root:
-                self.root.destroy()
-                self.root = None
+
+        if self.root:
+            self.root.destroy()
+            self.root = None
+        sys.exit(42)
 
 
 def parse_args():

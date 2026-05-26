@@ -29,16 +29,7 @@ class ServerEngine:
 
         session = self.db.get_running_session(user_id, app)
         if session:
-            return  # deduplicate repeated APP_STARTED events
-
-        # Check if the app is allowed BEFORE starting session
-        # We still want to log the start attempt in app_sessions even if blocked?
-        # Actually, if it's blocked, it will be killed.
-        # But for tracking why it was killed, having it in app_sessions helps.
-        # However, the current logic kills it if can_user_run_app is False.
-        
-        # FIX: Always start session to record the attempt.
-        # This ensures the user sees 'notepad.exe' in the sessions table even if it's already over the limit.
+            return  
         self.db.start_app_session(user_id, app, timestamp)
     def can_user_run_app(self, sid, app):
         remaining = self.db.remaining_time(sid, app)
@@ -59,7 +50,6 @@ class ServerEngine:
         session_id = session["id"]
         start_time = session["start_time"]
 
-        # Ensure start_time is offset-aware if timestamp is
         if start_time.tzinfo is None and timestamp.tzinfo is not None:
             start_time = start_time.replace(tzinfo=timezone.utc)
 
