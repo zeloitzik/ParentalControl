@@ -579,16 +579,16 @@ class WardenControlClient:
                     # 4. Build the command to run.
                     #    When running as a Windows Service, sys.executable points to
                     #    pythonservice.exe (the pywin32 service host), NOT python.exe.
-                    #    Derive python.exe from sys.base_prefix instead.
+                    #    Derive pythonw.exe from sys.base_prefix instead.
                     if getattr(sys, "frozen", False):
                         exe_path = Path(sys.executable).with_name("lock_screen.exe")
                         if not exe_path.exists():
                             raise FileNotFoundError("lock_screen.exe not found next to service executable.")
                         cmd_args = [str(exe_path)]
                     else:
-                        python_exe = str(Path(sys.base_prefix) / "python.exe")
+                        python_exe = str(Path(sys.base_prefix) / "pythonw.exe")
                         if not Path(python_exe).exists():
-                            python_exe = str(Path(sys.base_prefix) / "Scripts" / "python.exe")
+                            python_exe = str(Path(sys.base_prefix) / "Scripts" / "pythonw.exe")
                         self.logger.info(f"Using Python interpreter: {python_exe}")
                         cmd_args = [python_exe, str(script_path)]
 
@@ -623,7 +623,8 @@ class WardenControlClient:
                     creation_flags = (
                         win32process.CREATE_NEW_PROCESS_GROUP |
                         win32process.CREATE_UNICODE_ENVIRONMENT |
-                        win32con.NORMAL_PRIORITY_CLASS
+                        win32con.NORMAL_PRIORITY_CLASS |
+                        0x08000000  # CREATE_NO_WINDOW — suppress console host
                     )
 
                     self.logger.info(f"Launching cmd: {cmd_str}")
@@ -700,11 +701,11 @@ class WardenControlClient:
                     "NOTE: This will NOT work from Session 0 (Windows Service). "
                     "The lock screen will be invisible to the user."
                 )
-                # Resolve the real python.exe even in fallback path
+                # Resolve the real pythonw.exe even in fallback path
                 if getattr(sys, "frozen", False):
                     fallback_cmd = cmd_args if cmd_args else [sys.executable]
                 else:
-                    python_exe = str(Path(sys.base_prefix) / "python.exe")
+                    python_exe = str(Path(sys.base_prefix) / "pythonw.exe")
                     fallback_cmd = [python_exe, str(script_path)]
                     if self.locked_app_name:
                         fallback_cmd.extend(["--app", self.locked_app_name])
@@ -719,12 +720,18 @@ class WardenControlClient:
                 if not getattr(sys, "frozen", False):
                     env["PYTHONPATH"] = str(Path(__file__).resolve().parent.parent)
 
+                # --- Suppress console window ---
+                si = subprocess.STARTUPINFO()
+                si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                si.wShowWindow = 0  # SW_HIDE
+
                 self.lock_screen_process = subprocess.Popen(
                     fallback_cmd,
                     env=env,
                     stdout=stderr_log if stderr_log != subprocess.DEVNULL else subprocess.DEVNULL,
                     stderr=stderr_log if stderr_log != subprocess.DEVNULL else subprocess.DEVNULL,
-                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+                    startupinfo=si,
+                    creationflags=subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP,
                 )
                 self.logger.info(
                     f"Lock screen launched via fallback Popen (PID: {self.lock_screen_process.pid}). "
