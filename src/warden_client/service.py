@@ -81,7 +81,7 @@ class WardenControlClient:
         self.max_retries = 5
         self.retry_count = 0
         self.app_states = {}
-        self.lock_cooldown_until = 0
+        self.app_cooldowns = {}
         
         # Ensure log path is absolute and handles frozen execution properly
         if getattr(sys, "frozen", False):
@@ -222,6 +222,42 @@ class WardenControlClient:
                     pass
             time.sleep(2)
 
+    def _is_app_in_cooldown(self, app_name):
+        """Check if the given app is inside its per-app debounce window."""
+        if not app_name:
+            return False
+        deadline = self.app_cooldowns.get(app_name.lower(), 0)
+        if time.time() < deadline:
+            self.logger.info("App '%s' is in cooldown for %.1fs — suppressing lock.",
+                             app_name, deadline - time.time())
+            return True
+        return False
+
+    def _set_app_cooldown(self, app_name, seconds=3):
+        """Start a per-app debounce cooldown (default 3s)."""
+        if app_name:
+            self.app_cooldowns[app_name.lower()] = time.time() + seconds
+
+    def _clear_app_cooldown(self, app_name):
+        """Remove the per-app cooldown so a fresh server lock is honoured immediately."""
+        if app_name:
+            self.app_cooldowns.pop(app_name.lower(), None)
+
+    def _is_process_alive(self, process_name):
+        """Quick psutil check: is *any* process with this executable name currently running?"""
+        try:
+            import psutil
+            target = process_name.lower()
+            for proc in psutil.process_iter(['name']):
+                try:
+                    if proc.info['name'] and proc.info['name'].lower() == target:
+                        return True
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    continue
+        except Exception:
+            pass
+        return False
+
     def _start_event_scanner(self):
         if self.event_thread and self.event_thread.is_alive():
             return
@@ -284,9 +320,9 @@ class WardenControlClient:
                             and self.locked_app_name
                             and event["app"].lower() == self.locked_app_name.lower()):
                         self.logger.info("Locked app '%s' has closed. Dismissing lock screen.", event["app"])
+                        self._set_app_cooldown(event["app"], seconds=3)
                         self.kill_lock_screen()
                         self.locked_app_name = None
-                        self.lock_cooldown_until = time.time() + 5
 
             except Exception as exc:
                 if self.stop_event.is_set():
@@ -301,12 +337,12 @@ class WardenControlClient:
                     if exit_code is not None:
                         self.lock_screen_process = None
                         if exit_code == 42:
-                            self.logger.info("Lock screen dismissed by user (exit 42). Cooldown 5s.")
-                            self.lock_cooldown_until = time.time() + 5
+                            self.logger.info("Lock screen dismissed by user (exit 42). Cooldown 3s.")
+                            self._set_app_cooldown(self.locked_app_name, seconds=3)
                         else:
                             self.logger.warning("Lock screen killed externally (code %s). Respawning.", exit_code)
                             self.launch_lock_screen()
-                elif time.time() >= self.lock_cooldown_until:
+                elif not self._is_app_in_cooldown(self.locked_app_name):
                     self.logger.warning("Lock screen not running while locked. Respawning.")
                     self.launch_lock_screen()
 
@@ -390,7 +426,7 @@ class WardenControlClient:
             # Track which app triggered the lock for the watchdog
             if app_name:
                 self.locked_app_name = app_name
-            self.lock_cooldown_until = 0
+            self._clear_app_cooldown(app_name)
             self.launch_lock_screen()
         elif (normalized_cmd in UNLOCK_COMMANDS
                 or normalized_action in UNLOCK_COMMANDS
@@ -434,7 +470,7 @@ class WardenControlClient:
             else:
                 self.logger.info("Reconciliation logic: Locking app %s", app_name)
                 self.locked_app_name = app_name
-                self.lock_cooldown_until = 0
+                self._clear_app_cooldown(app_name)
                 self.launch_lock_screen()
             
             # Acknowledge the update
@@ -456,11 +492,24 @@ class WardenControlClient:
     def launch_lock_screen(self):
         self.log_session_debug_info()
 
-        # --- Cooldown guard: prevent re-launch during grace period ---
-        if time.time() < self.lock_cooldown_until:
-            self.logger.info("Lock screen launch skipped (cooldown active for %.1fs).",
-                             self.lock_cooldown_until - time.time())
+        # --- Per-app debounce guard ---
+        if self._is_app_in_cooldown(self.locked_app_name):
             return
+
+        # --- Double-check verification ---
+        # Wait 500 ms then re-poll the process list to confirm the target
+        # app is *actually* still running.  This eliminates "false opens"
+        # caused by a split-second window where the tracker hasn't yet
+        # registered the app as closed.
+        if self.locked_app_name:
+            time.sleep(0.5)
+            if not self._is_process_alive(self.locked_app_name):
+                self.logger.info(
+                    "Double-check: '%s' is no longer running — aborting lock screen launch.",
+                    self.locked_app_name)
+                self._set_app_cooldown(self.locked_app_name, seconds=3)
+                self.locked_app_name = None
+                return
 
         if hasattr(self, 'lock_screen_process') and self.lock_screen_process:
             try:
