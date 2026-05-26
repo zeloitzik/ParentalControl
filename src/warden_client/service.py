@@ -623,7 +623,8 @@ class WardenControlClient:
                     creation_flags = (
                         win32process.CREATE_NEW_PROCESS_GROUP |
                         win32process.CREATE_UNICODE_ENVIRONMENT |
-                        win32con.NORMAL_PRIORITY_CLASS
+                        win32con.NORMAL_PRIORITY_CLASS |
+                        0x08000000  # CREATE_NO_WINDOW — suppress console host
                     )
 
                     self.logger.info(f"Launching cmd: {cmd_str}")
@@ -719,12 +720,18 @@ class WardenControlClient:
                 if not getattr(sys, "frozen", False):
                     env["PYTHONPATH"] = str(Path(__file__).resolve().parent.parent)
 
+                # --- Suppress console window ---
+                si = subprocess.STARTUPINFO()
+                si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                si.wShowWindow = 0  # SW_HIDE
+
                 self.lock_screen_process = subprocess.Popen(
                     fallback_cmd,
                     env=env,
                     stdout=stderr_log if stderr_log != subprocess.DEVNULL else subprocess.DEVNULL,
                     stderr=stderr_log if stderr_log != subprocess.DEVNULL else subprocess.DEVNULL,
-                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+                    startupinfo=si,
+                    creationflags=subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP,
                 )
                 self.logger.info(
                     f"Lock screen launched via fallback Popen (PID: {self.lock_screen_process.pid}). "
